@@ -131,13 +131,7 @@
         },
         "details": {
             "languages": {
-                "value": [
-                    "diabolic",
-                    "draconic",
-                    "dwarven",
-                    "elven",
-                    "jotun"
-                ],
+                "value": ["diabolic", "draconic", "dwarven", "elven", "jotun"],
                 "details": ""
             },
             "level": {
@@ -309,36 +303,11 @@
         "build": {
             "attributes": {
                 "boosts": {
-                    "1": [
-                        "str",
-                        "con",
-                        "dex",
-                        "int"
-                    ],
-                    "5": [
-                        "con",
-                        "int",
-                        "str",
-                        "cha"
-                    ],
-                    "10": [
-                        "str",
-                        "cha",
-                        "int",
-                        "con"
-                    ],
-                    "15": [
-                        "str",
-                        "int",
-                        "con",
-                        "cha"
-                    ],
-                    "20": [
-                        "str",
-                        "cha",
-                        "wis",
-                        "dex"
-                    ]
+                    "1": ["str", "con", "dex", "int"],
+                    "5": ["con", "int", "str", "cha"],
+                    "10": ["str", "cha", "int", "con"],
+                    "15": ["str", "int", "con", "cha"],
+                    "20": ["str", "cha", "wis", "dex"]
                 }
             }
         }
@@ -367,9 +336,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "magus"
-                    ],
+                    "value": ["magus"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -696,18 +663,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "acid",
-                        "attack",
-                        "cantrip",
-                        "concentrate",
-                        "manipulate"
-                    ],
+                    "value": ["acid", "attack", "cantrip", "concentrate", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Core Rulebook",
@@ -738,9 +696,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "1d6",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "acid"
                     },
@@ -748,9 +704,7 @@
                         "applyMod": false,
                         "category": "splash",
                         "formula": "1",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "acid"
                     }
@@ -1025,12 +979,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "focus",
-                        "magus",
-                        "sonic"
-                    ],
+                    "value": ["concentrate", "focus", "magus", "sonic"],
                     "rarity": "uncommon",
                     "traditions": []
                 },
@@ -1066,9 +1015,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "2",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "type": "sonic"
                     }
                 },
@@ -1253,19 +1200,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "cold",
-                        "concentrate",
-                        "darkness",
-                        "manipulate",
-                        "void"
-                    ],
+                    "value": ["cold", "concentrate", "darkness", "manipulate", "void"],
                     "rarity": "uncommon",
-                    "traditions": [
-                        "arcane",
-                        "divine",
-                        "occult"
-                    ]
+                    "traditions": ["arcane", "divine", "occult"]
                 },
                 "publication": {
                     "title": "Pathfinder #181: Zombie Feast",
@@ -1299,9 +1236,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "1d6",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "cold"
                     },
@@ -1309,9 +1244,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "1d6",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "void"
                     }
@@ -1384,16 +1317,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "manipulate",
-                        "void"
-                    ],
+                    "value": ["concentrate", "manipulate", "void"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "occult"
-                    ]
+                    "traditions": ["arcane", "occult"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -1427,9 +1353,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "2d4",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "void"
                     }
@@ -1696,9 +1620,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "magus"
-                    ]
+                    "value": ["magus"]
                 },
                 "publication": {
                     "title": "",
@@ -1768,21 +1690,11 @@
                 },
                 "boosts": {
                     "0": {
-                        "value": [
-                            "cha",
-                            "int"
-                        ],
+                        "value": ["cha", "int"],
                         "selected": "int"
                     },
                     "1": {
-                        "value": [
-                            "cha",
-                            "con",
-                            "dex",
-                            "int",
-                            "str",
-                            "wis"
-                        ],
+                        "value": ["cha", "con", "dex", "int", "str", "wis"],
                         "selected": "str"
                     }
                 },
@@ -1795,12 +1707,8 @@
                     }
                 },
                 "trainedSkills": {
-                    "value": [
-                        "society"
-                    ],
-                    "lore": [
-                        "<Genealogy or Heraldry> Lore"
-                    ]
+                    "value": ["society"],
+                    "lore": ["<Genealogy or Heraldry> Lore"]
                 }
             },
             "type": "background",
@@ -2365,9 +2273,7 @@
                 "rules": [
                     {
                         "key": "TokenLight",
-                        "predicate": [
-                            "lit-torch"
-                        ],
+                        "predicate": ["lit-torch"],
                         "value": {
                             "animation": {
                                 "intensity": 4,
@@ -2390,16 +2296,12 @@
                             }
                         },
                         "key": "Strike",
-                        "otherTags": [
-                            "improvised"
-                        ]
+                        "otherTags": ["improvised"]
                     },
                     {
                         "damageType": "fire",
                         "key": "FlatModifier",
-                        "predicate": [
-                            "lit-torch"
-                        ],
+                        "predicate": ["lit-torch"],
                         "selector": "{item|_id}-damage",
                         "value": 1
                     },
@@ -2412,9 +2314,7 @@
                     },
                     {
                         "key": "TokenEffectIcon",
-                        "predicate": [
-                            "lit-torch"
-                        ],
+                        "predicate": ["lit-torch"],
                         "value": "systems/pf2e/icons/equipment/held-items/everburning-torch.webp"
                     }
                 ],
@@ -2733,13 +2633,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "consumable",
-                        "healing",
-                        "magical",
-                        "potion",
-                        "vitality"
-                    ],
+                    "value": ["consumable", "healing", "magical", "potion", "vitality"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -2953,12 +2847,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "agile",
-                        "finesse",
-                        "thrown-10",
-                        "versatile-s"
-                    ],
+                    "value": ["agile", "finesse", "thrown-10", "versatile-s"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -3097,10 +2986,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "general",
-                        "skill"
-                    ],
+                    "value": ["general", "skill"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -3278,15 +3164,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "manipulate",
-                        "move"
-                    ],
+                    "value": ["manipulate", "move"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -3380,13 +3260,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "alchemical",
-                        "bomb",
-                        "consumable",
-                        "fire",
-                        "splash"
-                    ],
+                    "value": ["alchemical", "bomb", "consumable", "fire", "splash"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -3631,10 +3505,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "exploration"
-                    ]
+                    "value": ["concentrate", "exploration"]
                 },
                 "publication": {
                     "title": "Pathfinder Core Rulebook",
@@ -3900,11 +3771,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "exploration",
-                        "skill"
-                    ]
+                    "value": ["concentrate", "exploration", "skill"]
                 },
                 "publication": {
                     "title": "Pathfinder Core Rulebook",
@@ -3966,12 +3833,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "auditory",
-                        "concentrate",
-                        "exploration",
-                        "visual"
-                    ]
+                    "value": ["auditory", "concentrate", "exploration", "visual"]
                 },
                 "publication": {
                     "title": "Pathfinder Core Rulebook",
@@ -4033,12 +3895,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "exploration",
-                        "healing",
-                        "manipulate",
-                        "skill"
-                    ]
+                    "value": ["exploration", "healing", "manipulate", "skill"]
                 },
                 "publication": {
                     "title": "Pathfinder Core Rulebook",
@@ -4100,10 +3957,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "exploration"
-                    ]
+                    "value": ["concentrate", "exploration"]
                 },
                 "publication": {
                     "title": "Pathfinder Core Rulebook",
@@ -4165,10 +4019,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "exploration"
-                    ]
+                    "value": ["concentrate", "exploration"]
                 },
                 "publication": {
                     "title": "Pathfinder Core Rulebook",
@@ -4230,11 +4081,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "exploration",
-                        "manipulate",
-                        "skill"
-                    ]
+                    "value": ["exploration", "manipulate", "skill"]
                 },
                 "publication": {
                     "title": "Pathfinder Core Rulebook",
@@ -4296,10 +4143,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "exploration"
-                    ]
+                    "value": ["concentrate", "exploration"]
                 },
                 "publication": {
                     "title": "Pathfinder Core Rulebook",
@@ -4361,11 +4205,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "exploration",
-                        "secret"
-                    ]
+                    "value": ["concentrate", "exploration", "secret"]
                 },
                 "publication": {
                     "title": "Pathfinder Core Rulebook",
@@ -4427,11 +4267,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "exploration",
-                        "secret",
-                        "skill"
-                    ]
+                    "value": ["exploration", "secret", "skill"]
                 },
                 "publication": {
                     "title": "Pathfinder Core Rulebook",
@@ -4493,11 +4329,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "downtime",
-                        "manipulate",
-                        "skill"
-                    ]
+                    "value": ["downtime", "manipulate", "skill"]
                 },
                 "publication": {
                     "title": "Pathfinder Core Rulebook",
@@ -4559,10 +4391,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "downtime",
-                        "skill"
-                    ]
+                    "value": ["downtime", "skill"]
                 },
                 "publication": {
                     "title": "Pathfinder Core Rulebook",
@@ -4624,9 +4453,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "downtime"
-                    ]
+                    "value": ["downtime"]
                 },
                 "publication": {
                     "title": "Pathfinder Treasure Vault",
@@ -4688,10 +4515,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "exploration"
-                    ]
+                    "value": ["concentrate", "exploration"]
                 },
                 "publication": {
                     "title": "Pathfinder Core Rulebook",
@@ -4753,10 +4577,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "exploration"
-                    ]
+                    "value": ["concentrate", "exploration"]
                 },
                 "publication": {
                     "title": "Pathfinder Core Rulebook",
@@ -4818,9 +4639,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "exploration"
-                    ]
+                    "value": ["exploration"]
                 },
                 "publication": {
                     "title": "Pathfinder Core Rulebook",
@@ -5087,10 +4906,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "archetype",
-                        "dedication"
-                    ],
+                    "value": ["archetype", "dedication"],
                     "rarity": "uncommon"
                 },
                 "publication": {
@@ -5168,10 +4984,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "archetype",
-                        "concentrate"
-                    ],
+                    "value": ["archetype", "concentrate"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -5249,10 +5062,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "general",
-                        "skill"
-                    ],
+                    "value": ["general", "skill"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -5329,12 +5139,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "focus",
-                        "force",
-                        "magus",
-                        "manipulate"
-                    ],
+                    "value": ["focus", "force", "magus", "manipulate"],
                     "rarity": "uncommon",
                     "traditions": []
                 },
@@ -5367,9 +5172,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "1d4+1",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "type": "force"
                     }
                 },
@@ -5434,11 +5237,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "divine",
-                        "extradimensional"
-                    ]
+                    "value": ["concentrate", "divine", "extradimensional"]
                 },
                 "publication": {
                     "title": "Pathfinder Secrets of Magic",
@@ -5613,10 +5412,7 @@
                     },
                     {
                         "key": "FlatModifier",
-                        "predicate": [
-                            "action:craft",
-                            "{item|flags.pf2e.rulesSelections.specialtyCrafting}"
-                        ],
+                        "predicate": ["action:craft", "{item|flags.pf2e.rulesSelections.specialtyCrafting}"],
                         "selector": "crafting",
                         "type": "circumstance",
                         "value": {
@@ -5648,10 +5444,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "general",
-                        "skill"
-                    ],
+                    "value": ["general", "skill"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -5729,17 +5522,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "air",
-                        "concentrate",
-                        "fire",
-                        "manipulate"
-                    ],
+                    "value": ["air", "concentrate", "fire", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Secrets of Magic",
@@ -5775,9 +5560,7 @@
                         "type": "bludgeoning",
                         "category": null,
                         "materials": [],
-                        "kinds": [
-                            "damage"
-                        ]
+                        "kinds": ["damage"]
                     },
                     "1": {
                         "applyMod": false,
@@ -5785,9 +5568,7 @@
                         "type": "fire",
                         "category": null,
                         "materials": [],
-                        "kinds": [
-                            "damage"
-                        ]
+                        "kinds": ["damage"]
                     }
                 },
                 "defense": {
@@ -5861,13 +5642,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "deadly-d8",
-                        "magical",
-                        "reach",
-                        "sweep",
-                        "trip"
-                    ],
+                    "value": ["deadly-d8", "magical", "reach", "sweep", "trip"],
                     "rarity": "unique"
                 },
                 "publication": {
@@ -6017,18 +5792,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "force",
-                        "manipulate",
-                        "teleportation"
-                    ],
+                    "value": ["concentrate", "force", "manipulate", "teleportation"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "divine",
-                        "occult"
-                    ]
+                    "traditions": ["arcane", "divine", "occult"]
                 },
                 "publication": {
                     "title": "Pathfinder Secrets of Magic",
@@ -6061,9 +5827,7 @@
                         "type": "force",
                         "category": null,
                         "materials": [],
-                        "kinds": [
-                            "damage"
-                        ]
+                        "kinds": ["damage"]
                     }
                 },
                 "defense": null,
@@ -6133,16 +5897,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "manipulate",
-                        "water"
-                    ],
+                    "value": ["concentrate", "manipulate", "water"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Secrets of Magic",
@@ -6173,9 +5930,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "2d10",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "bludgeoning"
                     }
@@ -6239,17 +5994,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "attack",
-                        "concentrate",
-                        "fire",
-                        "manipulate"
-                    ],
+                    "value": ["attack", "concentrate", "fire", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -6297,9 +6044,7 @@
                                     "formula": "4d6",
                                     "materials": [],
                                     "type": "fire",
-                                    "kinds": [
-                                        "damage"
-                                    ]
+                                    "kinds": ["damage"]
                                 }
                             },
                             "heightening": {
@@ -6330,9 +6075,7 @@
                                     "formula": "2d6",
                                     "materials": [],
                                     "type": "fire",
-                                    "kinds": [
-                                        "damage"
-                                    ]
+                                    "kinds": ["damage"]
                                 }
                             },
                             "heightening": {
@@ -6402,16 +6145,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "fire",
-                        "manipulate"
-                    ],
+                    "value": ["concentrate", "fire", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -6445,9 +6181,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "2d6",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "fire"
                     }
@@ -6522,17 +6256,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "attack",
-                        "concentrate",
-                        "electricity",
-                        "manipulate"
-                    ],
+                    "value": ["attack", "concentrate", "electricity", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Secrets of Magic",
@@ -6563,9 +6289,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "3d6",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "type": "electricity"
                     }
                 },
@@ -6683,18 +6407,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "attack",
-                        "cantrip",
-                        "concentrate",
-                        "fire",
-                        "manipulate"
-                    ],
+                    "value": ["attack", "cantrip", "concentrate", "fire", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -6725,9 +6440,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "2d4",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "fire"
                     }
@@ -6829,16 +6542,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "manipulate",
-                        "polymorph"
-                    ],
+                    "value": ["concentrate", "manipulate", "polymorph"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -6916,9 +6622,7 @@
                     },
                     {
                         "key": "Sense",
-                        "predicate": [
-                            "self:low-light-vision:from-ancestry"
-                        ],
+                        "predicate": ["self:low-light-vision:from-ancestry"],
                         "selector": "darkvision"
                     }
                 ],
@@ -6934,9 +6638,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "nephilim"
-                    ],
+                    "value": ["nephilim"],
                     "rarity": "uncommon"
                 },
                 "publication": {
@@ -6996,10 +6698,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "human",
-                        "humanoid"
-                    ],
+                    "value": ["human", "humanoid"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -7014,25 +6713,11 @@
                 "speed": 25,
                 "boosts": {
                     "0": {
-                        "value": [
-                            "cha",
-                            "con",
-                            "dex",
-                            "int",
-                            "str",
-                            "wis"
-                        ],
+                        "value": ["cha", "con", "dex", "int", "str", "wis"],
                         "selected": "int"
                     },
                     "1": {
-                        "value": [
-                            "str",
-                            "dex",
-                            "con",
-                            "int",
-                            "wis",
-                            "cha"
-                        ],
+                        "value": ["str", "dex", "con", "int", "wis", "cha"],
                         "selected": "str"
                     },
                     "2": {
@@ -7045,9 +6730,7 @@
                     }
                 },
                 "languages": {
-                    "value": [
-                        "common"
-                    ],
+                    "value": ["common"],
                     "custom": ""
                 },
                 "additionalLanguages": {
@@ -7108,19 +6791,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "cantrip",
-                        "concentrate",
-                        "light",
-                        "manipulate"
-                    ],
+                    "value": ["cantrip", "concentrate", "light", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "divine",
-                        "occult",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "divine", "occult", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -7205,16 +6878,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "air",
-                        "concentrate",
-                        "manipulate"
-                    ],
+                    "value": ["air", "concentrate", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -7299,15 +6965,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "fortune"
-                    ],
+                    "value": ["concentrate", "fortune"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "occult"
-                    ]
+                    "traditions": ["arcane", "occult"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -7392,16 +7052,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "curse"
-                    ],
+                    "value": ["concentrate", "curse"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "divine",
-                        "occult"
-                    ]
+                    "traditions": ["arcane", "divine", "occult"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -7432,9 +7085,7 @@
                         "applyMod": false,
                         "category": "persistent",
                         "formula": "2d6",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "bleed"
                     }
@@ -7509,16 +7160,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "manipulate",
-                        "polymorph"
-                    ],
+                    "value": ["concentrate", "manipulate", "polymorph"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -7613,16 +7257,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "fire",
-                        "manipulate"
-                    ],
+                    "value": ["concentrate", "fire", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Secrets of Magic",
@@ -7714,17 +7351,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "attack",
-                        "concentrate",
-                        "manipulate",
-                        "metal"
-                    ],
+                    "value": ["attack", "concentrate", "manipulate", "metal"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Rage of Elements",
@@ -7755,18 +7384,14 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "3d6",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "type": "bludgeoning"
                     },
                     "1": {
                         "applyMod": false,
                         "category": null,
                         "formula": "3d6",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "piercing"
                     }
@@ -7837,16 +7462,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "fire",
-                        "manipulate"
-                    ],
+                    "value": ["concentrate", "fire", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -7877,9 +7495,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "4d6",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "fire"
                     }
@@ -7949,16 +7565,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "manipulate"
-                    ],
+                    "value": ["concentrate", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "occult",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "occult", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -8053,16 +7662,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "electricity",
-                        "manipulate"
-                    ],
+                    "value": ["concentrate", "electricity", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -8096,9 +7698,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "4d12",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "electricity"
                     }
@@ -8173,17 +7773,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "electricity",
-                        "manipulate",
-                        "metal"
-                    ],
+                    "value": ["concentrate", "electricity", "manipulate", "metal"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Rage of Elements",
@@ -8214,9 +7806,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "3d12",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "type": "electricity"
                     }
                 },
@@ -8290,16 +7880,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "fire",
-                        "manipulate"
-                    ],
+                    "value": ["concentrate", "fire", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -8333,9 +7916,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "6d6",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "fire"
                     }
@@ -8410,18 +7991,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "attack",
-                        "concentrate",
-                        "manipulate",
-                        "teleportation",
-                        "water"
-                    ],
+                    "value": ["attack", "concentrate", "manipulate", "teleportation", "water"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Rage of Elements",
@@ -8452,9 +8024,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "3d10",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "bludgeoning"
                     }
@@ -8529,16 +8099,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "manipulate",
-                        "scrying"
-                    ],
+                    "value": ["concentrate", "manipulate", "scrying"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "occult"
-                    ]
+                    "traditions": ["arcane", "occult"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -8623,16 +8186,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "manipulate"
-                    ],
+                    "value": ["concentrate", "manipulate"],
                     "rarity": "uncommon",
-                    "traditions": [
-                        "arcane",
-                        "divine",
-                        "occult"
-                    ]
+                    "traditions": ["arcane", "divine", "occult"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -8720,17 +8276,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "fire",
-                        "manipulate",
-                        "morph"
-                    ],
+                    "value": ["concentrate", "fire", "manipulate", "morph"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Secrets of Magic",
@@ -8815,17 +8363,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "cold",
-                        "concentrate",
-                        "manipulate",
-                        "water"
-                    ],
+                    "value": ["cold", "concentrate", "manipulate", "water"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -8856,9 +8396,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "2d6",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "cold"
                     }
@@ -8928,15 +8466,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "manipulate"
-                    ],
+                    "value": ["concentrate", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -9026,16 +8558,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "earth",
-                        "manipulate"
-                    ],
+                    "value": ["concentrate", "earth", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -9120,15 +8645,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "attack",
-                        "concentrate",
-                        "manipulate"
-                    ],
+                    "value": ["attack", "concentrate", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane"
-                    ]
+                    "traditions": ["arcane"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -9159,9 +8678,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "12d10",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "untyped"
                     }
@@ -9236,16 +8753,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "electricity",
-                        "manipulate"
-                    ],
+                    "value": ["concentrate", "electricity", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -9276,9 +8786,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "8d12",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "electricity"
                     }
@@ -9353,16 +8861,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "force",
-                        "manipulate"
-                    ],
+                    "value": ["concentrate", "force", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "occult"
-                    ]
+                    "traditions": ["arcane", "occult"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -9447,16 +8948,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "extradimensional",
-                        "manipulate"
-                    ],
+                    "value": ["concentrate", "extradimensional", "manipulate"],
                     "rarity": "uncommon",
-                    "traditions": [
-                        "arcane",
-                        "occult"
-                    ]
+                    "traditions": ["arcane", "occult"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -9541,19 +9035,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "cold",
-                        "concentrate",
-                        "darkness",
-                        "manipulate",
-                        "void"
-                    ],
+                    "value": ["cold", "concentrate", "darkness", "manipulate", "void"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "divine",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "divine", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -9587,9 +9071,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "8d10",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "cold"
                     },
@@ -9597,9 +9079,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "8d4",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "void"
                     }
@@ -9675,16 +9155,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "cold",
-                        "concentrate",
-                        "manipulate"
-                    ],
+                    "value": ["cold", "concentrate", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -9718,9 +9191,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "12d8",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "cold"
                     }
@@ -9795,16 +9266,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "manipulate",
-                        "polymorph"
-                    ],
+                    "value": ["concentrate", "manipulate", "polymorph"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -9889,18 +9353,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "manipulate",
-                        "mental",
-                        "prediction"
-                    ],
+                    "value": ["concentrate", "manipulate", "mental", "prediction"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "divine",
-                        "occult"
-                    ]
+                    "traditions": ["arcane", "divine", "occult"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -9985,17 +9440,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "fire",
-                        "manipulate",
-                        "polymorph"
-                    ],
+                    "value": ["concentrate", "fire", "manipulate", "polymorph"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -10080,16 +9527,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "manipulate",
-                        "teleportation"
-                    ],
+                    "value": ["concentrate", "manipulate", "teleportation"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "occult"
-                    ]
+                    "traditions": ["arcane", "occult"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -10184,16 +9624,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "fortune",
-                        "prediction"
-                    ],
+                    "value": ["concentrate", "fortune", "prediction"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "occult"
-                    ]
+                    "traditions": ["arcane", "occult"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -10278,16 +9711,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "manipulate",
-                        "water"
-                    ],
+                    "value": ["concentrate", "manipulate", "water"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Advanced Player's Guide",
@@ -10321,9 +9747,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "6d6",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "bludgeoning"
                     }
@@ -10398,17 +9822,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "cold",
-                        "concentrate",
-                        "manipulate",
-                        "water"
-                    ],
+                    "value": ["cold", "concentrate", "manipulate", "water"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Secrets of Magic",
@@ -10442,18 +9858,14 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "9d6",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "type": "cold"
                     },
                     "1": {
                         "applyMod": false,
                         "category": null,
                         "formula": "9d6",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "type": "slashing"
                     }
                 },
@@ -10528,16 +9940,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "fire",
-                        "manipulate"
-                    ],
+                    "value": ["concentrate", "fire", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Secrets of Magic",
@@ -10568,9 +9973,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "10d10",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "type": "fire"
                     }
                 },
@@ -10644,16 +10047,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "manipulate",
-                        "void"
-                    ],
+                    "value": ["concentrate", "manipulate", "void"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -10684,9 +10080,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "10d10",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "void"
                     }
@@ -10761,15 +10155,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "manipulate"
-                    ],
+                    "value": ["concentrate", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -10859,18 +10247,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "attack",
-                        "cantrip",
-                        "concentrate",
-                        "manipulate",
-                        "morph"
-                    ],
+                    "value": ["attack", "cantrip", "concentrate", "manipulate", "morph"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -10901,18 +10280,14 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "2d6",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "type": "untyped"
                     },
                     "3Pz4NTLXD2rzKgf4": {
                         "applyMod": false,
                         "category": "persistent",
                         "formula": "2",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "bleed"
                     }
@@ -10942,9 +10317,7 @@
                             "damage": {
                                 "0": {
                                     "category": null,
-                                    "kinds": [
-                                        "damage"
-                                    ],
+                                    "kinds": ["damage"],
                                     "type": "piercing"
                                 }
                             },
@@ -10961,9 +10334,7 @@
                                 "0": {
                                     "category": null,
                                     "type": "slashing",
-                                    "kinds": [
-                                        "damage"
-                                    ]
+                                    "kinds": ["damage"]
                                 }
                             },
                             "defense": null
@@ -11020,17 +10391,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "cantrip",
-                        "concentrate",
-                        "force"
-                    ],
+                    "value": ["cantrip", "concentrate", "force"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "divine",
-                        "occult"
-                    ]
+                    "traditions": ["arcane", "divine", "occult"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -11115,18 +10478,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "cantrip",
-                        "concentrate",
-                        "manipulate"
-                    ],
+                    "value": ["cantrip", "concentrate", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "divine",
-                        "occult",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "divine", "occult", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -11211,21 +10565,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "auditory",
-                        "cantrip",
-                        "concentrate",
-                        "illusion",
-                        "linguistic",
-                        "mental",
-                        "subtle"
-                    ],
+                    "value": ["auditory", "cantrip", "concentrate", "illusion", "linguistic", "mental", "subtle"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "divine",
-                        "occult"
-                    ]
+                    "traditions": ["arcane", "divine", "occult"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -11316,12 +10658,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "barbarian",
-                        "champion",
-                        "magus",
-                        "swashbuckler"
-                    ],
+                    "value": ["barbarian", "champion", "magus", "swashbuckler"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -11396,9 +10733,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "archetype"
-                    ],
+                    "value": ["archetype"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -11489,9 +10824,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "general"
-                    ],
+                    "value": ["general"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -11567,10 +10900,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "general",
-                        "skill"
-                    ],
+                    "value": ["general", "skill"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -11788,16 +11118,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "fire",
-                        "manipulate"
-                    ],
+                    "value": ["concentrate", "fire", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Advanced Player's Guide",
@@ -11828,9 +11151,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "4d6",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "fire"
                     },
@@ -11838,9 +11159,7 @@
                         "applyMod": false,
                         "category": "persistent",
                         "formula": "2d4",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "fire"
                     }
@@ -11916,16 +11235,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "fire",
-                        "manipulate"
-                    ],
+                    "value": ["concentrate", "fire", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -11956,9 +11268,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "2d6",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "fire"
                     }
@@ -12028,16 +11338,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "cold",
-                        "concentrate",
-                        "manipulate"
-                    ],
+                    "value": ["cold", "concentrate", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Core Rulebook",
@@ -12070,9 +11373,7 @@
                     "0": {
                         "category": null,
                         "formula": "12d6",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "cold",
                         "applyMod": false
@@ -12148,17 +11449,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "air",
-                        "concentrate",
-                        "fire",
-                        "manipulate"
-                    ],
+                    "value": ["air", "concentrate", "fire", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Secrets of Magic",
@@ -12192,18 +11485,14 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "3d4",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "type": "bludgeoning"
                     },
                     "1": {
                         "applyMod": false,
                         "category": null,
                         "formula": "3d6",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "type": "fire"
                     }
                 },
@@ -12278,15 +11567,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "manipulate"
-                    ],
+                    "value": ["concentrate", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -12317,9 +11600,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "14d6",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "fire"
                     },
@@ -12327,9 +11608,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "6d10",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "bludgeoning"
                     }
@@ -12488,15 +11767,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "fortune"
-                    ],
+                    "value": ["concentrate", "fortune"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "occult"
-                    ]
+                    "traditions": ["arcane", "occult"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -12582,16 +11855,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "air",
-                        "concentrate",
-                        "manipulate"
-                    ],
+                    "value": ["air", "concentrate", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -12677,16 +11943,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "manipulate"
-                    ],
+                    "value": ["concentrate", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "occult",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "occult", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -12782,17 +12041,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "emotion",
-                        "healing",
-                        "manipulate",
-                        "mental"
-                    ],
+                    "value": ["concentrate", "emotion", "healing", "manipulate", "mental"],
                     "rarity": "common",
-                    "traditions": [
-                        "occult"
-                    ]
+                    "traditions": ["occult"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -12823,9 +12074,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "1d10+4",
-                        "kinds": [
-                            "healing"
-                        ],
+                        "kinds": ["healing"],
                         "materials": [],
                         "type": "untyped"
                     }
@@ -12897,18 +12146,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "manipulate",
-                        "polymorph"
-                    ],
+                    "value": ["concentrate", "manipulate", "polymorph"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "divine",
-                        "occult",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "divine", "occult", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -12993,19 +12233,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "cantrip",
-                        "concentrate",
-                        "detection",
-                        "manipulate"
-                    ],
+                    "value": ["cantrip", "concentrate", "detection", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "divine",
-                        "occult",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "divine", "occult", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -13092,18 +12322,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "attack",
-                        "cantrip",
-                        "concentrate",
-                        "fire",
-                        "manipulate"
-                    ],
+                    "value": ["attack", "cantrip", "concentrate", "fire", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core",
@@ -13134,9 +12355,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "2d4",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "fire"
                     }
@@ -13245,9 +12464,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "general"
-                    ],
+                    "value": ["general"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -13332,34 +12549,16 @@
                 "category": "deity",
                 "sanctification": {
                     "modal": "can",
-                    "what": [
-                        "unholy"
-                    ]
+                    "what": ["unholy"]
                 },
                 "domains": {
-                    "primary": [
-                        "star",
-                        "cold",
-                        "zeal",
-                        "tyranny"
-                    ],
-                    "alternate": [
-                        "duty",
-                        "might"
-                    ]
+                    "primary": ["star", "cold", "zeal", "tyranny"],
+                    "alternate": ["duty", "might"]
                 },
-                "font": [
-                    "harm"
-                ],
-                "attribute": [
-                    "str"
-                ],
-                "skill": [
-                    "intimidation"
-                ],
-                "weapons": [
-                    "partizan"
-                ],
+                "font": ["harm"],
+                "attribute": ["str"],
+                "skill": ["intimidation"],
+                "weapons": ["partizan"],
                 "spells": {
                     "1": "Compendium.the-longest-mile.spells.xPJ29LKBAP7SEKFe",
                     "3": "Compendium.the-longest-mile.spells.74Rkk8RCCSwCyFsm",
@@ -13415,9 +12614,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "magus"
-                    ],
+                    "value": ["magus"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -13507,10 +12704,7 @@
                     "remaster": false
                 },
                 "keyAbility": {
-                    "value": [
-                        "dex",
-                        "str"
-                    ],
+                    "value": ["dex", "str"],
                     "selected": "str"
                 },
                 "items": {
@@ -13631,9 +12825,7 @@
                 },
                 "hp": 8,
                 "trainedSkills": {
-                    "value": [
-                        "arcana"
-                    ],
+                    "value": ["arcana"],
                     "additional": 2,
                     "custom": ""
                 },
@@ -13661,63 +12853,19 @@
                 },
                 "spellcasting": 1,
                 "ancestryFeatLevels": {
-                    "value": [
-                        1,
-                        5,
-                        9,
-                        13,
-                        17
-                    ]
+                    "value": [1, 5, 9, 13, 17]
                 },
                 "classFeatLevels": {
-                    "value": [
-                        2,
-                        4,
-                        6,
-                        8,
-                        10,
-                        12,
-                        14,
-                        16,
-                        18,
-                        20
-                    ]
+                    "value": [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
                 },
                 "generalFeatLevels": {
-                    "value": [
-                        3,
-                        7,
-                        11,
-                        15,
-                        19
-                    ]
+                    "value": [3, 7, 11, 15, 19]
                 },
                 "skillFeatLevels": {
-                    "value": [
-                        2,
-                        4,
-                        6,
-                        8,
-                        10,
-                        12,
-                        14,
-                        16,
-                        18,
-                        20
-                    ]
+                    "value": [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
                 },
                 "skillIncreaseLevels": {
-                    "value": [
-                        3,
-                        5,
-                        7,
-                        9,
-                        11,
-                        13,
-                        15,
-                        17,
-                        19
-                    ]
+                    "value": [3, 5, 7, 9, 11, 13, 15, 17, 19]
                 }
             },
             "type": "class",
@@ -13767,9 +12915,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "magus"
-                    ],
+                    "value": ["magus"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -13845,10 +12991,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "arcane",
-                        "magus"
-                    ],
+                    "value": ["arcane", "magus"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -13925,9 +13068,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "magus"
-                    ],
+                    "value": ["magus"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -14015,10 +13156,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "lineage",
-                        "nephilim"
-                    ],
+                    "value": ["lineage", "nephilim"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -14096,9 +13234,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate"
-                    ]
+                    "value": ["concentrate"]
                 },
                 "publication": {
                     "title": "Pathfinder Lost Omens: Impossible Lands",
@@ -14162,10 +13298,7 @@
                         "tint": null,
                         "predicate": [
                             {
-                                "or": [
-                                    "self:effect:towering-presence",
-                                    "self:effect:enlarge"
-                                ]
+                                "or": ["self:effect:towering-presence", "self:effect:enlarge"]
                             }
                         ]
                     }
@@ -14182,13 +13315,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "divine",
-                        "illusion",
-                        "nephilim",
-                        "polymorph"
-                    ],
+                    "value": ["concentrate", "divine", "illusion", "nephilim", "polymorph"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -14272,11 +13399,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "divine",
-                        "morph",
-                        "nephilim"
-                    ],
+                    "value": ["divine", "morph", "nephilim"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -14346,9 +13469,7 @@
                     {
                         "adjustName": false,
                         "choices": {
-                            "filter": [
-                                "item:tag:magus-hybrid-study"
-                            ]
+                            "filter": ["item:tag:magus-hybrid-study"]
                         },
                         "flag": "hybridStudy",
                         "key": "ChoiceSet",
@@ -14373,9 +13494,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "magus"
-                    ],
+                    "value": ["magus"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -14468,9 +13587,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "magus"
-                    ],
+                    "value": ["magus"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -14556,9 +13673,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "magus"
-                    ],
+                    "value": ["magus"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -14628,10 +13743,7 @@
                 "rules": [
                     {
                         "key": "FlatModifier",
-                        "predicate": [
-                            "self:armored",
-                            "self:effect:arcane-cascade"
-                        ],
+                        "predicate": ["self:armored", "self:effect:arcane-cascade"],
                         "selector": "speed",
                         "slug": "laughing-shadow-armored-movement",
                         "type": "status",
@@ -14656,10 +13768,7 @@
                         "predicate": [
                             "target:condition:off-guard",
                             {
-                                "gte": [
-                                    "hands-free:but-really",
-                                    1
-                                ]
+                                "gte": ["hands-free:but-really", 1]
                             }
                         ],
                         "selector": "strike-damage",
@@ -14673,10 +13782,7 @@
                             "feature:weapon-specialization",
                             "target:condition:off-guard",
                             {
-                                "gte": [
-                                    "hands-free:but-really",
-                                    1
-                                ]
+                                "gte": ["hands-free:but-really", 1]
                             }
                         ],
                         "selector": "strike-damage",
@@ -14690,10 +13796,7 @@
                             "feature:greater-weapon-specialization",
                             "target:condition:off-guard",
                             {
-                                "gte": [
-                                    "hands-free:but-really",
-                                    1
-                                ]
+                                "gte": ["hands-free:but-really", 1]
                             }
                         ],
                         "selector": "strike-damage",
@@ -14719,12 +13822,8 @@
                     }
                 },
                 "traits": {
-                    "otherTags": [
-                        "magus-hybrid-study"
-                    ],
-                    "value": [
-                        "magus"
-                    ],
+                    "otherTags": ["magus-hybrid-study"],
+                    "value": ["magus"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -14801,11 +13900,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "concentrate",
-                        "magus",
-                        "stance"
-                    ]
+                    "value": ["concentrate", "magus", "stance"]
                 },
                 "publication": {
                     "title": "Pathfinder Secrets of Magic",
@@ -14872,10 +13967,7 @@
                         "mode": "add",
                         "predicate": [
                             {
-                                "gte": [
-                                    "item:cast:actions",
-                                    1
-                                ]
+                                "gte": ["item:cast:actions", 1]
                             },
                             "item:trait:focus",
                             "item:trait:magus"
@@ -14968,9 +14060,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "magus"
-                    ],
+                    "value": ["magus"],
                     "rarity": "common",
                     "selected": {}
                 },
@@ -15043,9 +14133,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "magus"
-                    ],
+                    "value": ["magus"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -15111,11 +14199,7 @@
                         "path": "system.proficiencies.attacks.martial.rank",
                         "predicate": [
                             {
-                                "or": [
-                                    "class:champion",
-                                    "class:investigator",
-                                    "class:magus"
-                                ]
+                                "or": ["class:champion", "class:investigator", "class:magus"]
                             }
                         ],
                         "value": 2
@@ -15288,10 +14372,7 @@
                         "label": "PF2E.WeaponSpecialization",
                         "predicate": [
                             {
-                                "gte": [
-                                    "item:proficiency:rank",
-                                    2
-                                ]
+                                "gte": ["item:proficiency:rank", 2]
                             }
                         ],
                         "selector": "strike-damage",
@@ -15301,9 +14382,7 @@
                     {
                         "key": "AdjustModifier",
                         "mode": "upgrade",
-                        "predicate": [
-                            "item:proficiency:rank:3"
-                        ],
+                        "predicate": ["item:proficiency:rank:3"],
                         "priority": 0,
                         "selector": "strike-damage",
                         "slug": "weapon-specialization",
@@ -15312,9 +14391,7 @@
                     {
                         "key": "AdjustModifier",
                         "mode": "upgrade",
-                        "predicate": [
-                            "item:proficiency:rank:4"
-                        ],
+                        "predicate": ["item:proficiency:rank:4"],
                         "priority": 0,
                         "selector": "strike-damage",
                         "slug": "weapon-specialization",
@@ -15405,9 +14482,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "magus"
-                    ],
+                    "value": ["magus"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -15480,10 +14555,7 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "general",
-                        "skill"
-                    ],
+                    "value": ["general", "skill"],
                     "rarity": "common"
                 },
                 "publication": {
@@ -15556,19 +14628,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "attack",
-                        "cantrip",
-                        "concentrate",
-                        "electricity",
-                        "manipulate",
-                        "metal"
-                    ],
+                    "value": ["attack", "cantrip", "concentrate", "electricity", "manipulate", "metal"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ]
+                    "traditions": ["arcane", "primal"]
                 },
                 "publication": {
                     "title": "Pathfinder Player Core 2",
@@ -15599,9 +14661,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "1d4",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "slashing"
                     },
@@ -15609,9 +14669,7 @@
                         "applyMod": false,
                         "category": null,
                         "formula": "1d4",
-                        "kinds": [
-                            "damage"
-                        ],
+                        "kinds": ["damage"],
                         "materials": [],
                         "type": "electricity"
                     }
@@ -15671,16 +14729,9 @@
                 },
                 "traits": {
                     "otherTags": [],
-                    "value": [
-                        "cantrip",
-                        "concentrate",
-                        "manipulate"
-                    ],
+                    "value": ["cantrip", "concentrate", "manipulate"],
                     "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "occult"
-                    ]
+                    "traditions": ["arcane", "occult"]
                 },
                 "publication": {
                     "title": "Pathfinder Dark Archive",

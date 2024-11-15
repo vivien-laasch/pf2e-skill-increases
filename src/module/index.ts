@@ -1,11 +1,13 @@
+import { HelloWorld } from "./apps/HelloWorld";
 import { getDariosBoosts } from "./skillCalculator";
-
-const MODULE_NAME = "pf2e-skill-increases";
+import {  MODULE_ID } from "./constants";
 
 Hooks.once("ready", async () => {
-    console.log(`${MODULE_NAME.toUpperCase()} | Initializing ${MODULE_NAME.capitalize()}`);
+    console.log(`${MODULE_ID.toUpperCase()} | Initializing ${MODULE_ID}`);
 
-    console.log(`${MODULE_NAME.toUpperCase()} | Dario's available skills: ${getDariosBoosts()}`);
+    window.HelloWorld = await new HelloWorld().render(true);
 
-    console.log(`${MODULE_NAME.toUpperCase()} | Finished initializing.`);
+    console.log(`${MODULE_ID.toUpperCase()} | Dario's available skills: ${getDariosBoosts()}`);
+
+    console.log(`${MODULE_ID.toUpperCase()} | Finished initializing.`);
 });

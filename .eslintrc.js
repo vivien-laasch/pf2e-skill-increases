@@ -53,5 +53,4 @@ export default tseslint.config(
         files: ["tests/**/*"],
         rules: { "global-require": "off" },
     },
-    
 );

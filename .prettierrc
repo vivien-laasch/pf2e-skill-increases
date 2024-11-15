@@ -1,5 +1,5 @@
 {
     "printWidth": 160,
     "tabWidth": 4,
-    "plugins": ["prettier-plugin-svelte"]
+    "plugins": ["prettier-plugin-vue"]
 }
