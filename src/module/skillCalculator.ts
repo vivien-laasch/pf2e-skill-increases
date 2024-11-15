@@ -1,15 +1,4 @@
-export function getDariosBoosts(): number {
-    const dario = game.actors?.get("nTDnP6Cp2QT9TMNN") as ActorPF2e;
-
-    if (!dario) {
-        console.error("Dario not found");
-        return 0;
-    }
-
-    return getInitialBoosts(dario);
-}
-
-function getInitialBoosts(actor: ActorPF2e): number {
+export function getInitialBoosts(actor: ActorPF2e): number {
     return getAncestryBoosts(actor) + getIntelligenceBoostAtLevel(actor, 1) + getClassBoosts(actor) + getBackgroundBoosts(actor);
 }
 

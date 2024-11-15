@@ -1,74 +1,72 @@
-import ModuleData from './module.json' with { type: 'json' };
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import * as path from 'path';
-import {viteStaticCopy} from 'vite-plugin-static-copy';
+import ModuleData from "./module.json" with { type: "json" };
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import * as path from "path";
+import { viteStaticCopy } from "vite-plugin-static-copy";
 
 const s_SOURCEMAPS = true;
 const s_COMPRESS = false;
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  root: 'src/',                 // Source location / esbuild root.
-  base: `/${ModuleData.id}/`,    // Base module path that 30001 / served dev directory.
-  publicDir: false,             // No public resources to copy.
-  cacheDir: '../.vite-cache',   // Relative from root directory.
+    root: "src/", // Source location / esbuild root.
+    base: `/${ModuleData.id}/`, // Base module path that 30001 / served dev directory.
+    publicDir: false, // No public resources to copy.
+    cacheDir: "../.vite-cache", // Relative from root directory.
+    resolve: {
+        conditions: ["import", "browser"],
+        alias: {
+            "~": path.resolve(__dirname, "src"),
+        },
+    },
+    esbuild: {
+        target: ["es2022"],
+    },
+    css: {
+        // Creates a standard configuration for PostCSS with autoprefixer & postcss-preset-env.
+        // postcss: postcssConfig({ compress: s_COMPRESS, sourceMap: s_SOURCEMAPS })
+    },
+    define: {
+        "process.env": {},
+    },
+    server: {
+        port: 29999,
+        open: "/game",
+        proxy: {
+            // Serves static files from main Foundry server.
+            [`^(/${ModuleData.id}/(images|assets|lang|packs|style.css))`]: "http://localhost:30000",
 
-  resolve: {
-    conditions: ['import', 'browser'],
-    alias: {
-      '~': path.resolve(__dirname, 'src'),
-    }
-  },
+            // All other paths besides package ID path are served from main Foundry server.
+            [`^(?!/${ModuleData.id}/)`]: "http://localhost:30000",
 
-  esbuild: {
-    target: ['es2022']
-  },
-
-  css: {
-    // Creates a standard configuration for PostCSS with autoprefixer & postcss-preset-env.
-    // postcss: postcssConfig({ compress: s_COMPRESS, sourceMap: s_SOURCEMAPS })
-  },
-
-  define: {
-    'process.env': {}
-  },
-
-  server: {
-    port: 29999,
-    open: '/game',
-    proxy: {
-      // Serves static files from main Foundry server.
-      [`^(/${ModuleData.id}/(images|assets|lang|packs|style.css))`]: 'http://localhost:30000',
-
-      // All other paths besides package ID path are served from main Foundry server.
-      [`^(?!/${ModuleData.id}/)`]: 'http://localhost:30000',
-
-      // Enable socket.io from main Foundry server.
-      '/socket.io': { target: 'ws://localhost:30000', ws: true }
-    }
-  },
-  build: {
-    outDir: __dirname + '/dist',
-    emptyOutDir: false,
-    sourcemap: s_SOURCEMAPS,
-    minify: s_COMPRESS ? 'terser' : false,
-    target: ['es2022'],
-    lib: {
-      entry: './module/index.ts',
-      formats: ['es'],
-      fileName: 'main'
-    }
-  },
-  // Necessary when using the dev server for top-level await usage inside of TRL.
-  optimizeDeps: {
-    esbuildOptions: {
-      target: 'es2022'
-    }
-  },
-  plugins: [vue(), ...viteStaticCopy( {
-    targets: [
-//      { src: 'module.json', dest: '.' },
-    ]
-  })],
-})
+            // Enable socket.io from main Foundry server.
+            "/socket.io": { target: "ws://localhost:30000", ws: true },
+        },
+    },
+    build: {
+        outDir: __dirname + "/dist",
+        emptyOutDir: false,
+        sourcemap: s_SOURCEMAPS,
+        minify: s_COMPRESS ? "terser" : false,
+        target: ["es2022"],
+        lib: {
+            entry: "./module/index.ts",
+            formats: ["es"],
+            fileName: "main",
+        },
+    },
+    // Necessary when using the dev server for top-level await usage inside of TRL.
+    optimizeDeps: {
+        esbuildOptions: {
+            target: "es2022",
+        },
+    },
+    plugins: [
+        vue(),
+        ...viteStaticCopy({
+            targets: [
+                //      { src: 'module.json', dest: '.' },
+            ],
+        }),
+    ],
+});
