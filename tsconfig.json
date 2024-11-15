@@ -1,0 +1,23 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig.json",
+    "compilerOptions": {
+        "allowImportingTsExtensions": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "exactOptionalPropertyTypes": true,
+        "lib": ["DOM", "ES2023"],
+        "module": "ES2022",
+        "moduleResolution": "Bundler",
+        "noEmit": true,
+        "noImplicitOverride": true,
+        "strict": true,
+        "target": "ES2021",
+        "verbatimModuleSyntax": true,
+        "noUncheckedSideEffectImports": true,
+        "types": ["@league-of-foundry-developers/foundry-vtt-types"]
+    },
+    "watchOptions": {
+        "fallbackPolling": "dynamicpriority",
+        "excludeDirectories": ["dist", "static", "node_modules"]
+    }
+}
