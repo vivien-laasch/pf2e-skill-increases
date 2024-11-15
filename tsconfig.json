@@ -12,18 +12,11 @@
         "noImplicitOverride": true,
         "strict": true,
         "target": "ES2022",
-        "verbatimModuleSyntax": true,
         "noUncheckedSideEffectImports": true,
         "baseUrl": ".",
         "rootDir": ".",
         "outDir": "dist",
-        "paths": {
-            "@templates": ["src/templates"]
-        },
         "types": ["@league-of-foundry-developers/foundry-vtt-types"]
     },
-    "watchOptions": {
-        "fallbackPolling": "dynamicpriority",
-        "excludeDirectories": ["dist", "static", "node_modules"]
-    }
+    "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

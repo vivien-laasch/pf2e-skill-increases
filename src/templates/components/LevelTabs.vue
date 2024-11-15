@@ -1,35 +1,38 @@
 <script setup lang="ts">
-import { skillManagerStore } from "../../module/store/SkillManagerStore";
+import { skillManagerStore } from "../../module/stores/SkillManagerStore";
 
 const props = defineProps({
-    actorLevel: Number,
-    levelsWithIncreases: {
-        type: Array<number>,
-        required: true,
-    },
+  actorLevel: Number,
+  levelsWithIncreases: {
+    type: Array<number>,
+    required: true,
+  },
 });
 
 const store = skillManagerStore();
 const emit = defineEmits(["selectLevel"]);
 
 function selectLevel(level: number) {
-    store.selectedLevel = level;
-    emit("selectLevel");
+  store.selectedLevel = level;
+  emit("selectLevel");
 }
 </script>
 <template>
-    <div class="accordion">
-        <button
-            v-for="level of props.levelsWithIncreases"
-            :key="level"
-            class="level"
-            :class="{ disabled: level > props.actorLevel!, selected: level === store.selectedLevel }"
-            :disabled="level > props.actorLevel!"
-            @click="selectLevel(level)"
-        >
-            Level {{ level }}
-        </button>
-    </div>
+  <div class="accordion">
+    <button
+      v-for="level of props.levelsWithIncreases"
+      :key="level"
+      class="level"
+      :class="{
+        disabled: level > props.actorLevel!,
+        selected: level === store.selectedLevel,
+      }"
+      :disabled="level > props.actorLevel!"
+      @click="selectLevel(level)"
+    >
+      Level {{ level }}
+    </button>
+  </div>
 </template>
 <style scoped>
 .accordion {
@@ -46,6 +49,6 @@ function selectLevel(level: number) {
 }
 
 .selected {
-  background-color:var(--button-hover-background-color);
+  background-color: var(--button-hover-background-color);
 }
 </style>

@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { createApp, h, reactive } from "vue";
+import { MODULE_ID } from "../constants";
 
 export const VueApplicationMixinVersion = "0.0.6";
 
@@ -167,7 +168,7 @@ export function VueApplicationMixin(BaseApplication) {
                 if (this.constructor.SHADOWROOT) {
                     const link = document.createElement("link");
                     link.rel = "stylesheet";
-                    link.href = "/modules/fvtt-vue-vite/dist/style.css";
+                    link.href = `/modules/${MODULE_ID}/style.css`;
                     content.shadowRoot.appendChild(link);
 
                     const mountPoint = document.createElement("div");

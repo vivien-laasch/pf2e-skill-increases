@@ -2,6 +2,8 @@ import App from "../../templates/SkillManager.vue";
 import { VueApplicationMixin } from "../vue/VueApplicationMixin";
 import { MODULE_ID } from "../constants";
 import { createPinia, setActivePinia } from "pinia";
+import { skillManagerStore } from "../stores/SkillManagerStore";
+import { actor } from "../util/loader";
 
 const { ApplicationV2 } = foundry.applications.api;
 
@@ -37,6 +39,9 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
             use: {
                 pinia: { plugin: pinia, options: {} },
             },
+            props: {
+                actor: actor
+            }
         },
     };
 }

@@ -1,5 +1,10 @@
 interface ActorPF2e extends Actor {
     system: {
+        details: {
+            level: {
+                value: number;
+            };
+        };
         build: {
             attributes: {
                 boosts: {
