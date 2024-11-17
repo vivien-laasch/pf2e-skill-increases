@@ -1,41 +1,49 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { skillManagerStore } from "../../module/stores/SkillManagerStore";
+import { isFunctionLike } from "typescript";
 
 const props = defineProps({
-  skill: { type: String, required: true },
+    skill: { type: String, required: true },
 });
 
 const ranks = ["T", "E", "M", "L"];
 const store = skillManagerStore();
-const proficiencyRank = computed(() =>
-  store.getProficiencyAtSelectedLevel(props.skill)
-);
+const proficiencyRank = computed(() => store.getProficiencyAtSelectedLevel(props.skill));
 
-const updateProficiency = (index: number) => {
-  const skill = props.skill;
-  console.log(proficiencyRank.value);
-  if (proficiencyRank.value > index) {
-    store.removeProficiency(skill);
+function updateProficiency(index: number) {
+    const skill = props.skill;
     console.log(proficiencyRank.value);
-  } else {
-    store.addProficiency(skill);
-    console.log(proficiencyRank.value);
-  }
-};
+    if (proficiencyRank.value > index) {
+        store.removeProficiency(skill);
+        console.log(proficiencyRank.value);
+    } else {
+        store.addProficiency(skill);
+        console.log(proficiencyRank.value);
+    }
+}
+
+function selectedThisLevel(index: number): boolean {
+    return store.isSkillSelected(props.skill) && index === proficiencyRank.value;
+}
+
+function disabled(index: number): boolean {
+    return index < proficiencyRank.value && !selectedThisLevel(index);
+}
 </script>
 
 <template>
-  <div class="proficiency">
-    <div class="indicator" v-for="(rank, index) in ranks" :key="rank">
-      <div class="rank">{{ rank }}</div>
-      <button
-        @click="updateProficiency(index)"
-        class="background"
-        :class="{ proficient: index < proficiencyRank }"
-      ></button>
+    <div class="proficiency">
+        <div class="indicator" v-for="(rank, index) in ranks" :key="rank">
+            <div class="rank">{{ rank }}</div>
+            <button
+                @click="updateProficiency(index)"
+                class="background"
+                :class="{ proficient: index < proficiencyRank, selected: selectedThisLevel(index) }"
+                :disabled="disabled(index)"
+            ></button>
+        </div>
     </div>
-  </div>
 </template>
 <style lang="css">
 .proficiency {
@@ -56,14 +64,17 @@ const updateProficiency = (index: number) => {
   text-align: center;
 }
 
-.background {
+button {
   width: 12px;
   aspect-ratio: 1;
-  border-radius: 25%;
-  border: 1px solid black;
 }
 
-.background.proficient {
+button.proficient:disabled {
+  background-color: color-mix(in srgb, var(--button-hover-background-color) 50, transparent 50);
+  border-color: var(--button-border-color);
+}
+
+button.selected.proficient {
   background-color: var(--button-hover-background-color);
 }
 </style>
