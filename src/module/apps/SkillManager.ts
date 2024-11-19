@@ -1,7 +1,6 @@
 import { createPinia, setActivePinia } from "pinia";
 import App from "../../templates/SkillManager.vue";
 import { MODULE_ID } from "../constants";
-import { actor } from "../util/loader";
 import { VueApplicationMixin } from "../vue/VueApplicationMixin";
 import { skillManagerStore } from "../stores/SkillManagerStore";
 
@@ -10,6 +9,10 @@ const { ApplicationV2 } = foundry.applications.api;
 let pinia = createPinia();
 setActivePinia(pinia);
 export class SkillManager extends VueApplicationMixin(ApplicationV2) {
+    constructor(actor: ActorPF2e) {
+        super();
+        skillManagerStore().actor = actor;
+    }
 
     static DEFAULT_OPTIONS = foundry.utils.mergeObject(
         super.DEFAULT_OPTIONS,
@@ -22,7 +25,7 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
             position: {
                 width: 600,
                 height: 570,
-            }
+            },
         },
         { inplace: false },
     );
@@ -37,7 +40,7 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
             component: App,
             use: {
                 pinia: { plugin: pinia, options: {} },
-            }
+            },
         },
     };
 }

@@ -5,7 +5,7 @@ export const skillManagerStore = defineStore("skill-manager", {
         return {
             selectedLevel: 1,
             selectedSkills: new Map<number, string[]>(),
-            actor: null as ActorPF2e | null,
+            actor: new Object(),
         };
     },
     actions: {
@@ -36,7 +36,10 @@ export const skillManagerStore = defineStore("skill-manager", {
             this.selectedSkills.set(this.selectedLevel, skills);
         },
         isSkillSelected(skill: string): boolean {
-          return this.selectedSkills.get(this.selectedLevel)?.includes(skill) || false;
-      },
+            return this.selectedSkills.get(this.selectedLevel)?.includes(skill) || false;
+        },
+        getActor(): ActorPF2e {
+            return this.actor as ActorPF2e;
+        }
     },
 });

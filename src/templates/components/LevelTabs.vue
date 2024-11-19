@@ -1,18 +1,14 @@
 <script setup lang="ts">
-import { computed, defineEmits } from "vue";
+import { computed, defineEmits, PropType } from "vue";
 import { skillManagerStore } from "../../module/stores/SkillManagerStore";
 import { getSkillIncreaseLevels } from "../../module/util/actorUtils";
 
 const store = skillManagerStore();
-const emit = defineEmits(["selectLevel"]);
-
-const actor = computed (() => store.actor);
-const levelsWithIncreases = computed(() => getSkillIncreaseLevels(actor.value));
-const actorLevel = computed(() => actor.value.system.details.level.value);
+const levelsWithIncreases = computed(() => getSkillIncreaseLevels(store.getActor()));
+const actorLevel = computed(() => store.getActor().system.details.level.value);
 
 function selectLevel(level: number) {
     store.selectedLevel = level;
-    emit("selectLevel");
 }
 </script>
 <template>
@@ -38,12 +34,12 @@ function selectLevel(level: number) {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  overflow-x: hidden;
   padding-right: 0.75rem;
 }
 
 .level {
   padding: 0.25rem 1.5rem;
+  width: auto;
 }
 
 .selected {

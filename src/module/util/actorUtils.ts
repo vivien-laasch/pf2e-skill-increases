@@ -76,11 +76,8 @@ export function getBackgroundBoosts(actor: ActorPF2e): number {
   return totalBoosts;
 }
 
-export function getSkillIncreaseLevels(actor: ActorPF2e | null): number[] {
-  if (!actor) {
-    return [];
-  }
-  const classItem = actor.items.find((i) => i.type === "class") as ClassPF2e;
+export function getSkillIncreaseLevels(actor: ActorPF2e): number[] {
+  const classItem = actor.class;
 
   if (!classItem) {
     return [];

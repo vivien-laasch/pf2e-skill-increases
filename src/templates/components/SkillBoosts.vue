@@ -29,7 +29,7 @@ const availableSkills = [
     </div>
   </div>
 </template>
-<style lang="css">
+<style scoped lang="css">
 .skill-list {
   gap: 0.5rem;
   display: flex;

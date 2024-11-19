@@ -13,7 +13,6 @@ const proficiencyRank = computed(() => store.getProficiencyAtSelectedLevel(props
 
 function updateProficiency(index: number) {
     const skill = props.skill;
-    console.log(proficiencyRank.value);
     if (proficiencyRank.value > index) {
         store.removeProficiency(skill);
         console.log(proficiencyRank.value);
@@ -45,7 +44,7 @@ function disabled(index: number): boolean {
         </div>
     </div>
 </template>
-<style lang="css">
+<style scoped lang="css">
 .proficiency {
   display: flex;
   justify-content: space-around;

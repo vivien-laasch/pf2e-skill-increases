@@ -8,7 +8,7 @@ import SkillBoosts from "./components/SkillBoosts.vue";
         <SkillBoosts></SkillBoosts>
     </div>
 </template>
-<style>
+<style scoped lang="css">
 .skill-manager {
   display: flex;
   gap: 1rem;

@@ -1,4 +1,5 @@
 interface ActorPF2e extends Actor {
+    class : ClassPF2e;
     system: {
         details: {
             level: {
