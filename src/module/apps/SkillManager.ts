@@ -23,8 +23,8 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
                 resizable: true,
             },
             position: {
-                width: 600,
-                height: 790,
+                width: 660,
+                height: 620,
             },
         },
         { inplace: false },
@@ -37,7 +37,7 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
     static override PARTS = {
         app: {
             id: "app",
-            component: App,
+            app: App,
             use: {
                 pinia: { plugin: pinia, options: {} },
             },

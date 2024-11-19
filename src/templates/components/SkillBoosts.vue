@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import ProficiencyIndicator from "./ProficiencyIndicator.vue";
 
 const availableSkills = [
@@ -19,11 +20,12 @@ const availableSkills = [
     "survival",
     "thievery",
 ];
+const bonus = computed(() => "+53");
 </script>
 <template>
     <div class="skill-list">
         <div v-for="skill in availableSkills" :key="skill" class="skill">
-            <div class="skill-bonus">+53</div>
+            <div class="skill-bonus">{{ bonus }}</div>
             <div class="skill-name">{{ skill }}</div>
             <ProficiencyIndicator :skill="skill"></ProficiencyIndicator>
         </div>

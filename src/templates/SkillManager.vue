@@ -8,11 +8,15 @@ import SkillBoosts from "./components/SkillBoosts.vue";
         <SkillBoosts></SkillBoosts>
     </div>
 </template>
-<style scoped lang="css">
-.skill-manager {
+<style lang="css">
+#app-pf2e-skill-increases [data-application-part="app"] {
+    height: 100%;
+}
+
+#app-pf2e-skill-increases .skill-manager {
   display: flex;
   gap: 1rem;
   width: 100%;
-  max-height: 720px
+  height: 100%;
 }
 </style>

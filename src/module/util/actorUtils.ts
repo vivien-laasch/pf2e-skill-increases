@@ -1,4 +1,4 @@
-export function getInitialBoosts(actor: ActorPF2e): number {
+function getInitialBoosts(actor: ActorPF2e): number {
     return getAncestryBoosts(actor) + getIntelligenceBoostAtLevel(actor, 1) + getClassBoosts(actor) + getBackgroundBoosts(actor);
 }
 
@@ -32,7 +32,7 @@ function getIntelligenceBoostAtLevel(actor: ActorPF2e, level: number): number {
 }
 
 function getClassBoosts(actor: ActorPF2e): number {
-    const classItem = actor.items.find((i) => i.type === "class") as ClassPF2e;
+    const classItem = actor.class;
 
     if (!classItem) {
         return 0;
@@ -77,4 +77,22 @@ export function getSkillIncreaseLevels(actor: ActorPF2e): number[] {
 
 export function getLevel(actor: ActorPF2e): number {
     return actor.system.details.level.value;
+}
+
+export function maxProficiencyAtLevel(level: number): number {
+    if (level < 7) {
+        return 2;
+    } else if (level < 15) {
+        return 3;
+    } else {
+        return 4;
+    }
+}
+
+export function getAvailableSkillBoostsAtLevel(actor: ActorPF2e, level: number): number {
+    if (level == 1) {
+        return getInitialBoosts(actor);
+    }
+
+    return 1;
 }
