@@ -24,7 +24,7 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
             },
             position: {
                 width: 600,
-                height: 570,
+                height: 790,
             },
         },
         { inplace: false },

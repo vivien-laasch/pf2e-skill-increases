@@ -13,6 +13,6 @@ import SkillBoosts from "./components/SkillBoosts.vue";
   display: flex;
   gap: 1rem;
   width: 100%;
-  max-height: 500px;
+  max-height: 720px
 }
 </style>

@@ -40,6 +40,6 @@ export const skillManagerStore = defineStore("skill-manager", {
         },
         getActor(): ActorPF2e {
             return this.actor as ActorPF2e;
-        }
+        },
     },
 });

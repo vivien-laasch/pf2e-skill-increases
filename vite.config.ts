@@ -23,7 +23,7 @@ export default defineConfig({
         target: ["es2022"],
     },
     css: {
-/*         modules : {
+        /*         modules : {
             generateScopedName: "[local]__[hash:base64:5]",
         }, */
         // Creates a standard configuration for PostCSS with autoprefixer & postcss-preset-env.

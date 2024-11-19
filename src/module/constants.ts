@@ -1,4 +1,5 @@
 export const MODULE_ID = "pf2e-skill-increases";
+export const CHARACTER_SHEET = "CharacterSheetPF2e";
 
 const ModuleData = {
     id: MODULE_ID,

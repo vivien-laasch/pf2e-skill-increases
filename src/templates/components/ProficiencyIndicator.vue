@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { skillManagerStore } from "../../module/stores/SkillManagerStore";
-import { isFunctionLike } from "typescript";
 
 const props = defineProps({
     skill: { type: String, required: true },
@@ -15,19 +14,15 @@ function updateProficiency(index: number) {
     const skill = props.skill;
     if (proficiencyRank.value > index) {
         store.removeProficiency(skill);
-        console.log(proficiencyRank.value);
     } else {
         store.addProficiency(skill);
-        console.log(proficiencyRank.value);
     }
 }
 
-function selectedThisLevel(index: number): boolean {
-    return store.isSkillSelected(props.skill) && index === proficiencyRank.value;
-}
-
 function disabled(index: number): boolean {
-    return index < proficiencyRank.value && !selectedThisLevel(index);
+    const totalProficiency = store.getProficiencyAtSelectedLevel(props.skill);
+    const allowDeselect = store.isSkillSelected(props.skill) && totalProficiency - 1 == index;
+    return index < totalProficiency && !allowDeselect;
 }
 </script>
 
@@ -35,12 +30,7 @@ function disabled(index: number): boolean {
     <div class="proficiency">
         <div class="indicator" v-for="(rank, index) in ranks" :key="rank">
             <div class="rank">{{ rank }}</div>
-            <button
-                @click="updateProficiency(index)"
-                class="background"
-                :class="{ proficient: index < proficiencyRank, selected: selectedThisLevel(index) }"
-                :disabled="disabled(index)"
-            ></button>
+            <button @click="updateProficiency(index)" class="background" :class="{ proficient: index < proficiencyRank }" :disabled="disabled(index)"></button>
         </div>
     </div>
 </template>
@@ -69,11 +59,11 @@ button {
 }
 
 button.proficient:disabled {
-  background-color: color-mix(in srgb, var(--button-hover-background-color) 50, transparent 50);
+  background-color: color-mix(in srgb, var(--button-hover-background-color), transparent 20%);
   border-color: var(--button-border-color);
 }
 
-button.selected.proficient {
+button.proficient {
   background-color: var(--button-hover-background-color);
 }
 </style>
