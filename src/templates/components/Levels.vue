@@ -35,7 +35,7 @@ function selectLevel(level: number) {
   flex-direction: column;
   overflow-y: auto;
   flex: 0.35;
-  padding-right: 0.25rem;
+  padding-right: 0.75rem;
 }
 
 .level {

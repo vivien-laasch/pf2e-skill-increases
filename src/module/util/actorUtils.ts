@@ -66,7 +66,7 @@ function getClassSkillBoosts(actor: ActorPF2e): number {
         return 0;
     }
 
-    return getClassIntMod(classItem);
+    return classItem.system.trainedSkills.additional;
 }
 
 export function getSkillIncreaseLevels(actor: ActorPF2e): number[] {
@@ -115,7 +115,9 @@ function calculateAdditionalSkillIncreases(actor: ActorPF2e): number[] {
 }
 
 export function maxProficiencyAtLevel(level: number): number {
-    if (level < 7) {
+    if (level == 1) {
+        return 1;
+    } else if (level < 7) {
         return 2;
     } else if (level < 15) {
         return 3;

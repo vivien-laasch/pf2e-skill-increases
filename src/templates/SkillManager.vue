@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import LevelTabs from "./components/LevelTabs.vue";
-import SkillBoosts from "./components/SkillBoosts.vue";
+import Levels from "./components/Levels.vue";
+import Skills from "./components/Skills.vue";
 </script>
 <template>
     <div class="skill-manager">
-        <LevelTabs></LevelTabs>
-        <SkillBoosts></SkillBoosts>
+        <Levels></Levels>
+        <Skills></Skills>
     </div>
 </template>
 <style lang="css">

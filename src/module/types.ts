@@ -2,6 +2,7 @@ interface ActorPF2e extends Actor {
     class: ClassPF2e;
     ancestry: AncestryPF2e;
     background: BackgroundPF2e;
+    skills: SkillPF2e[];
     system: {
         details: {
             level: {
@@ -58,5 +59,18 @@ interface BackgroundPF2e extends Item {
                 selected: string;
             };
         };
+    };
+}
+
+interface SkillPF2e extends Item {
+    slug: string;
+    label: string;
+    attribute: string;
+    data: {
+        modifiers: {
+            slug: string;
+            type: string;
+            ability: string;
+        }[];
     };
 }

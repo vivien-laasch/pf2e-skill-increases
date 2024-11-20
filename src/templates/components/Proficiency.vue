@@ -73,7 +73,7 @@ button {
 }
 
 button.proficient:disabled {
-  background-color: color-mix(in srgb, var(--button-hover-background-color), transparent 25%);
+  background-color: color-mix(in srgb, var(--button-hover-background-color), transparent 35%);
   border-color: var(--color-light-5)
 }
 
