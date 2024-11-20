@@ -1,0 +1,3 @@
+[submodule "src/module/fvtt-vue"]
+	path = src/module/fvtt-vue
+	url = https://github.com/mouse0270/fvtt-vue.git
