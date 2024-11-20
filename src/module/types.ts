@@ -1,5 +1,7 @@
 interface ActorPF2e extends Actor {
     class: ClassPF2e;
+    ancestry: AncestryPF2e;
+    background: BackgroundPF2e;
     system: {
         details: {
             level: {

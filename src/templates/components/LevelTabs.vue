@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, defineEmits, PropType } from "vue";
+import { computed } from "vue";
 import { skillManagerStore } from "../../module/stores/SkillManagerStore";
 import { getSkillIncreaseLevels } from "../../module/util/actorUtils";
 
