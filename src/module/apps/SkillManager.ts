@@ -1,7 +1,7 @@
 import { createPinia, setActivePinia } from "pinia";
 import App from "../../templates/SkillManager.vue";
 import { MODULE_ID } from "../constants";
-import { VueApplicationMixin } from "../vue/VueApplicationMixin";
+import { VueApplicationMixin } from "../fvtt-vue/VueApplicationMixin.mjs";
 import { skillManagerStore } from "../stores/SkillManagerStore";
 
 const { ApplicationV2 } = foundry.applications.api;
