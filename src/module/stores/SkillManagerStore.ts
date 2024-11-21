@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { getPersistedData } from "../util/persistenceUtils";
 
 export const useSkillManagerStore = defineStore("skill-manager", {
     state: () => {
@@ -36,10 +37,14 @@ export const useSkillManagerStore = defineStore("skill-manager", {
         isSkillSelected(skill: string): boolean {
             return this.selectedSkills.get(this.selectedLevel)?.includes(skill) || false;
         },
+        loadPersistedSkills() {
+            const persistedSkills = getPersistedData(this.actor as ActorPF2e);
+            this.selectedSkills = persistedSkills;
+        },
     },
     getters: {
         getActor(): ActorPF2e {
             return this.actor as ActorPF2e;
         },
-    }
+    },
 });

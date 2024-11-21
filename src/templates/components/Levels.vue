@@ -1,20 +1,16 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
-import { getSkillIncreaseLevels } from "../../module/util/calculationUtils";
+import { computeSkillProgression } from "../../module/util/skillCalculationUtils";
 
 const store = useSkillManagerStore();
-const levelsWithIncreases = computed(() => getSkillIncreaseLevels(store.getActor));
+const levelsWithIncreases = computed(() => computeSkillProgression(store.getActor));
 const actorLevel = computed(() => store.actor.system.details.level.value);
-
-function selectLevel(level: number) {
-    store.selectedLevel = level;
-}
 </script>
 <template>
     <div class="accordion">
         <button
-            v-for="level of levelsWithIncreases"
+            v-for="level of levelsWithIncreases.keys()"
             :key="level"
             class="level"
             :class="{
@@ -22,7 +18,7 @@ function selectLevel(level: number) {
                 selected: level === store.selectedLevel,
             }"
             :disabled="level > actorLevel!"
-            @click="selectLevel(level)"
+            @click="store.selectedLevel = level"
         >
             Level {{ level }}
         </button>

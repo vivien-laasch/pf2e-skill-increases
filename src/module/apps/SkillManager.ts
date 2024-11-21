@@ -7,14 +7,13 @@ import { persistData } from "../util/persistenceUtils";
 
 const { ApplicationV2 } = foundry.applications.api;
 export class SkillManager extends VueApplicationMixin(ApplicationV2) {
-    state: Pinia;
+    pinia: Pinia;
 
     constructor(actor: ActorPF2e) {
         // @ts-expect-error - valid override
-        super({ uniqueId: actor.id });
-        this.state = createPinia();
-        setActivePinia(this.state);
-        useSkillManagerStore().actor = actor;
+        super({ uniqueId: actor.id, actorName: actor.name });
+        this.pinia = createPinia();
+        this.initializeStore(actor);
     }
 
     static DEFAULT_OPTIONS = foundry.utils.mergeObject(
@@ -44,14 +43,26 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
     override async close(options?: Application.CloseOptions): Promise<void> {
         const store = useSkillManagerStore();
         persistData(store.getActor, store.selectedSkills);
-        disposePinia(this.state);
+        disposePinia(this.pinia);
         return await super.close(options);
     }
 
-    //@ts-expect-error - valid override to prevent infinite managers
-    override _initializeApplicationOptions(options: ApplicationConfiguration): ApplicationConfiguration {
-        const renderOptions = super._initializeApplicationOptions(options);
+    // @ts-expect-error - valid override
+    override _initializeApplicationOptions(options: RenderOptions): RenderOptions {
+        const renderOptions = super._initializeApplicationOptions(options) as RenderOptions;
         renderOptions.uniqueId = options.uniqueId;
         return renderOptions;
     }
+
+    initializeStore(actor: ActorPF2e) {
+        setActivePinia(this.pinia);
+        const store = useSkillManagerStore();
+        store.actor = actor;
+        store.loadPersistedSkills();
+    }
+}
+
+
+interface RenderOptions {
+    uniqueId: string;
 }

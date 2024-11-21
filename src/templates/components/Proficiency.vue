@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
-import { getAvailableSkillBoostsAtLevel, maxProficiencyAtLevel } from "../../module/util/calculationUtils";
+import { maxProficiencyAtLevel, computeSkillProgression } from "../../module/util/skillCalculationUtils";
 
 const props = defineProps({
     skill: { type: String, required: true },
@@ -10,6 +10,7 @@ const props = defineProps({
 const ranks = ["T", "E", "M", "L"];
 const store = useSkillManagerStore();
 const proficiencyRank = computed(() => store.getProficiencyAtSelectedLevel(props.skill));
+const maxSkillIncreases = computed(() => computeSkillProgression(store.getActor).get(store.selectedLevel));
 
 function updateProficiency(index: number) {
     const skill = props.skill;
@@ -29,8 +30,7 @@ function decreaseAllowed(index: number): boolean {
 function exceeded(index: number): boolean {
     const currentProficiency = store.getProficiencyAtSelectedLevel(props.skill);
     const allowDecrease = store.isSkillSelected(props.skill) && currentProficiency - 1 == index;
-    const maxAmountExceeded =
-        getAvailableSkillBoostsAtLevel(store.getActor, store.selectedLevel) <= (store.selectedSkills.get(store.selectedLevel)?.length ?? 0);
+    const maxAmountExceeded = (maxSkillIncreases.value || 0) <= (store.selectedSkills.get(store.selectedLevel)?.length ?? 0);
     return (maxProficiencyAtLevel(store.selectedLevel) <= index || maxAmountExceeded) && !allowDecrease;
 }
 </script>
