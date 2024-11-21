@@ -9,11 +9,11 @@ import Skills from "./components/Skills.vue";
     </div>
 </template>
 <style lang="css">
-#app-pf2e-skill-increases [data-application-part="app"] {
+.application.skill-manager [data-application-part="app"] {
     height: 100%;
 }
 
-#app-pf2e-skill-increases .skill-manager {
+.application.skill-manager .skill-manager {
   display: flex;
   gap: 1rem;
   width: 100%;

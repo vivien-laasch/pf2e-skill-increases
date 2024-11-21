@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import ProficiencyIndicator from "./Proficiency.vue";
-import { skillManagerStore } from "../../module/stores/SkillManagerStore";
+import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
 
-const store = skillManagerStore();
+const store = useSkillManagerStore();
 
-const availableSkills = computed(() => store.getActor().skills);
+const availableSkills = computed(() => store.getActor.skills);
 
 function getBonus(skill: SkillPF2e): string {
     const prof = store.getProficiencyAtSelectedLevel(skill.slug);

@@ -4,7 +4,7 @@ import { CHARACTER_SHEET, MODULE_ID } from "./constants";
 const openManager = `<button id="open-skill-manager" type="button" class="blue" style="margin-bottom: 0.5rem;">Skill Manager</button>`;
 
 Hooks.on("render" + CHARACTER_SHEET, (app: ActorSheet, html: JQuery) => {
-    console.log(`${MODULE_ID.toUpperCase()} | Attempting to inject Skill Manager button`);
+    console.log(`${MODULE_ID} | Attempting to inject Skill Manager button`);
 
     const id = app.options.token?.actorId;
     if (!id) return;
@@ -14,7 +14,7 @@ Hooks.on("render" + CHARACTER_SHEET, (app: ActorSheet, html: JQuery) => {
         openSkillManager(id);
     });
 
-    console.log(`${MODULE_ID.toUpperCase()} | Skill Manager button injected`);
+    console.log(`${MODULE_ID} | Skill Manager button injected`);
 });
 
 async function openSkillManager(actorId: string) {

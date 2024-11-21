@@ -1,11 +1,11 @@
 import { defineStore } from "pinia";
 
-export const skillManagerStore = defineStore("skill-manager", {
+export const useSkillManagerStore = defineStore("skill-manager", {
     state: () => {
         return {
             selectedLevel: 1,
             selectedSkills: new Map<number, string[]>(),
-            actor: new Object(),
+            actor: new Object() as ActorPF2e,
         };
     },
     actions: {
@@ -19,16 +19,14 @@ export const skillManagerStore = defineStore("skill-manager", {
             return proficiencyRank;
         },
         addProficiency(skill: string) {
-            let skills = this.selectedSkills.get(this.selectedLevel) || [];
-            console.log(skills);
+            const skills = this.selectedSkills.get(this.selectedLevel) || [];
             if (!skills.includes(skill)) {
                 skills.push(skill);
             }
             this.selectedSkills.set(this.selectedLevel, skills);
         },
         removeProficiency(skill: string) {
-            let skills = this.selectedSkills.get(this.selectedLevel) || [];
-            console.log(skills);
+            const skills = this.selectedSkills.get(this.selectedLevel) || [];
             const index = skills.indexOf(skill);
             if (index > -1) {
                 skills.splice(index, 1);
@@ -38,8 +36,10 @@ export const skillManagerStore = defineStore("skill-manager", {
         isSkillSelected(skill: string): boolean {
             return this.selectedSkills.get(this.selectedLevel)?.includes(skill) || false;
         },
+    },
+    getters: {
         getActor(): ActorPF2e {
             return this.actor as ActorPF2e;
         },
-    },
+    }
 });

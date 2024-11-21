@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { skillManagerStore } from "../../module/stores/SkillManagerStore";
-import { getSkillIncreaseLevels } from "../../module/util/actorUtils";
+import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
+import { getSkillIncreaseLevels } from "../../module/util/calculationUtils";
 
-const store = skillManagerStore();
-const levelsWithIncreases = computed(() => getSkillIncreaseLevels(store.getActor()));
-const actorLevel = computed(() => store.getActor().system.details.level.value);
+const store = useSkillManagerStore();
+const levelsWithIncreases = computed(() => getSkillIncreaseLevels(store.getActor));
+const actorLevel = computed(() => store.actor.system.details.level.value);
 
 function selectLevel(level: number) {
     store.selectedLevel = level;

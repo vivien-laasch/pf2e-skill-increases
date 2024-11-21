@@ -1,23 +1,27 @@
-import { createPinia, setActivePinia } from "pinia";
+import { createPinia, disposePinia, Pinia, setActivePinia } from "pinia";
 import App from "../../templates/SkillManager.vue";
 import { MODULE_ID } from "../constants";
 import { VueApplicationMixin } from "../fvtt-vue/VueApplicationMixin.mjs";
-import { skillManagerStore } from "../stores/SkillManagerStore";
+import { useSkillManagerStore } from "../stores/SkillManagerStore";
+import { persistData } from "../util/persistenceUtils";
 
 const { ApplicationV2 } = foundry.applications.api;
-
-let pinia = createPinia();
-setActivePinia(pinia);
 export class SkillManager extends VueApplicationMixin(ApplicationV2) {
+    state: Pinia;
+
     constructor(actor: ActorPF2e) {
-        super();
-        skillManagerStore().actor = actor;
+        // @ts-expect-error - valid override
+        super({ uniqueId: actor.id });
+        this.state = createPinia();
+        setActivePinia(this.state);
+        useSkillManagerStore().actor = actor;
     }
 
     static DEFAULT_OPTIONS = foundry.utils.mergeObject(
         super.DEFAULT_OPTIONS,
         {
-            id: `app-${MODULE_ID}`,
+            id: "skill-manager-{id}",
+            uniqueId: "",
             window: {
                 title: `${MODULE_ID}.title`,
                 resizable: true,
@@ -26,21 +30,28 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
                 width: 660,
                 height: 620,
             },
+            classes: ["skill-manager"],
         },
         { inplace: false },
     );
 
-    static override DEBUG = true;
-
-    static override SHADOWROOT = false;
-
     static override PARTS = {
         app: {
-            id: "app",
             app: App,
-            use: {
-                pinia: { plugin: pinia, options: {} },
-            },
         },
     };
+
+    override async close(options?: Application.CloseOptions): Promise<void> {
+        const store = useSkillManagerStore();
+        persistData(store.getActor, store.selectedSkills);
+        disposePinia(this.state);
+        return await super.close(options);
+    }
+
+    //@ts-expect-error - valid override to prevent infinite managers
+    override _initializeApplicationOptions(options: ApplicationConfiguration): ApplicationConfiguration {
+        const renderOptions = super._initializeApplicationOptions(options);
+        renderOptions.uniqueId = options.uniqueId;
+        return renderOptions;
+    }
 }
