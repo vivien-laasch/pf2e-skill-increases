@@ -34,17 +34,26 @@ function addAutoChanges(actor: ActorPF2e, selectedSkills: Map<number, Preselecte
 }
 
 function updateSkillSelection(selectedSkills: Map<number, PreselectedSkills>, skill: string, level: number): void {
-    const existingEntry = selectedSkills.get(level) || { preselectedSkills: [], additional: 0 };
-    const { preselectedSkills: preselected } = existingEntry;
+    let alreadySelected = false;
 
-    if (!preselected.includes(skill)) {
-        preselected.push(skill);
-    } else {
+    for (const [lvl, entry] of selectedSkills) {
+        if (lvl < level && entry.preselectedSkills.includes(skill)) {
+            alreadySelected = true;
+            break;
+        }
+    }
+
+    const existingEntry = selectedSkills.get(level) || { preselectedSkills: [], additional: 0 };
+
+    if (alreadySelected) {
         existingEntry.additional++;
+    } else {
+        existingEntry.preselectedSkills.push(skill);
     }
 
     selectedSkills.set(level, existingEntry);
 }
+
 function addClassSkills(actor: ActorPF2e, selectedSkills: Map<number, PreselectedSkills>) {
     const classItem = actor.class;
 

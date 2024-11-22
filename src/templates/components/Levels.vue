@@ -6,12 +6,17 @@ import { localize } from "../../module/fvtt-vue/VueHelpers.mjs";
 
 const store = useSkillManagerStore();
 const levelsWithIncreases = computed(() => computeSkillProgression(store.getActor));
+const levelsWithAdditionalIncreases = computed(() => store.preselectedSKills);
 const actorLevel = computed(() => store.actor.system.details.level.value);
+
+function totalLevels(): number[] {
+    return Array.from(new Set([...levelsWithIncreases.value.keys(), ...levelsWithAdditionalIncreases.value.keys()])).sort((a, b) => a - b);
+}
 </script>
 <template>
     <div class="accordion">
         <button
-            v-for="level of levelsWithIncreases.keys()"
+            v-for="level of totalLevels()"
             :key="level"
             class="level"
             :class="{

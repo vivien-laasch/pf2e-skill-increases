@@ -45,7 +45,7 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
                     closeOnSubmit: true,
                     handler() {
                         const store = useSkillManagerStore();
-                        persistData(store.getActor, store.selectedSkills);
+                        persistData(store.getActor, store.selectedSkills, store.preselectedSKills);
                     },
                 },
             },
