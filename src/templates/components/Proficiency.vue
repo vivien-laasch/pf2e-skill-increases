@@ -3,6 +3,7 @@ import { computed } from "vue";
 import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
 import { maxProficiencyAtLevel, computeSkillProgression } from "../../module/util/skillCalculationUtils";
 import { localize } from "../../module/fvtt-vue/VueHelpers.mjs";
+import { MODULE_ID } from "../../module/constants";
 
 const props = defineProps({
     skill: { type: String, required: true },
@@ -40,6 +41,18 @@ function maxAmountReached(index: number): boolean {
     const maxAmountExceeded = maxAmount.value <= (store.selectedSkills.get(store.selectedLevel)?.length ?? 0);
     return (maxProficiencyAtLevel(store.selectedLevel) <= index || maxAmountExceeded) && !allowDecrease;
 }
+
+function getMessage(index: number): string {
+    if (preselected()) {
+        return localize(`${MODULE_ID}.proficiencyPreselected`);
+    } else if (!decreaseAllowed(index)) {
+        return localize(`${MODULE_ID}.proficiencyDecreaseNotAllowed`);
+    } else if (maxAmountReached(index)) {
+        return localize(`${MODULE_ID}.skillsMaxAmountReached`);
+    } else {
+        return "";
+    }
+}
 </script>
 
 <template>
@@ -48,10 +61,11 @@ function maxAmountReached(index: number): boolean {
             <div class="rank">{{ rank }}</div>
             <button
                 @click="updateProficiency(index)"
-                class="background"
+                class="proficiency-button"
                 :class="{ proficient: index < proficiencyRank, exceeded: maxAmountReached(index), preselected: preselected() }"
                 :disabled="!decreaseAllowed(index) || maxAmountReached(index) || preselected()"
             ></button>
+            <span v-if="getMessage(index)" v-text="getMessage(index)" class="tooltip"></span>
         </div>
     </div>
 </template>
@@ -67,6 +81,7 @@ function maxAmountReached(index: number): boolean {
   display: flex;
   flex-direction: column;
   align-items: center;
+  display: block;
 }
 
 .rank {
@@ -80,19 +95,30 @@ button {
 }
 
 button.proficient:disabled {
-  background-color: color-mix(in srgb, var(--button-hover-background-color), transparent 35%);
-  border-color: var(--color-light-5)
+  background-color: color-mix(in srgb, var(--button-hover-background-color), transparent 50%);
 }
 
 button.proficient {
   background-color: var(--button-hover-background-color);
 }
 
-button.exceeded:disabled {
+button:disabled {
   border-color: color-mix(in srgb, var(--color-light-5), transparent 70%);
 }
 
-button.proficient.preselected {
-  background-color: aqua
+.tooltip {
+  visibility: hidden;
+  background-color: color-mix(in srgb, var(--background), black 50%);
+  border-radius: 6px;
+  box-shadow: 0 0 10px #000;
+  position: absolute;
+  z-index: 1;
+  width: 160px;
+  margin-left: -80px;
+  padding: 0.5rem;
+}
+
+.indicator:hover .tooltip {
+  visibility: visible;
 }
 </style>
