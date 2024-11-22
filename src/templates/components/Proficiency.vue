@@ -57,7 +57,7 @@ function getMessage(index: number): string {
 
 <template>
     <div class="proficiency">
-        <div class="indicator" v-for="(rank, index) in ranks" :key="rank">
+        <div class="indicator" v-for="(rank, index) in ranks" :key="rank" :data-tooltip="getMessage(index)" data-tooltip-direction="DOWN">
             <div class="rank">{{ rank }}</div>
             <button
                 @click="updateProficiency(index)"
@@ -65,7 +65,6 @@ function getMessage(index: number): string {
                 :class="{ proficient: index < proficiencyRank, exceeded: maxAmountReached(index), preselected: preselected() }"
                 :disabled="!decreaseAllowed(index) || maxAmountReached(index) || preselected()"
             ></button>
-            <span v-if="getMessage(index)" v-text="getMessage(index)" class="tooltip"></span>
         </div>
     </div>
 </template>
@@ -81,7 +80,6 @@ function getMessage(index: number): string {
   display: flex;
   flex-direction: column;
   align-items: center;
-  display: block;
 }
 
 .rank {
@@ -104,21 +102,5 @@ button.proficient {
 
 button:disabled {
   border-color: color-mix(in srgb, var(--color-light-5), transparent 70%);
-}
-
-.tooltip {
-  visibility: hidden;
-  background-color: color-mix(in srgb, var(--background), black 50%);
-  border-radius: 6px;
-  box-shadow: 0 0 10px #000;
-  position: absolute;
-  z-index: 1;
-  width: 160px;
-  margin-left: -80px;
-  padding: 0.5rem;
-}
-
-.indicator:hover .tooltip {
-  visibility: visible;
 }
 </style>
