@@ -70,6 +70,7 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
         store.actor = actor;
         store.selectedLevel = getLevel(actor);
         store.loadPersistedSkills();
+        store.loadPreselectedSkills();
     }
 }
 

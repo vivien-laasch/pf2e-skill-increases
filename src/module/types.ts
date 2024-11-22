@@ -1,19 +1,21 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface ActorPF2e extends Actor {
-    class: ClassPF2e;
     ancestry: AncestryPF2e;
+    class: ClassPF2e;
     background: BackgroundPF2e;
     skills: Record<string, SkillPF2e>;
     system: {
-        details: {
-            level: {
-                value: number;
-            };
-        };
+        autoChanges: Record<string, Change[]>;
         build: {
             attributes: {
                 boosts: {
                     [key: string]: string[];
                 };
+            };
+        };
+        details: {
+            level: {
+                value: number;
             };
         };
     };
@@ -59,6 +61,10 @@ interface BackgroundPF2e extends Item {
                 selected: string;
             };
         };
+        trainedSkills: {
+            lore: string[];
+            value: string[];
+        };
     };
 }
 
@@ -77,4 +83,17 @@ interface ModifierPf2e {
     ability: string;
     label: string;
     modifier: number;
+}
+
+interface Change {
+    mode: string;
+    level: number;
+    value: number | string;
+    source: string;
+}
+
+
+interface PreselectedSkills {
+    preselectedSkills: string[];
+    additional: number;
 }

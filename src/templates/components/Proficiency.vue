@@ -11,7 +11,9 @@ const props = defineProps({
 const ranks = [1, 2, 3, 4].map((rank) => localize(`PF2E.ProficiencyLevel${rank}`).charAt(0));
 const store = useSkillManagerStore();
 const proficiencyRank = computed(() => store.getProficiencyAtSelectedLevel(props.skill));
-const maxSkillIncreases = computed(() => computeSkillProgression(store.getActor).get(store.selectedLevel));
+const skillIncreases = computed(() => computeSkillProgression(store.getActor).get(store.selectedLevel));
+const preselectedSkills = computed(() => store.preselectedSKills.get(store.selectedLevel));
+const maxAmount = computed(() => (skillIncreases.value || 0) + (preselectedSkills.value?.additional || 0));
 
 function updateProficiency(index: number) {
     const skill = props.skill;
@@ -28,10 +30,14 @@ function decreaseAllowed(index: number): boolean {
     return index >= currentProficiency || allowDecrease;
 }
 
-function exceeded(index: number): boolean {
+function preselected(): boolean {
+    return preselectedSkills.value?.preselectedSkills.includes(props.skill) ?? false;
+}
+
+function maxAmountReached(index: number): boolean {
     const currentProficiency = store.getProficiencyAtSelectedLevel(props.skill);
     const allowDecrease = store.isSkillSelected(props.skill) && currentProficiency - 1 == index;
-    const maxAmountExceeded = (maxSkillIncreases.value || 0) <= (store.selectedSkills.get(store.selectedLevel)?.length ?? 0);
+    const maxAmountExceeded = maxAmount.value <= (store.selectedSkills.get(store.selectedLevel)?.length ?? 0);
     return (maxProficiencyAtLevel(store.selectedLevel) <= index || maxAmountExceeded) && !allowDecrease;
 }
 </script>
@@ -43,8 +49,8 @@ function exceeded(index: number): boolean {
             <button
                 @click="updateProficiency(index)"
                 class="background"
-                :class="{ proficient: index < proficiencyRank, exceeded: exceeded(index) }"
-                :disabled="!decreaseAllowed(index) || exceeded(index)"
+                :class="{ proficient: index < proficiencyRank, exceeded: maxAmountReached(index), preselected: preselected() }"
+                :disabled="!decreaseAllowed(index) || maxAmountReached(index) || preselected()"
             ></button>
         </div>
     </div>
@@ -84,5 +90,9 @@ button.proficient {
 
 button.exceeded:disabled {
   border-color: color-mix(in srgb, var(--color-light-5), transparent 70%);
+}
+
+button.proficient.preselected {
+  background-color: aqua
 }
 </style>

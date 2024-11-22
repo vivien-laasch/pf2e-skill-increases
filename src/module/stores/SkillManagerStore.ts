@@ -1,11 +1,13 @@
 import { defineStore } from "pinia";
 import { getPersistedData } from "../util/persistenceUtils";
+import { resolvePreselectedSkills } from "../util/preselectedSkillsUtil";
 
 export const useSkillManagerStore = defineStore("skill-manager", {
     state: () => {
         return {
             selectedLevel: 1,
             selectedSkills: new Map<number, string[]>(),
+            preselectedSKills: new Map() as Map<number, PreselectedSkills> , 
             actor: new Object() as ActorPF2e,
         };
     },
@@ -14,6 +16,11 @@ export const useSkillManagerStore = defineStore("skill-manager", {
             let proficiencyRank = 0;
             for (const [key, value] of this.selectedSkills) {
                 if (key <= this.selectedLevel && value.includes(skill)) {
+                    proficiencyRank++;
+                }
+            }
+            for(const [key, value] of this.preselectedSKills){
+                if(key <= this.selectedLevel && value.preselectedSkills.includes(skill)){
                     proficiencyRank++;
                 }
             }
@@ -40,6 +47,9 @@ export const useSkillManagerStore = defineStore("skill-manager", {
         loadPersistedSkills() {
             const persistedSkills = getPersistedData(this.actor as ActorPF2e);
             this.selectedSkills = persistedSkills;
+        },
+        loadPreselectedSkills() {
+            this.preselectedSKills = resolvePreselectedSkills(this.actor as ActorPF2e);
         },
     },
     getters: {
