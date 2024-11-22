@@ -2,12 +2,13 @@
 import { computed } from "vue";
 import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
 import { maxProficiencyAtLevel, computeSkillProgression } from "../../module/util/skillCalculationUtils";
+import { localize } from "../../module/fvtt-vue/VueHelpers.mjs";
 
 const props = defineProps({
     skill: { type: String, required: true },
 });
 
-const ranks = ["T", "E", "M", "L"];
+const ranks = [1, 2, 3, 4].map((rank) => localize(`PF2E.ProficiencyLevel${rank}`).charAt(0));
 const store = useSkillManagerStore();
 const proficiencyRank = computed(() => store.getProficiencyAtSelectedLevel(props.skill));
 const maxSkillIncreases = computed(() => computeSkillProgression(store.getActor).get(store.selectedLevel));

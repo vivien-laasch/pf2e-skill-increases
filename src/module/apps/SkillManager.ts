@@ -40,12 +40,19 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
     static override PARTS = {
         app: {
             app: App,
+            forms: {
+                "form": {
+                    closeOnSubmit: true,
+                    handler() {
+                        const store = useSkillManagerStore();
+                        persistData(store.getActor, store.selectedSkills);
+                    },
+                },
+            },
         },
     };
 
     override async close(options?: Application.CloseOptions): Promise<void> {
-        const store = useSkillManagerStore();
-        persistData(store.getActor, store.selectedSkills);
         disposePinia(this.pinia);
         return await super.close(options);
     }

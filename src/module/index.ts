@@ -1,10 +1,10 @@
 import { SkillManager } from "./apps/SkillManager";
 import { CHARACTER_SHEET, MODULE_ID } from "./constants";
 
-const openManager = `<button id="open-skill-manager" type="button" class="blue" style="margin-bottom: 0.5rem;">Skill Manager</button>`;
-
 Hooks.on("render" + CHARACTER_SHEET, (app: ActorSheet, html: JQuery) => {
     console.log(`${MODULE_ID} | Attempting to inject Skill Manager button`);
+
+    const openManager = `<button id="open-skill-manager" type="button" class="blue" style="margin-bottom: 0.5rem;">${game.i18n?.localize("pf2e-skill-increases.open")}</button>`;
 
     const id = app.options.token?.actorId;
     if (!id) return;

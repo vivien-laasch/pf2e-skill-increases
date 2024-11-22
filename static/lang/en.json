@@ -1,6 +1,7 @@
 {
     "pf2e-skill-increases": {
         "title": "Skill Manager",
-        "button": "Open Skill Manager"
+        "open": "Open Skill Manager",
+        "available": "Available Skill Increases"
     }
 }

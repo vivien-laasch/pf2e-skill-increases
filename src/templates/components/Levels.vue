@@ -2,6 +2,7 @@
 import { computed } from "vue";
 import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
 import { computeSkillProgression } from "../../module/util/skillCalculationUtils";
+import { localize } from "../../module/fvtt-vue/VueHelpers.mjs";
 
 const store = useSkillManagerStore();
 const levelsWithIncreases = computed(() => computeSkillProgression(store.getActor));
@@ -20,7 +21,7 @@ const actorLevel = computed(() => store.actor.system.details.level.value);
             :disabled="level > actorLevel!"
             @click="store.selectedLevel = level"
         >
-            Level {{ level }}
+            {{ `${localize("PF2E.LevelLabel")}  ${level}` }}
         </button>
     </div>
 </template>
