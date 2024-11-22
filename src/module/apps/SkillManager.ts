@@ -4,6 +4,7 @@ import { MODULE_ID } from "../constants";
 import { VueApplicationMixin } from "../fvtt-vue/VueApplicationMixin.mjs";
 import { useSkillManagerStore } from "../stores/SkillManagerStore";
 import { persistData } from "../util/persistenceUtils";
+import { getLevel } from "../util/skillCalculationUtils";
 
 const { ApplicationV2 } = foundry.applications.api;
 export class SkillManager extends VueApplicationMixin(ApplicationV2) {
@@ -11,7 +12,10 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
 
     constructor(actor: ActorPF2e) {
         // @ts-expect-error - valid override
-        super({ uniqueId: actor.id, actorName: actor.name });
+        super({
+            uniqueId: actor.id,
+            window: { title: game.i18n?.localize(`${MODULE_ID}.title`) + `: ${actor.name}` },
+        });
         this.pinia = createPinia();
         this.initializeStore(actor);
     }
@@ -22,7 +26,6 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
             id: "skill-manager-{id}",
             uniqueId: "",
             window: {
-                title: `${MODULE_ID}.title`,
                 resizable: true,
             },
             position: {
@@ -58,11 +61,14 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
         setActivePinia(this.pinia);
         const store = useSkillManagerStore();
         store.actor = actor;
+        store.selectedLevel = getLevel(actor);
         store.loadPersistedSkills();
     }
 }
 
-
 interface RenderOptions {
     uniqueId: string;
+    window: {
+        title: string;
+    };
 }

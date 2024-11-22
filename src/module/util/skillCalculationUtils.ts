@@ -29,7 +29,7 @@ export function computeSkillProgression(actor: ActorPF2e): Map<number, number> {
     return boosts;
 }
 
-function getLevel(actor: ActorPF2e): number {
+export function getLevel(actor: ActorPF2e): number {
     return actor.system.details.level.value;
 }
 

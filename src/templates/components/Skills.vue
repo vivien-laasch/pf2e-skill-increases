@@ -8,23 +8,30 @@ const store = useSkillManagerStore();
 const availableSkills = computed(() => store.getActor.skills);
 const proficiencyPerRank = [0, 2, 4, 6, 8];
 
-function getBonus(skill: SkillPF2e): string {
+function getTotalBonus(skill: SkillPF2e): number {
+    return getProficiencyBonus(skill) + getAttributeBonus(skill);
+}
+
+function getProficiencyBonus(skill: SkillPF2e): number {
     const proficiency = proficiencyPerRank[store.getProficiencyAtSelectedLevel(skill.slug)] ?? 0;
+    return proficiency !== 0 ? proficiency + store.selectedLevel : 0;
+}
+
+function getAttributeBonus(skill: SkillPF2e): number {
     const progression = computeAttributeProgression(store.getActor, skill.attribute, store.selectedLevel);
     const lastLevelKey = Array.from(progression.keys()).pop() ?? 1;
 
-    const proficiencyBonus = proficiency !== 0 ? proficiency + store.selectedLevel : 0;
-    const attributeBonus = progression.get(lastLevelKey) || 0;
-    const totalBonus = proficiencyBonus + attributeBonus;
-
-    return totalBonus >= 0 ? `+${totalBonus}` : `${totalBonus}`;
+    return progression.get(lastLevelKey) || 0;
 }
 
+function formatBonus(bonus: number): string {
+    return bonus >= 0 ? `+ ${bonus}` : `- ${Math.abs(bonus)}`;
+}
 </script>
 <template>
     <div class="skill-list">
         <div v-for="skill in availableSkills" :key="skill.slug" class="skill">
-            <div class="skill-bonus">{{ getBonus(skill) }}</div>
+            <div class="skill-bonus">{{ formatBonus(getTotalBonus(skill)) }}</div>
             <div class="skill-name">{{ skill.label }}</div>
             <Proficiency :skill="skill.slug"></Proficiency>
         </div>
