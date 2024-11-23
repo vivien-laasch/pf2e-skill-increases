@@ -8,9 +8,27 @@ export function resolvePreselectedSkills(actor: ActorPF2e): Map<number, Preselec
     return selectedSkills;
 }
 
-// todo
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function resolveFlagTarget(target: string, _actor: ActorPF2e): string {
+function resolveFlagTarget(target: string, actor: ActorPF2e): string {
+    if (!target.startsWith("{item|flags.")) {
+        return target;
+    }
+
+    const flagPaths = target.replace("}", "").split(".").slice(1);
+
+    for (const item of actor.items) {
+        let flags = item.flags;
+        for (const flagPath of flagPaths) {
+            if (!flags) {
+                break;
+            }
+
+            flags = flags[flagPath];
+        }
+        if (flags && typeof flags === "string") {
+            return flags;
+        }
+    }
+
     return target;
 }
 

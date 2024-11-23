@@ -7,7 +7,7 @@ export const useSkillManagerStore = defineStore("skill-manager", {
         return {
             selectedLevel: 1,
             selectedSkills: new Map<number, string[]>(),
-            preselectedSKills: new Map() as Map<number, PreselectedSkills> , 
+            preselectedSKills: new Map() as Map<number, PreselectedSkills>,
             actor: new Object() as ActorPF2e,
         };
     },
@@ -19,8 +19,8 @@ export const useSkillManagerStore = defineStore("skill-manager", {
                     proficiencyRank++;
                 }
             }
-            for(const [key, value] of this.preselectedSKills){
-                if(key <= this.selectedLevel && value.preselectedSkills.includes(skill)){
+            for (const [key, value] of this.preselectedSKills) {
+                if (key <= this.selectedLevel && value.preselectedSkills.includes(skill)) {
                     proficiencyRank++;
                 }
             }
@@ -44,12 +44,10 @@ export const useSkillManagerStore = defineStore("skill-manager", {
         isSkillSelected(skill: string): boolean {
             return this.selectedSkills.get(this.selectedLevel)?.includes(skill) || false;
         },
-        loadPersistedSkills() {
-            const persistedSkills = getPersistedData(this.actor as ActorPF2e);
+        preloadSkills(actor: ActorPF2e) {
+            const persistedSkills = getPersistedData(actor);
             this.selectedSkills = persistedSkills;
-        },
-        loadPreselectedSkills() {
-            this.preselectedSKills = resolvePreselectedSkills(this.actor as ActorPF2e);
+            this.preselectedSKills = resolvePreselectedSkills(actor);
         },
     },
     getters: {

@@ -41,7 +41,7 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
         app: {
             app: App,
             forms: {
-                "form": {
+                form: {
                     closeOnSubmit: true,
                     handler() {
                         const store = useSkillManagerStore();
@@ -69,8 +69,7 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
         const store = useSkillManagerStore();
         store.actor = actor;
         store.selectedLevel = getLevel(actor);
-        store.loadPersistedSkills();
-        store.loadPreselectedSkills();
+        store.preloadSkills(actor);
     }
 }
 

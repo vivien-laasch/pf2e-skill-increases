@@ -52,9 +52,9 @@ function getLevelOneAttributeMod(actor: ActorPF2e, attribute: string): number {
             hasAncestryBoosts(actor, attribute),
             hasKeyAttribute(actor.class, attribute),
             hasAttributeBoostAtLevel(actor, attribute, 1),
-        ].filter(Boolean).length
+        ].filter(Boolean).length -
         //todo fix this
-         - (hasAncestryFlaw(actor, attribute) ? 1 : 0)
+        (hasAncestryFlaw(actor, attribute) ? 1 : 0)
     );
 }
 

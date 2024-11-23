@@ -48,7 +48,7 @@ function getMessage(index: number): string {
     } else if (!decreaseAllowed(index)) {
         return localize(`${MODULE_ID}.proficiencyDecreaseNotAllowed`);
     } else if (maxAmountReached(index)) {
-      return "";
+        return "";
         //return localize(`${MODULE_ID}.skillsMaxAmountReached`);
     } else {
         return "";

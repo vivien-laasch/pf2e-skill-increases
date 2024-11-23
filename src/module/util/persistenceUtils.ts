@@ -27,11 +27,12 @@ async function applyBonuses(actor: ActorPF2e, selectedSkills: Map<number, string
 }
 
 function upgradeProficiency(skill: SkillPF2e, selectedSkills: Map<number, string[]>, preselectedSkills: Map<number, PreselectedSkills>): number {
-    const selectedRank = Array.from(selectedSkills.values()).reduce((rank, selections) => 
-        rank + (selections.includes(skill.slug) ? 1 : 0), 0);
+    const selectedRank = Array.from(selectedSkills.values()).reduce((rank, selections) => rank + (selections.includes(skill.slug) ? 1 : 0), 0);
 
-    const preselectedRank = Array.from(preselectedSkills.values()).reduce((rank, selections) => 
-        rank + (selections.preselectedSkills.includes(skill.slug) ? 1 : 0), 0);
+    const preselectedRank = Array.from(preselectedSkills.values()).reduce(
+        (rank, selections) => rank + (selections.preselectedSkills.includes(skill.slug) ? 1 : 0),
+        0,
+    );
 
     return selectedRank + preselectedRank;
 }

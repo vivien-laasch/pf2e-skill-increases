@@ -92,7 +92,6 @@ interface Change {
     source: string;
 }
 
-
 interface PreselectedSkills {
     preselectedSkills: string[];
     additional: number;
