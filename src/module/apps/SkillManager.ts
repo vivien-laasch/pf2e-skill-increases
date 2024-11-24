@@ -71,7 +71,7 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
         const skillManager = new SkillBoostManager();
 
         skillManager.selectedLevel = getLevel(actor);
-        skillManager.preloadSkills(actor);
+        skillManager.initialize(actor);
 
         store.manager = skillManager;
         store.actor = actor;

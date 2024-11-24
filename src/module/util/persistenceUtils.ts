@@ -1,19 +1,28 @@
 import { MODULE_ID } from "../constants";
-import { SkillBoosts } from "../model/SkillBoostManager";
+import { SkillBoosts, SkillBoost } from "../model/SkillBoostManager";
 
 export async function persistData(actor: ActorPF2e, skillBoosts: SkillBoosts): Promise<void> {
-    const serializedSkills = Object.fromEntries(skillBoosts);
+    const serializedSkills = Object.fromEntries(
+        [...skillBoosts].map(([level, boosts]) => {
+            const selected = Object.fromEntries(Object.entries(boosts.selected).filter(([, boost]) => !boost.locked));
+            return [level, { selected }];
+        }),
+    );
+
     actor.setFlag(MODULE_ID, "selectedSkills", serializedSkills);
     applyBonuses(actor, skillBoosts);
 }
 
-export function getPersistedData(actor: ActorPF2e): Map<number, string[]> {
-    const serializedSkills = actor.getFlag(MODULE_ID, "selectedSkills") as Record<string, string[]>;
+export function getPersistedData(actor: ActorPF2e): SkillBoosts {
+    const serializedSkills = actor.getFlag(MODULE_ID, "selectedSkills") as Record<string, { selected: Record<string, SkillBoost> }>;
+    if (!serializedSkills) return new Map();
 
-    if (!serializedSkills) {
-        return new Map();
-    }
-    return new Map(Object.entries(serializedSkills).map(([key, value]) => [Number(key), value]));
+    return new Map(
+        Object.entries(serializedSkills).map(([level, { selected }]) => [
+            parseInt(level),
+            { available: 0, additional: 0, selected },
+        ]),
+    );
 }
 
 async function applyBonuses(actor: ActorPF2e, skillBoosts: SkillBoosts): Promise<void> {

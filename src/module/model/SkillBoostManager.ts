@@ -14,6 +14,7 @@ type SkillBoosts = Map<
 interface SkillBoost {
     rank: number;
     locked: boolean;
+    additional?: boolean;
 }
 
 class SkillBoostManager {
@@ -32,7 +33,7 @@ class SkillBoostManager {
         return this.getRankAtLevel(skill, this.selectedLevel);
     }
 
-    private getRankAtLevel(skill: string, level: number): number {
+    getRankAtLevel(skill: string, level: number): number {
         let proficiencyRank = 0;
 
         for (const [skillBoostLevel, boosts] of this.skillBoosts) {
@@ -49,8 +50,12 @@ class SkillBoostManager {
         if (levelBoosts.selected[skill]) {
             return;
         }
-        const rank = this.getRankAtSelectedLevel(skill) + 1;
-        levelBoosts.selected[skill] = { rank, locked: false };
+        if (levelBoosts.additional > 0 && this.getRankAtSelectedLevel(skill) == 0) {
+            levelBoosts.selected[skill] = { rank: 1, locked: false, additional: true };
+        } else if (levelBoosts.available > 0) {
+            const rank = this.getRankAtSelectedLevel(skill) + 1;
+            levelBoosts.selected[skill] = { rank, locked: false };
+        }
 
         this.skillBoosts.set(this.selectedLevel, levelBoosts);
     }
@@ -62,8 +67,7 @@ class SkillBoostManager {
         delete levelBoosts.selected[skill];
     }
 
-    preloadSkills(actor: ActorPF2e): void {
-        //todo: refactor this to use the new data model
+    initialize(actor: ActorPF2e): void {
         const persistedSkills = getPersistedData(actor);
         const preselectedSkills = resolvePreselectedSkills(actor);
         const skillProgression = computeSkillProgression(actor);
@@ -75,6 +79,16 @@ class SkillBoostManager {
             if (skill.additional > 0) {
                 skillProgression.set(level, levelBoosts);
             }
+        });
+
+        persistedSkills.forEach((boosts, level) => {
+            const levelBoosts = skillProgression.get(level) || { available: 0, additional: 0, selected: {} };
+            for (const [skill, boost] of Object.entries(boosts.selected)) {
+                if (!levelBoosts.selected[skill]) {
+                    levelBoosts.selected[skill] = boost;
+                }
+            }
+            skillProgression.set(level, levelBoosts);
         });
 
         this.skillBoosts = new Map([...skillProgression.entries()].sort((a, b) => a[0] - b[0]));
@@ -109,11 +123,32 @@ class SkillBoostManager {
             return true;
         }
 
-        if (skillSelection) {
+        if (skillSelection && skillSelection.rank == rank) {
             return false;
         }
 
-        return this.getTotalSkillBoostsAtLevel() <= 0;
+        if (this.getAvailableSkillBoosts() > 0) {
+            return false;
+        }
+
+        if (this.getAdditionalSkillBoosts() > 0 && rank == 1) {
+            return false;
+        }
+        return true;
+    }
+
+    getAvailableSkillBoosts(): number {
+        return (
+            this.getSkillBoostsAtSelectedLevel().available -
+            Object.values(this.getSkillBoostsAtSelectedLevel().selected).filter((skill) => !skill.locked && !skill.additional).length
+        );
+    }
+
+    getAdditionalSkillBoosts(): number {
+        return (
+            this.getSkillBoostsAtSelectedLevel().additional -
+            Object.values(this.getSkillBoostsAtSelectedLevel().selected).filter((skill) => !skill.locked && skill.additional).length
+        );
     }
 }
 

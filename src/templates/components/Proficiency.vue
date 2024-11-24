@@ -32,10 +32,13 @@ function getMessage(index: number): string {
         return localize(`${MODULE_ID}.proficiencyPreselected`);
     }
     if (index >= maxProficiency.value) {
-        return localize(`${MODULE_ID}.skillsMaxProficiencyReached`);
+        return localize(`${MODULE_ID}.levelTooLow`);
     }
     if (manager.getTotalSkillBoostsAtLevel() == 0) {
-        return localize(`${MODULE_ID}.skillsNoBoostsLeft`);
+        return localize(`${MODULE_ID}.skillsMaxIncreasesReached`);
+    }
+    if (manager.getRankAtLevel(props.skill, manager.selectedLevel - 1) == index + 1) {
+        return localize(`${MODULE_ID}.proficiencyDecreaseNotAllowed`);
     }
     return "";
 }

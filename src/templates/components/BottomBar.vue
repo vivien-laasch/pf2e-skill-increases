@@ -6,7 +6,7 @@ import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
 
 const onSubmit = inject("onSubmit") as (payload: Event) => void;
 const store = useSkillManagerStore();
-const skills = computed(() => store.manager.getSkillBoostsAtSelectedLevel());
+const manager = computed(() => store.manager);
 </script>
 <template>
     <form class="bottom-bar">
@@ -14,8 +14,8 @@ const skills = computed(() => store.manager.getSkillBoostsAtSelectedLevel());
             <button @click="onSubmit">{{ localize("PF2E.Actor.Character.AttributeBuilder.Complete") }}</button>
         </div>
         <div class="skill-counts">
-            <div>{{ localize(`${MODULE_ID}.available`) + `: ${skills.available}` }}</div>
-            <div>{{ localize(`${MODULE_ID}.additional`) + `: ${skills.additional}` }}</div>
+            <div>{{ localize(`${MODULE_ID}.available`) + `: ${manager.getAvailableSkillBoosts()}` }}</div>
+            <div>{{ localize(`${MODULE_ID}.additional`) + `: ${manager.getAdditionalSkillBoosts()}` }}</div>
         </div>
     </form>
 </template>
