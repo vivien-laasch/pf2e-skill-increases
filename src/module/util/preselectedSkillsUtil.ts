@@ -1,5 +1,7 @@
-export function resolvePreselectedSkills(actor: ActorPF2e): Map<number, PreselectedSkills> {
-    const selectedSkills = new Map<number, PreselectedSkills>();
+import { SkillBoost, SkillBoosts } from "../model/SkillBoostManager";
+
+export function resolvePreselectedSkills(actor: ActorPF2e): SkillBoosts {
+    const selectedSkills = new Map();
 
     addClassSkills(actor, selectedSkills);
     addBackgroundSkills(actor, selectedSkills);
@@ -32,7 +34,7 @@ function resolveFlagTarget(target: string, actor: ActorPF2e): string {
     return target;
 }
 
-function addAutoChanges(actor: ActorPF2e, selectedSkills: Map<number, PreselectedSkills>): void {
+function addAutoChanges(actor: ActorPF2e, selectedSkills: SkillBoosts): void {
     const autoChanges = actor.system.autoChanges;
 
     if (!autoChanges) {
@@ -46,33 +48,34 @@ function addAutoChanges(actor: ActorPF2e, selectedSkills: Map<number, Preselecte
         }
         const skill = resolved.split(".")[2];
         changes.forEach((change) => {
-            updateSkillSelection(selectedSkills, skill, change.level);
+            updateSkillSelection(selectedSkills, skill, change.value, change.level);
         });
     }
 }
 
-function updateSkillSelection(selectedSkills: Map<number, PreselectedSkills>, skill: string, level: number): void {
+function updateSkillSelection(selectedSkills: SkillBoosts, skill: string, rank: number, level: number): void {
     let alreadySelected = false;
 
     for (const [lvl, entry] of selectedSkills) {
-        if (lvl < level && entry.preselectedSkills.includes(skill)) {
+        //todo check rank
+        if (lvl < level && entry.selected[skill]) {
             alreadySelected = true;
             break;
         }
     }
 
-    const existingEntry = selectedSkills.get(level) || { preselectedSkills: [], additional: 0 };
+    const existingEntry = selectedSkills.get(level) || { available: 0, additional: 0, selected: {} as Record<string, SkillBoost> };
 
     if (alreadySelected) {
         existingEntry.additional++;
     } else {
-        existingEntry.preselectedSkills.push(skill);
+        existingEntry.selected[skill] = { locked: true, rank: rank };
     }
 
     selectedSkills.set(level, existingEntry);
 }
 
-function addClassSkills(actor: ActorPF2e, selectedSkills: Map<number, PreselectedSkills>) {
+function addClassSkills(actor: ActorPF2e, selectedSkills: SkillBoosts) {
     const classItem = actor.class;
 
     if (!classItem) {
@@ -80,11 +83,11 @@ function addClassSkills(actor: ActorPF2e, selectedSkills: Map<number, Preselecte
     }
 
     classItem.system.trainedSkills.value.forEach((skill) => {
-        updateSkillSelection(selectedSkills, skill, 1);
+        updateSkillSelection(selectedSkills, skill, 1, 1);
     });
 }
 
-function addBackgroundSkills(actor: ActorPF2e, selectedSkills: Map<number, PreselectedSkills>) {
+function addBackgroundSkills(actor: ActorPF2e, selectedSkills: SkillBoosts) {
     const background = actor.background;
 
     if (!background) {
@@ -92,6 +95,6 @@ function addBackgroundSkills(actor: ActorPF2e, selectedSkills: Map<number, Prese
     }
 
     background.system.trainedSkills.value.forEach((skill) => {
-        updateSkillSelection(selectedSkills, skill, 1);
+        updateSkillSelection(selectedSkills, skill, 1, 1);
     });
 }

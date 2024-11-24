@@ -88,11 +88,6 @@ interface ModifierPf2e {
 interface Change {
     mode: string;
     level: number;
-    value: number | string;
+    value: number;
     source: string;
-}
-
-interface PreselectedSkills {
-    preselectedSkills: string[];
-    additional: number;
 }

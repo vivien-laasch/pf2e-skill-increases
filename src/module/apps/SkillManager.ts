@@ -5,6 +5,7 @@ import { VueApplicationMixin } from "../fvtt-vue/VueApplicationMixin.mjs";
 import { useSkillManagerStore } from "../stores/SkillManagerStore";
 import { persistData } from "../util/persistenceUtils";
 import { getLevel } from "../util/skillCalculationUtils";
+import { SkillBoostManager } from "../model/SkillBoostManager";
 
 const { ApplicationV2 } = foundry.applications.api;
 export class SkillManager extends VueApplicationMixin(ApplicationV2) {
@@ -45,7 +46,7 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
                     closeOnSubmit: true,
                     handler() {
                         const store = useSkillManagerStore();
-                        persistData(store.getActor, store.selectedSkills, store.preselectedSKills);
+                        persistData(store.getActor, store.manager.skillBoosts);
                     },
                 },
             },
@@ -67,9 +68,13 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
     initializeStore(actor: ActorPF2e) {
         setActivePinia(this.pinia);
         const store = useSkillManagerStore();
+        const skillManager = new SkillBoostManager();
+
+        skillManager.selectedLevel = getLevel(actor);
+        skillManager.preloadSkills(actor);
+
+        store.manager = skillManager;
         store.actor = actor;
-        store.selectedLevel = getLevel(actor);
-        store.preloadSkills(actor);
     }
 }
 

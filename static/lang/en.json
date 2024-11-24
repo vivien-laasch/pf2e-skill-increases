@@ -5,6 +5,8 @@
         "proficiencyPreselected": "This skill is preselected by a feat or a class feature.",
         "skillsMaxAmountReached": "You have reached the maximum amount of skill increases for this level.",
         "proficiencyDecreaseNotAllowed": "This skill was selected on a previous level and cannot be decreased.",
-        "levelTooLow": "Your level is too low for the selected proficiency level."
+        "levelTooLow": "Your level is too low for the selected proficiency level.",
+        "available": "Available",
+        "additional": "Additional"
     }
 }

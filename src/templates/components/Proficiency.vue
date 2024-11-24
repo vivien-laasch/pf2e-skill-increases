@@ -1,74 +1,63 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
-import { maxProficiencyAtLevel, computeSkillProgression } from "../../module/util/skillCalculationUtils";
-import { localize } from "../../module/fvtt-vue/VueHelpers.mjs";
+import { getMaxProficiencyAtLevel } from "../../module/util/skillCalculationUtils";
+
 import { MODULE_ID } from "../../module/constants";
+import { localize } from "../../module/fvtt-vue/VueHelpers.mjs";
 
 const props = defineProps({
     skill: { type: String, required: true },
 });
 
-const ranks = [1, 2, 3, 4].map((rank) => localize(`PF2E.ProficiencyLevel${rank}`).charAt(0));
 const store = useSkillManagerStore();
-const proficiencyRank = computed(() => store.getProficiencyAtSelectedLevel(props.skill));
-const skillIncreases = computed(() => computeSkillProgression(store.getActor).get(store.selectedLevel));
-const preselectedSkills = computed(() => store.preselectedSKills.get(store.selectedLevel));
-const maxAmount = computed(() => (skillIncreases.value || 0) + (preselectedSkills.value?.additional || 0));
+const manager = store.manager;
 
-function updateProficiency(index: number) {
-    const skill = props.skill;
-    if (proficiencyRank.value > index) {
-        store.removeProficiency(skill);
+const ranks = [1, 2, 3, 4].map((rank) => localize(`PF2E.ProficiencyLevel${rank}`).charAt(0));
+const proficiencyRank = computed(() => manager.getRankAtSelectedLevel(props.skill));
+const isLocked = computed(() => manager.isSkillLocked(props.skill));
+const maxProficiency = computed(() => getMaxProficiencyAtLevel(manager.selectedLevel));
+
+function toggleProficiency(index: number) {
+    if (index < proficiencyRank.value) {
+        manager.removeRank(props.skill);
     } else {
-        store.addProficiency(skill);
+        manager.addRank(props.skill);
     }
 }
 
-function decreaseAllowed(index: number): boolean {
-    const currentProficiency = store.getProficiencyAtSelectedLevel(props.skill);
-    const allowDecrease = store.isSkillSelected(props.skill) && currentProficiency - 1 == index;
-    return index >= currentProficiency || allowDecrease;
-}
-
-function preselected(): boolean {
-    return preselectedSkills.value?.preselectedSkills.includes(props.skill) ?? false;
-}
-
-function maxAmountReached(index: number): boolean {
-    const currentProficiency = store.getProficiencyAtSelectedLevel(props.skill);
-    const allowDecrease = store.isSkillSelected(props.skill) && currentProficiency - 1 == index;
-    const maxAmountExceeded = maxAmount.value <= (store.selectedSkills.get(store.selectedLevel)?.length ?? 0);
-    return (maxProficiencyAtLevel(store.selectedLevel) <= index || maxAmountExceeded) && !allowDecrease;
-}
-
+// Tooltip message for each rank
 function getMessage(index: number): string {
-    if (preselected()) {
+    if (isLocked.value) {
         return localize(`${MODULE_ID}.proficiencyPreselected`);
-    } else if (!decreaseAllowed(index)) {
-        return localize(`${MODULE_ID}.proficiencyDecreaseNotAllowed`);
-    } else if (maxAmountReached(index)) {
-        return "";
-        //return localize(`${MODULE_ID}.skillsMaxAmountReached`);
-    } else {
-        return "";
     }
+    if (index >= maxProficiency.value) {
+        return localize(`${MODULE_ID}.skillsMaxProficiencyReached`);
+    }
+    if (manager.getTotalSkillBoostsAtLevel() == 0) {
+        return localize(`${MODULE_ID}.skillsNoBoostsLeft`);
+    }
+    return "";
+}
+
+function isDisabled(index: number): boolean {
+    return manager.isDisabled(props.skill, index + 1);
 }
 </script>
-
 <template>
     <div class="proficiency">
         <div class="indicator" v-for="(rank, index) in ranks" :key="rank" :data-tooltip="getMessage(index)" data-tooltip-direction="DOWN">
             <div class="rank">{{ rank }}</div>
             <button
-                @click="updateProficiency(index)"
+                @click="toggleProficiency(index)"
                 class="proficiency-button"
-                :class="{ proficient: index < proficiencyRank, exceeded: maxAmountReached(index), preselected: preselected() }"
-                :disabled="!decreaseAllowed(index) || maxAmountReached(index) || preselected()"
+                :class="{ proficient: index < proficiencyRank, preselected: isLocked }"
+                :disabled="isDisabled(index)"
             ></button>
         </div>
     </div>
 </template>
+
 <style scoped lang="css">
 .proficiency {
   display: flex;

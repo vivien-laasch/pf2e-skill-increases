@@ -1,30 +1,25 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
-import { computeSkillProgression } from "../../module/util/skillCalculationUtils";
 import { localize } from "../../module/fvtt-vue/VueHelpers.mjs";
+import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
 
 const store = useSkillManagerStore();
-const levelsWithIncreases = computed(() => computeSkillProgression(store.getActor));
-const levelsWithAdditionalIncreases = computed(() => store.preselectedSKills);
-const actorLevel = computed(() => store.actor.system.details.level.value);
-
-function totalLevels(): number[] {
-    return Array.from(new Set([...levelsWithIncreases.value.keys(), ...levelsWithAdditionalIncreases.value.keys()])).sort((a, b) => a - b);
-}
+const levels = store.manager.getLevels();
+const actorLevel = store.actor.system.details.level.value;
+const manager = computed(() => store.manager);
 </script>
 <template>
     <div class="accordion">
         <button
-            v-for="level of totalLevels()"
+            v-for="level of levels"
             :key="level"
             class="level"
             :class="{
                 disabled: level > actorLevel!,
-                selected: level === store.selectedLevel,
+                selected: level === manager.selectedLevel,
             }"
             :disabled="level > actorLevel!"
-            @click="store.selectedLevel = level"
+            @click="manager.selectedLevel = level"
         >
             {{ `${localize("PF2E.LevelLabel")}  ${level}` }}
         </button>
@@ -36,7 +31,6 @@ function totalLevels(): number[] {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  flex: 0.35;
   padding-right: 0.75rem;
 }
 

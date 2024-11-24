@@ -5,11 +5,11 @@ import Skills from "./components/Skills.vue";
 </script>
 <template>
     <div class="root">
-        <div class="skill-manager">
+        <div class="grid">
             <Levels></Levels>
             <Skills></Skills>
         </div>
-        <BottomBar></BottomBar>
+        <BottomBar class="grid"></BottomBar>
     </div>
 </template>
 <style lang="css">
@@ -21,9 +21,9 @@ import Skills from "./components/Skills.vue";
 padding-bottom: 0;
 }
 
-.application.skill-manager .skill-manager {
-  display: flex;
-  gap: 1rem;
+.application.skill-manager .grid {
+  display: inline-grid;
+  grid-template-columns: 25% 75%;
 }
 
 .application.skill-manager .root {
