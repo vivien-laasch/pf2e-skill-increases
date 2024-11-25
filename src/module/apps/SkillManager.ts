@@ -2,10 +2,10 @@ import { createPinia, disposePinia, Pinia, setActivePinia } from "pinia";
 import App from "../../templates/SkillManager.vue";
 import { MODULE_ID } from "../constants";
 import { VueApplicationMixin } from "../fvtt-vue/VueApplicationMixin.mjs";
+import { SkillBoostManager } from "../model/SkillBoostManager";
 import { useSkillManagerStore } from "../stores/SkillManagerStore";
 import { persistData } from "../util/persistenceUtils";
 import { getLevel } from "../util/skillCalculationUtils";
-import { SkillBoostManager } from "../model/SkillBoostManager";
 
 const { ApplicationV2 } = foundry.applications.api;
 export class SkillManager extends VueApplicationMixin(ApplicationV2) {
@@ -70,8 +70,8 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
         const store = useSkillManagerStore();
         const skillManager = new SkillBoostManager();
 
-        skillManager.selectedLevel = getLevel(actor);
         skillManager.initialize(actor);
+        skillManager.selectedLevel = skillManager.skillBoosts.has(getLevel(actor)) ? getLevel(actor) : 1;
 
         store.manager = skillManager;
         store.actor = actor;

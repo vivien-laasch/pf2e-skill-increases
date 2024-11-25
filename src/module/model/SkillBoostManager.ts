@@ -94,6 +94,16 @@ class SkillBoostManager {
         this.skillBoosts = new Map([...skillProgression.entries()].sort((a, b) => a[0] - b[0]));
     }
 
+    resetSelection(): void {
+        const skillBoosts = new Map(this.skillBoosts);
+        skillBoosts.forEach((levelBoosts) => {
+            const unlockedSkills = Object.keys(levelBoosts.selected).filter((skill) => !levelBoosts.selected[skill].locked);
+            unlockedSkills.forEach((skill) => delete levelBoosts.selected[skill]);
+        });
+
+     //   this.skillBoosts = skillBoosts;
+    }
+
     getLevels(): number[] {
         return Array.from(this.skillBoosts.keys());
     }

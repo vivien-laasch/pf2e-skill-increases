@@ -11,6 +11,9 @@ interface ActorPF2e extends Actor {
                 boosts: {
                     [key: string]: string[];
                 };
+                flaws: {
+                    [key: string]: string[];
+                };
             };
         };
         details: {

@@ -26,8 +26,10 @@ function toggleProficiency(index: number) {
     }
 }
 
-// Tooltip message for each rank
 function getMessage(index: number): string {
+    if (!manager.isDisabled(props.skill, index + 1)) {
+        return "";
+    }
     if (isLocked.value) {
         return localize(`${MODULE_ID}.proficiencyPreselected`);
     }

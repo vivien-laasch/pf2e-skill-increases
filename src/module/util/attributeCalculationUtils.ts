@@ -20,14 +20,14 @@ function hasAncestryBoosts(actor: ActorPF2e, attribute: string): boolean {
     return Object.values(ancestry.system.boosts).some((boost) => boost.selected === attribute);
 }
 
-function hasAncestryFlaw(actor: ActorPF2e, attribute: string): boolean {
-    const ancestry = actor.ancestry;
+function hasFlaw(actor: ActorPF2e, attribute: string): boolean {
+    const flaws = actor.system.build.attributes.flaws;
 
-    if (!ancestry) {
+    if (!flaws) {
         return false;
     }
 
-    return Object.values(ancestry.system.flaws).some((flaw) => flaw.value.includes(attribute));
+    return Object.values(flaws).some((flaw) => flaw.includes(attribute));
 }
 
 function hasBackgroundBoost(actor: ActorPF2e, attribute: string): boolean {
@@ -52,9 +52,7 @@ function getLevelOneAttributeMod(actor: ActorPF2e, attribute: string): number {
             hasAncestryBoosts(actor, attribute),
             hasKeyAttribute(actor.class, attribute),
             hasAttributeBoostAtLevel(actor, attribute, 1),
-        ].filter(Boolean).length -
-        //todo fix this
-        (hasAncestryFlaw(actor, attribute) ? 1 : 0)
+        ].filter(Boolean).length - (hasFlaw(actor, attribute) ? 1 : 0)
     );
 }
 
