@@ -46,7 +46,6 @@ class SkillBoostManager {
     }
 
     addRank(skill: string): void {
-        //todo if skill is later auto trained, grant additional skill on that level
         const levelBoosts = this.skillBoosts.get(this.selectedLevel) || { available: 0, additional: 0, selected: {} };
         if (levelBoosts.selected[skill]) {
             return;
@@ -57,6 +56,8 @@ class SkillBoostManager {
             const rank = this.getRankAtSelectedLevel(skill) + 1;
             levelBoosts.selected[skill] = { rank, locked: false };
         }
+
+        this.updateAdditionalSkills(skill);
 
         this.skillBoosts.set(this.selectedLevel, levelBoosts);
     }
@@ -86,9 +87,11 @@ class SkillBoostManager {
                 if (!levelBoosts.selected[skill]) {
                     levelBoosts.selected[skill] = boost;
                 }
+                this.updateAdditionalSkills(skill);
             }
             skillProgression.set(level, levelBoosts);
         });
+
 
         this.skillBoosts = new Map([...skillProgression.entries()].sort((a, b) => a[0] - b[0]));
     }
@@ -158,6 +161,10 @@ class SkillBoostManager {
             this.getSkillBoostsAtSelectedLevel().additional -
             Object.values(this.getSkillBoostsAtSelectedLevel().selected).filter((skill) => !skill.locked && skill.additional).length
         );
+    }
+
+    updateAdditionalSkills(skill: string): void {
+        //todo if a trained skill is later auto trained, grant additional skill on that level instead, remove if vice versa
     }
 }
 

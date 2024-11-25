@@ -4,6 +4,7 @@ interface ActorPF2e extends Actor {
     class: ClassPF2e;
     background: BackgroundPF2e;
     skills: Record<string, SkillPF2e>;
+    deity: DeityPF2e;
     system: {
         autoChanges: Record<string, Change[]>;
         build: {
@@ -26,6 +27,7 @@ interface ActorPF2e extends Actor {
 
 interface ClassPF2e extends Item {
     system: {
+        slug: string;
         trainedSkills: {
             value: string[];
             additional: number;
@@ -94,4 +96,10 @@ interface Change {
     level: number;
     value: number;
     source: string;
+}
+
+interface DeityPF2e extends Item {
+    system: {
+        skill: string[];
+    };
 }

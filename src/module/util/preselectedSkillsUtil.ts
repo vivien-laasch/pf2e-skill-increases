@@ -1,3 +1,4 @@
+import { MODULE_ID } from "../constants";
 import { SkillBoost, SkillBoosts } from "../model/SkillBoostManager";
 
 export function resolvePreselectedSkills(actor: ActorPF2e): SkillBoosts {
@@ -5,6 +6,7 @@ export function resolvePreselectedSkills(actor: ActorPF2e): SkillBoosts {
 
     addClassSkills(actor, selectedSkills);
     addBackgroundSkills(actor, selectedSkills);
+    addDeitySkills(actor, selectedSkills);
     addAutoChanges(actor, selectedSkills);
 
     return selectedSkills;
@@ -57,8 +59,7 @@ function updateSkillSelection(selectedSkills: SkillBoosts, skill: string, rank: 
     let alreadySelected = false;
 
     for (const [lvl, entry] of selectedSkills) {
-        //todo check rank
-        if (lvl < level && entry.selected[skill]) {
+        if (lvl < level && entry.selected[skill] && entry.selected[skill].rank == rank) {
             alreadySelected = true;
             break;
         }
@@ -97,4 +98,26 @@ function addBackgroundSkills(actor: ActorPF2e, selectedSkills: SkillBoosts) {
     background.system.trainedSkills.value.forEach((skill) => {
         updateSkillSelection(selectedSkills, skill, 1, 1);
     });
+}
+
+function addDeitySkills(actor: ActorPF2e, selectedSkills: SkillBoosts) {
+    const classesWithDeitySkills = game.settings?.get(MODULE_ID, "classesWithDeitySkills") as string[];
+
+    if (!classesWithDeitySkills?.includes(actor.class?.system.slug)) {
+        return;
+    }
+
+    const skill = actor.deity?.system.skill;
+
+    if (!skill) {
+        return;
+    }
+
+    if (skill.length > 1) {
+        const levelOneSkills = selectedSkills.get(1) || { available: 0, additional: 0, selected: {} };
+        levelOneSkills.additional++;
+        selectedSkills.set(1, levelOneSkills);
+    } else if (skill.length === 1) {
+        updateSkillSelection(selectedSkills, skill[0], 1, 1);
+    }
 }
