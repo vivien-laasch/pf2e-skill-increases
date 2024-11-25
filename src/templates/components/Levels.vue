@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { computed } from "vue";
 import { localize } from "../../module/fvtt-vue/VueHelpers.mjs";
 import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
 
 const store = useSkillManagerStore();
 const levels = store.manager.getLevels();
 const actorLevel = store.actor.system.details.level.value;
-const manager = computed(() => store.manager);
+const manager = store.manager;
 </script>
 <template>
     <div class="accordion">

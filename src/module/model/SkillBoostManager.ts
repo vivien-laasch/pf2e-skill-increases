@@ -46,6 +46,7 @@ class SkillBoostManager {
     }
 
     addRank(skill: string): void {
+        //todo if skill is later auto trained, grant additional skill on that level
         const levelBoosts = this.skillBoosts.get(this.selectedLevel) || { available: 0, additional: 0, selected: {} };
         if (levelBoosts.selected[skill]) {
             return;
@@ -76,9 +77,7 @@ class SkillBoostManager {
             const levelBoosts = skillProgression.get(level) || { available: 0, additional: 0, selected: {} };
             levelBoosts.additional = skill.additional;
             levelBoosts.selected = skill.selected;
-            if (skill.additional > 0) {
-                skillProgression.set(level, levelBoosts);
-            }
+            skillProgression.set(level, levelBoosts);
         });
 
         persistedSkills.forEach((boosts, level) => {
@@ -101,11 +100,11 @@ class SkillBoostManager {
             unlockedSkills.forEach((skill) => delete levelBoosts.selected[skill]);
         });
 
-     //   this.skillBoosts = skillBoosts;
+        this.skillBoosts = skillBoosts;
     }
 
     getLevels(): number[] {
-        return Array.from(this.skillBoosts.keys());
+        return [...this.skillBoosts.entries()].filter(([, boosts]) => boosts.available > 0 || boosts.additional > 0).map(([level]) => level);
     }
 
     isSkillLocked(skill: string): boolean {

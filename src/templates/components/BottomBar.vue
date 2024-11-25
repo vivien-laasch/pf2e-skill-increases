@@ -9,16 +9,16 @@ const store = useSkillManagerStore();
 const manager = computed(() => store.manager);
 </script>
 <template>
-    <form class="bottom-bar">
-        <div class="submit">
+    <div class="bottom-bar">
+        <form class="submit">
             <button @click="onSubmit">{{ localize("PF2E.Actor.Character.AttributeBuilder.Complete") }}</button>
-        </div>
+        </form>
         <div class="skill-counts">
             <div class="count">{{ localize(`${MODULE_ID}.available`) + `: ${manager.getAvailableSkillBoosts()}` }}</div>
             <div class="count">{{ localize(`${MODULE_ID}.additional`) + `: ${manager.getAdditionalSkillBoosts()}` }}</div>
             <button class="reset" @click="manager.resetSelection()"><i class="fa-solid fa-rotate-right"></i></button>
         </div>
-    </form>
+    </div>
 </template>
 <style scoped lang="css">
 .skill-counts {

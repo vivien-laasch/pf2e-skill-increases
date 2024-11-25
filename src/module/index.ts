@@ -6,7 +6,7 @@ Hooks.on("render" + CHARACTER_SHEET, (app: ActorSheet, html: JQuery) => {
 
     const openManager = `<button id="open-skill-manager" type="button" class="blue" style="margin-bottom: 0.5rem;">${game.i18n?.localize("pf2e-skill-increases.open")}</button>`;
 
-    const id = app.options.token?.actorId;
+    const id = app.object._id
     if (!id) return;
 
     html.find(".tab.proficiencies").find("header").first().after(openManager);

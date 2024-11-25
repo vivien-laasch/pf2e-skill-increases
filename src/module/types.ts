@@ -75,6 +75,7 @@ interface SkillPF2e {
     slug: string;
     label: string;
     attribute: string;
+    lore: boolean;
     data: {
         modifiers: ModifierPf2e[];
         rank: number;

@@ -1,26 +1,24 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import Proficiency from "./Proficiency.vue";
 import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
 import { computeAttributeProgression } from "../../module/util/attributeCalculationUtils";
+import Proficiency from "./Proficiency.vue";
 
 const store = useSkillManagerStore();
-const availableSkills = computed(() => store.getActor.skills);
+const availableSkills = Object.values(store.getActor.skills).filter((skill) => !skill.lore);
 const proficiencyPerRank = [0, 2, 4, 6, 8];
-const manager = computed(() => store.manager);
-const selectedLevel = computed(() => manager.value.selectedLevel);
+const manager = store.manager;
 
 function getTotalBonus(skill: SkillPF2e): number {
     return getProficiencyBonus(skill) + getAttributeBonus(skill);
 }
 
 function getProficiencyBonus(skill: SkillPF2e): number {
-    const proficiency = proficiencyPerRank[manager.value.getRankAtSelectedLevel(skill.slug)] ?? 0;
-    return proficiency !== 0 ? proficiency + manager.value.selectedLevel : 0;
+    const proficiency = proficiencyPerRank[manager.getRankAtSelectedLevel(skill.slug)] ?? 0;
+    return proficiency !== 0 ? proficiency + manager.selectedLevel : 0;
 }
 
 function getAttributeBonus(skill: SkillPF2e): number {
-    const progression = computeAttributeProgression(store.getActor, skill.attribute, manager.value.selectedLevel);
+    const progression = computeAttributeProgression(store.getActor, skill.attribute, manager.selectedLevel);
     const lastLevelKey = Array.from(progression.keys()).pop() ?? 1;
 
     return progression.get(lastLevelKey) || 0;
