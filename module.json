@@ -2,7 +2,6 @@
     "title": "PF2e Skill Increases",
     "description": "Let's see if this is worthwhile.",
     "id": "pf2e-skill-increases",
-    "version": "0.1.0",
     "authors": [
         {
             "name": "Vi"
@@ -14,7 +13,6 @@
         "maximum": "12"
     },
     "esmodules": ["main.js"],
-    "scripts": [],
     "styles": ["style.css"],
     "languages": [
         {
@@ -23,24 +21,8 @@
             "path": "lang/en.json"
         }
     ],
-    "url": "This is auto replaced",
-    "manifest": "This is auto replaced",
-    "download": "This is auto replaced",
-    "readme": "This is auto replaced",
-    "changelog": "This is auto replaced",
-    "license": "This is auto replacedE",
-    "bugs": "This is auto replaced",
-    "flags": {
-        "allowBugReporter": true,
-        "attributions": "This is auto replaced",
-        "hotReload": {
-            "extensions": ["css", "html", "handlebars", "hbs", "json", "vue"],
-            "paths": ["assets", "languages", "templates"]
-        },
-        "logger": {
-            "enabled": true,
-            "background": "#646cff",
-            "foreground": "#ffffff"
-        }
-    }
+    "url": "https://github.com/vivien-laasch/pf2e-skill-increases",
+    "download": "https://github.com/vivien-laasch/pf2e-skill-increases/releases/download/v0.0.1/module.zip",
+    "manifest": "https://github.com/vivien-laasch/pf2e-skill-increases/releases/latest/download/module.json",
+    "version": "0.0.1"
 }
