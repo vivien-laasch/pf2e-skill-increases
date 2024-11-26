@@ -1,4 +1,5 @@
-import { MODULE_ID } from "../constants";
+import { i } from "node_modules/vite/dist/node/types.d-aGj9QkWt";
+import { MODULE_ID, SPECIAL_PRINCESS_FEATS } from "../constants";
 import { SkillBoost, SkillBoosts } from "../model/SkillBoostManager";
 
 export function resolvePreselectedSkills(actor: ActorPF2e): SkillBoosts {
@@ -8,6 +9,7 @@ export function resolvePreselectedSkills(actor: ActorPF2e): SkillBoosts {
     addBackgroundSkills(actor, selectedSkills);
     addDeitySkills(actor, selectedSkills);
     addAutoChanges(actor, selectedSkills);
+    addSpecialPrincessFeats(actor, selectedSkills);
 
     return selectedSkills;
 }
@@ -15,10 +17,10 @@ export function resolvePreselectedSkills(actor: ActorPF2e): SkillBoosts {
 function resolveFlagTarget(target: string, actor: ActorPF2e): string {
     const match = target.match(/{item\|flags\.(.+?)}/);
     if (!match) {
-        return target; 
+        return target;
     }
 
-    const flagSegments = match[1].split("."); 
+    const flagSegments = match[1].split(".");
 
     for (const item of actor.items) {
         let currentValue = item.flags;
@@ -121,4 +123,23 @@ function addDeitySkills(actor: ActorPF2e, selectedSkills: SkillBoosts) {
     } else if (skill.length === 1) {
         updateSkillSelection(selectedSkills, skill[0], 1, 1);
     }
+}
+
+function addSpecialPrincessFeats(actor: ActorPF2e, selectedSkills: SkillBoosts) {
+    actor.items.forEach((item) => {
+        if (item.type !== "feat") {
+            return;
+        }
+        const additional = SPECIAL_PRINCESS_FEATS.find((featData) => featData.slug === item.system.slug)?.amount;
+
+        if (!additional) {
+            return;
+        }
+
+        const featLevel = (item as FeatPF2e).system.level.taken;
+
+        const selected = selectedSkills.get(featLevel) || { available: 0, additional: 0, selected: {} };
+        selected.additional += additional;
+        selectedSkills.set(featLevel, selected);
+    });
 }

@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface ActorPF2e extends Actor {
     ancestry: AncestryPF2e;
     class: ClassPF2e;
@@ -101,5 +100,13 @@ interface Change {
 interface DeityPF2e extends Item {
     system: {
         skill: string[];
+    };
+}
+
+interface FeatPF2e extends Item {
+    system: {
+        level: {
+            taken: number;
+        }
     };
 }
