@@ -13,23 +13,24 @@ export function resolvePreselectedSkills(actor: ActorPF2e): SkillBoosts {
 }
 
 function resolveFlagTarget(target: string, actor: ActorPF2e): string {
-    if (!target.startsWith("{item|flags.")) {
-        return target;
+    const match = target.match(/{item\|flags\.(.+?)}/);
+    if (!match) {
+        return target; 
     }
 
-    const flagPaths = target.replace("}", "").split(".").slice(1);
+    const flagSegments = match[1].split("."); 
 
     for (const item of actor.items) {
-        let flags = item.flags;
-        for (const flagPath of flagPaths) {
-            if (!flags) {
+        let currentValue = item.flags;
+        for (const segment of flagSegments) {
+            if (!currentValue) {
                 break;
             }
 
-            flags = flags[flagPath];
+            currentValue = currentValue[segment];
         }
-        if (flags && typeof flags === "string") {
-            return flags;
+        if (typeof currentValue === "string") {
+            return target.replace(match[0], currentValue);
         }
     }
 
