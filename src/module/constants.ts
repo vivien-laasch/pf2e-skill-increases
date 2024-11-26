@@ -8,6 +8,4 @@ const ModuleData = {
 
 export default foundry.utils.mergeObject(ModuleData);
 
-export const SPECIAL_PRINCESS_FEATS = [
-    { slug: "rogue-dedication", amount: 1 }
-];
+export const SPECIAL_PRINCESS_FEATS = [{ slug: "rogue-dedication", amount: 1 }];

@@ -107,6 +107,6 @@ interface FeatPF2e extends Item {
     system: {
         level: {
             taken: number;
-        }
+        };
     };
 }

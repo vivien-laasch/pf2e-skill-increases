@@ -37,17 +37,16 @@ const manager = computed(() => store.manager);
 
 button {
     padding: 0.25rem 1.5rem;
+    width: fit-content;
 }
 
 .submit {
     display: flex;
     justify-content: center;
-    padding-right: 0.75rem;
+    padding-right: 0.25rem;
 }
 
 .reset {
-    width: fit-content;
-    height: fit-content;
     padding: 0.5rem;
 }
 

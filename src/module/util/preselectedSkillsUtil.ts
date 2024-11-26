@@ -5,8 +5,8 @@ import { SkillBoost, SkillBoosts } from "../model/SkillBoostManager";
 export function resolvePreselectedSkills(actor: ActorPF2e): SkillBoosts {
     const selectedSkills = new Map();
 
-    addClassSkills(actor, selectedSkills);
     addBackgroundSkills(actor, selectedSkills);
+    addClassSkills(actor, selectedSkills);
     addDeitySkills(actor, selectedSkills);
     addAutoChanges(actor, selectedSkills);
     addSpecialPrincessFeats(actor, selectedSkills);
@@ -62,7 +62,7 @@ function updateSkillSelection(selectedSkills: SkillBoosts, skill: string, rank: 
     let alreadySelected = false;
 
     for (const [lvl, entry] of selectedSkills) {
-        if (lvl < level && entry.selected[skill] && entry.selected[skill].rank == rank) {
+        if (lvl <= level && entry.selected[skill] && entry.selected[skill].rank == rank) {
             alreadySelected = true;
             break;
         }

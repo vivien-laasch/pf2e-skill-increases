@@ -24,6 +24,7 @@ padding-bottom: 0;
 .application.skill-manager .grid {
   display: inline-grid;
   grid-template-columns: 25% 75%;
+  grid-gap: 0.5rem;
 }
 
 .application.skill-manager .root {

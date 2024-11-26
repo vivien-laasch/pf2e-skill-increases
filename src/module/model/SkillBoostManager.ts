@@ -50,9 +50,9 @@ class SkillBoostManager {
         if (levelBoosts.selected[skill]) {
             return;
         }
-        if (levelBoosts.additional > 0 && this.getRankAtSelectedLevel(skill) == 0) {
+        if (this.getAdditionalSkillBoosts() > 0 && this.getRankAtSelectedLevel(skill) == 0) {
             levelBoosts.selected[skill] = { rank: 1, locked: false, additional: true };
-        } else if (levelBoosts.available > 0) {
+        } else if (this.getAvailableSkillBoosts() > 0) {
             const rank = this.getRankAtSelectedLevel(skill) + 1;
             levelBoosts.selected[skill] = { rank, locked: false };
         }
@@ -91,7 +91,6 @@ class SkillBoostManager {
             }
             skillProgression.set(level, levelBoosts);
         });
-
 
         this.skillBoosts = new Map([...skillProgression.entries()].sort((a, b) => a[0] - b[0]));
     }
@@ -150,16 +149,18 @@ class SkillBoostManager {
     }
 
     getAvailableSkillBoosts(): number {
-        return (
+        return Math.max(
+            0,
             this.getSkillBoostsAtSelectedLevel().available -
-            Object.values(this.getSkillBoostsAtSelectedLevel().selected).filter((skill) => !skill.locked && !skill.additional).length
+                Object.values(this.getSkillBoostsAtSelectedLevel().selected).filter((skill) => !skill.locked && !skill.additional).length,
         );
     }
 
     getAdditionalSkillBoosts(): number {
-        return (
+        return Math.max(
+            0,
             this.getSkillBoostsAtSelectedLevel().additional -
-            Object.values(this.getSkillBoostsAtSelectedLevel().selected).filter((skill) => !skill.locked && skill.additional).length
+                Object.values(this.getSkillBoostsAtSelectedLevel().selected).filter((skill) => !skill.locked && skill.additional).length,
         );
     }
 
