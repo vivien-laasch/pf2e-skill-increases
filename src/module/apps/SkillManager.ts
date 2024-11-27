@@ -26,9 +26,6 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
         {
             id: "skill-manager-{id}",
             uniqueId: "",
-            window: {
-                resizable: true,
-            },
             position: {
                 width: 660,
                 height: 620,

@@ -29,12 +29,6 @@ const manager = computed(() => store.manager);
     align-items: center;
 }
 
-.bottom-bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 button {
     padding: 0.25rem 1.5rem;
     width: fit-content;
@@ -43,7 +37,7 @@ button {
 .submit {
     display: flex;
     justify-content: center;
-    padding-right: 0.25rem;
+    padding: 0.25rem;
 }
 
 .reset {

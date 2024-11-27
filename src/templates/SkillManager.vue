@@ -33,4 +33,12 @@ padding-bottom: 0;
   display: grid;
   grid-template-rows: 90% 50px
 }
+
+.application.skill-manager[data-theme] {
+  --background: var(--app-background);
+
+  button:disabled {
+    opacity: 30%;
+  }
+}
 </style>

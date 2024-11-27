@@ -30,7 +30,7 @@ const manager = store.manager;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  padding-right: 0.25rem;
+  padding: 0.25rem;
 }
 
 .level {

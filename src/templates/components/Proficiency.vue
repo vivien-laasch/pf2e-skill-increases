@@ -98,4 +98,17 @@ button.proficient {
 button:disabled {
   border-color: color-mix(in srgb, var(--color-light-5), transparent 70%);
 }
+
+    
+.skill-manager[data-theme] {
+
+    button.proficient:disabled {
+        opacity: 100%;
+        background-color: color-mix(in srgb, var(--accent-color-dark), transparent 50%);
+    }
+
+    button.proficient {
+        background-color: var(--accent-color);
+    }
+}
 </style>
