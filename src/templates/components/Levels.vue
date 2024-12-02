@@ -4,7 +4,7 @@ import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
 
 const store = useSkillManagerStore();
 const levels = store.manager.getLevels();
-const actorLevel = store.actor.system.details.level.value;
+const actorLevel = store.getActor.level;
 const manager = store.manager;
 </script>
 <template>
