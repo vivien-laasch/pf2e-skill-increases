@@ -1,8 +1,8 @@
-import { i } from "node_modules/vite/dist/node/types.d-aGj9QkWt";
 import { MODULE_ID, SPECIAL_PRINCESS_FEATS } from "../constants";
 import { SkillBoost, SkillBoosts } from "../model/SkillBoostManager";
+import { CharacterPF2e, FeatPF2e, ItemFlagsPF2e } from "foundry-pf2e";
 
-export function resolvePreselectedSkills(actor: ActorPF2e): SkillBoosts {
+export function resolvePreselectedSkills(actor: CharacterPF2e): SkillBoosts {
     const selectedSkills = new Map();
 
     addBackgroundSkills(actor, selectedSkills);
@@ -14,7 +14,7 @@ export function resolvePreselectedSkills(actor: ActorPF2e): SkillBoosts {
     return selectedSkills;
 }
 
-function resolveFlagTarget(target: string, actor: ActorPF2e): string {
+function resolveFlagTarget(target: string, actor: CharacterPF2e): string {
     const match = target.match(/{item\|flags\.(.+?)}/);
     if (!match) {
         return target;
@@ -29,7 +29,9 @@ function resolveFlagTarget(target: string, actor: ActorPF2e): string {
                 break;
             }
 
-            currentValue = currentValue[segment];
+            if (currentValue && typeof currentValue === "object") {
+                currentValue = currentValue[segment] as ItemFlagsPF2e;
+            }
         }
         if (typeof currentValue === "string") {
             return target.replace(match[0], currentValue);
@@ -39,7 +41,7 @@ function resolveFlagTarget(target: string, actor: ActorPF2e): string {
     return target;
 }
 
-function addAutoChanges(actor: ActorPF2e, selectedSkills: SkillBoosts): void {
+function addAutoChanges(actor: CharacterPF2e, selectedSkills: SkillBoosts): void {
     const autoChanges = actor.system.autoChanges;
 
     if (!autoChanges) {
@@ -48,12 +50,13 @@ function addAutoChanges(actor: ActorPF2e, selectedSkills: SkillBoosts): void {
 
     for (const [target, changes] of Object.entries(autoChanges)) {
         const resolved = resolveFlagTarget(target, actor);
-        if (!resolved.startsWith("system.skills.")) {
+        if (!resolved.startsWith("system.skills.") || !changes) {
             continue;
         }
         const skill = resolved.split(".")[2];
         changes.forEach((change) => {
-            updateSkillSelection(selectedSkills, skill, change.value, change.level);
+            //todo check this, i seriously don't care about non number values
+            updateSkillSelection(selectedSkills, skill, change.value as number, change.level as number);
         });
     }
 }
@@ -79,7 +82,7 @@ function updateSkillSelection(selectedSkills: SkillBoosts, skill: string, rank: 
     selectedSkills.set(level, existingEntry);
 }
 
-function addClassSkills(actor: ActorPF2e, selectedSkills: SkillBoosts) {
+function addClassSkills(actor: CharacterPF2e, selectedSkills: SkillBoosts) {
     const classItem = actor.class;
 
     if (!classItem) {
@@ -91,7 +94,7 @@ function addClassSkills(actor: ActorPF2e, selectedSkills: SkillBoosts) {
     });
 }
 
-function addBackgroundSkills(actor: ActorPF2e, selectedSkills: SkillBoosts) {
+function addBackgroundSkills(actor: CharacterPF2e, selectedSkills: SkillBoosts) {
     const background = actor.background;
 
     if (!background) {
@@ -103,10 +106,11 @@ function addBackgroundSkills(actor: ActorPF2e, selectedSkills: SkillBoosts) {
     });
 }
 
-function addDeitySkills(actor: ActorPF2e, selectedSkills: SkillBoosts) {
+function addDeitySkills(actor: CharacterPF2e, selectedSkills: SkillBoosts) {
     const classesWithDeitySkills = game.settings?.get(MODULE_ID, "classesWithDeitySkills") as string[];
+    const slug = actor.class?.system.slug;
 
-    if (!classesWithDeitySkills?.includes(actor.class?.system.slug)) {
+    if (!slug || !classesWithDeitySkills?.includes(slug)) {
         return;
     }
 
@@ -125,7 +129,7 @@ function addDeitySkills(actor: ActorPF2e, selectedSkills: SkillBoosts) {
     }
 }
 
-function addSpecialPrincessFeats(actor: ActorPF2e, selectedSkills: SkillBoosts) {
+function addSpecialPrincessFeats(actor: CharacterPF2e, selectedSkills: SkillBoosts) {
     actor.items.forEach((item) => {
         if (item.type !== "feat") {
             return;
@@ -136,7 +140,7 @@ function addSpecialPrincessFeats(actor: ActorPF2e, selectedSkills: SkillBoosts) 
             return;
         }
 
-        const featLevel = (item as FeatPF2e).system.level.taken;
+        const featLevel = (item as unknown as FeatPF2e).system.level.taken || 0;
 
         const selected = selectedSkills.get(featLevel) || { available: 0, additional: 0, selected: {} };
         selected.additional += additional;

@@ -1,7 +1,8 @@
+import { CharacterPF2e } from "foundry-pf2e";
 import { SkillBoosts } from "../model/SkillBoostManager";
 import { computeAttributeProgression } from "./attributeCalculationUtils";
 
-function getClassSkillBoosts(actor: ActorPF2e): number {
+function getClassSkillBoosts(actor: CharacterPF2e): number {
     const classItem = actor.class;
 
     if (!classItem) {
@@ -11,7 +12,7 @@ function getClassSkillBoosts(actor: ActorPF2e): number {
     return classItem.system.trainedSkills.additional;
 }
 
-export function computeSkillProgression(actor: ActorPF2e): SkillBoosts {
+export function computeSkillProgression(actor: CharacterPF2e): SkillBoosts {
     const classItem = actor.class;
     const boosts = new Map();
 
@@ -34,7 +35,7 @@ export function computeSkillProgression(actor: ActorPF2e): SkillBoosts {
     return boosts;
 }
 
-export function getLevel(actor: ActorPF2e): number {
+export function getLevel(actor: CharacterPF2e): number {
     return actor.system.details.level.value;
 }
 

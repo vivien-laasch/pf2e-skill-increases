@@ -1,3 +1,4 @@
+import type { CharacterPF2e } from "foundry-pf2e";
 import { SkillManager } from "./apps/SkillManager";
 import { CHARACTER_SHEET, MODULE_ID } from "./constants";
 import { registerSettings } from "./settings";
@@ -7,7 +8,7 @@ Hooks.once("init", () => {
     console.log(`${MODULE_ID} | Initialized ${MODULE_ID}`);
 });
 
-Hooks.on("render" + CHARACTER_SHEET, (app: ActorSheet, html: JQuery) => {
+Hooks.on("render" + CHARACTER_SHEET, (app: ActorSheet<CharacterPF2e>, html: JQuery) => {
     console.log(`${MODULE_ID} | Attempting to inject Skill Manager button`);
 
     const openManager = `<button id="open-skill-manager" type="button" class="blue" style="margin-bottom: 0.5rem;">${game.i18n?.localize("pf2e-skill-increases.open")}</button>`;
@@ -24,6 +25,6 @@ Hooks.on("render" + CHARACTER_SHEET, (app: ActorSheet, html: JQuery) => {
 });
 
 async function openSkillManager(actorId: string) {
-    const actor = await game.actors.get(actorId);
+    const actor = game.actors.get(actorId) as unknown as CharacterPF2e;
     new SkillManager(actor).render(true);
 }

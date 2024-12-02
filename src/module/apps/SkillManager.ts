@@ -1,3 +1,4 @@
+import { CharacterPF2e } from "foundry-pf2e";
 import { createPinia, disposePinia, Pinia, setActivePinia } from "pinia";
 import App from "../../templates/SkillManager.vue";
 import { MODULE_ID } from "../constants";
@@ -11,7 +12,7 @@ const { ApplicationV2 } = foundry.applications.api;
 export class SkillManager extends VueApplicationMixin(ApplicationV2) {
     pinia: Pinia;
 
-    constructor(actor: ActorPF2e) {
+    constructor(actor: CharacterPF2e) {
         // @ts-expect-error - valid override
         super({
             uniqueId: actor.id,
@@ -50,7 +51,7 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
         },
     };
 
-    override async close(options?: Application.CloseOptions): Promise<void> {
+    override async close(options?: unknown): Promise<void> {
         disposePinia(this.pinia);
         return await super.close(options);
     }
@@ -62,7 +63,7 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
         return renderOptions;
     }
 
-    initializeStore(actor: ActorPF2e) {
+    initializeStore(actor: CharacterPF2e) {
         setActivePinia(this.pinia);
         const store = useSkillManagerStore();
         const skillManager = new SkillBoostManager();
@@ -71,7 +72,6 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
         skillManager.selectedLevel = skillManager.skillBoosts.has(getLevel(actor)) ? getLevel(actor) : 1;
 
         store.manager = skillManager;
-        store.actor = actor;
     }
 }
 

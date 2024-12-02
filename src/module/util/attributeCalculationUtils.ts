@@ -1,16 +1,10 @@
-function hasKeyAttribute(classItem: ClassPF2e, attribute: string): boolean {
-    if (!classItem) {
-        return false;
-    }
+import { AttributeString, CharacterPF2e } from "foundry-pf2e";
 
-    if (classItem.system.keyAbility.value.length == 1) {
-        return classItem.system.keyAbility.value[0] === attribute;
-    } else {
-        return classItem.system.keyAbility.selected === attribute;
-    }
+function hasKeyAttribute(actor: CharacterPF2e, attribute: AttributeString): boolean {
+    return actor.keyAttribute === attribute;
 }
 
-function hasAncestryBoosts(actor: ActorPF2e, attribute: string): boolean {
+function hasAncestryBoosts(actor: CharacterPF2e, attribute: AttributeString): boolean {
     const ancestry = actor.ancestry;
 
     if (!ancestry) {
@@ -20,7 +14,7 @@ function hasAncestryBoosts(actor: ActorPF2e, attribute: string): boolean {
     return Object.values(ancestry.system.boosts).some((boost) => boost.selected === attribute);
 }
 
-function hasFlaw(actor: ActorPF2e, attribute: string): boolean {
+function hasFlaw(actor: CharacterPF2e, attribute: AttributeString): boolean {
     const flaws = actor.system.build.attributes.flaws;
 
     if (!flaws) {
@@ -30,7 +24,7 @@ function hasFlaw(actor: ActorPF2e, attribute: string): boolean {
     return Object.values(flaws).some((flaw) => flaw.includes(attribute));
 }
 
-function hasBackgroundBoost(actor: ActorPF2e, attribute: string): boolean {
+function hasBackgroundBoost(actor: CharacterPF2e, attribute: AttributeString): boolean {
     const background = actor.background;
 
     if (!background) {
@@ -40,23 +34,23 @@ function hasBackgroundBoost(actor: ActorPF2e, attribute: string): boolean {
     return Object.values(background.system.boosts).some((boost) => boost.selected === attribute);
 }
 
-function hasAttributeBoostAtLevel(actor: ActorPF2e, attribute: string, level: number): boolean {
+function hasAttributeBoostAtLevel(actor: CharacterPF2e, attribute: AttributeString, level: number): boolean {
     const attributeBoosts = actor.system.build.attributes.boosts;
-    return attributeBoosts[level].includes(attribute);
+    return attributeBoosts[level as keyof typeof attributeBoosts]?.includes(attribute) || false;
 }
 
-function getLevelOneAttributeMod(actor: ActorPF2e, attribute: string): number {
+function getLevelOneAttributeMod(actor: CharacterPF2e, attribute: AttributeString): number {
     return (
         [
             hasBackgroundBoost(actor, attribute),
             hasAncestryBoosts(actor, attribute),
-            hasKeyAttribute(actor.class, attribute),
+            hasKeyAttribute(actor, attribute),
             hasAttributeBoostAtLevel(actor, attribute, 1),
         ].filter(Boolean).length - (hasFlaw(actor, attribute) ? 1 : 0)
     );
 }
 
-export function computeAttributeProgression(actor: ActorPF2e, attribute: string, levelLimit: number): Map<number, number> {
+export function computeAttributeProgression(actor: CharacterPF2e, attribute: AttributeString, levelLimit: number): Map<number, number> {
     let modifier = getLevelOneAttributeMod(actor, attribute);
     let countNextBoost = modifier < 4;
     const boosts = new Map<number, number>();
