@@ -4,14 +4,14 @@ import { computed, inject } from "vue";
 import { localize } from "../../module/fvtt-vue/VueHelpers.mjs";
 import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
 
-const onSubmit = inject("onSubmit") as (payload: Event) => void;
+const submit = inject("onSubmit") as (payload: Event) => void;
 const store = useSkillManagerStore();
 const manager = computed(() => store.manager);
 </script>
 <template>
     <div class="bottom-bar">
         <form class="container">
-            <button class="submit" type="submit" @click="onSubmit">{{ localize("PF2E.Actor.Character.AttributeBuilder.Complete") }}</button>
+            <button class="submit" type="submit" @click="submit">{{ localize("PF2E.Actor.Character.AttributeBuilder.Complete") }}</button>
         </form>
         <div class="skill-counts container">
             <div class="count">{{ localize(`${MODULE_ID}.available`) + `: ${manager.getAvailableSkillBoosts()}` }}</div>
