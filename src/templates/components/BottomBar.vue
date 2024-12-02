@@ -30,7 +30,7 @@ const manager = computed(() => store.manager);
 
 .skill-counts {
     justify-content: space-between;
-    padding-right: 0.5rem;
+    padding-right: 1rem;
 }
 
 .submit {
