@@ -10,10 +10,10 @@ const manager = computed(() => store.manager);
 </script>
 <template>
     <div class="bottom-bar">
-        <form class="submit">
-            <button type="submit" @click="onSubmit">{{ localize("PF2E.Actor.Character.AttributeBuilder.Complete") }}</button>
+        <form class="container">
+            <button class="submit" type="submit" @click="onSubmit">{{ localize("PF2E.Actor.Character.AttributeBuilder.Complete") }}</button>
         </form>
-        <div class="skill-counts">
+        <div class="skill-counts container">
             <div class="count">{{ localize(`${MODULE_ID}.available`) + `: ${manager.getAvailableSkillBoosts()}` }}</div>
             <div class="count">{{ localize(`${MODULE_ID}.additional`) + `: ${manager.getAdditionalSkillBoosts()}` }}</div>
             <button class="reset" @click="manager.resetSelection()" :title="localize(`${MODULE_ID}.reset`)"><i class="fa-solid fa-rotate-right"></i></button>
@@ -21,27 +21,26 @@ const manager = computed(() => store.manager);
     </div>
 </template>
 <style scoped lang="css">
-.skill-counts {
+.container {
     display: flex;
-    justify-content: space-between;
-    padding: 0 0.5rem;
     height: 100%;
     align-items: center;
+    padding: 0.25rem;
 }
 
-button {
-    padding: 0.25rem 1.5rem;
-    width: fit-content;
+.skill-counts {
+    justify-content: space-between;
+    padding-right: 0.5rem;
 }
 
 .submit {
-    display: flex;
-    justify-content: center;
-    padding: 0.25rem;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
 }
 
 .reset {
     padding: 0.5rem;
+    width: fit-content;
 }
 
 .reset i {
