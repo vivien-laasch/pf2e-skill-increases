@@ -134,16 +134,27 @@ function addSpecialPrincessFeats(actor: CharacterPF2e, selectedSkills: SkillBoos
         if (item.type !== "feat") {
             return;
         }
-        const additional = SPECIAL_PRINCESS_FEATS.find((featData) => featData.slug === item.system.slug)?.amount;
 
-        if (!additional) {
+        const featData = SPECIAL_PRINCESS_FEATS.find((feat) => feat.slug === item.system.slug);
+
+        if (!featData) {
             return;
         }
 
         const featLevel = (item as unknown as FeatPF2e).system.level.taken || 0;
 
-        const selected = selectedSkills.get(featLevel) || { available: 0, additional: 0, selected: {} };
-        selected.additional += additional;
-        selectedSkills.set(featLevel, selected);
+        const levelsToUpdate = featLevel !== 0 ? [featLevel] : featData.levels || [];
+
+        levelsToUpdate.forEach((level) => {
+            const selected = selectedSkills.get(level) || { available: 0, additional: 0, selected: {} };
+
+            if (featData.type === "available") {
+                selected.available += featData.amount;
+            } else if (featData.type === "additional") {
+                selected.additional += featData.amount;
+            }
+
+            selectedSkills.set(level, selected);
+        });
     });
 }

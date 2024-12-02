@@ -1,3 +1,4 @@
+import { CharacterPF2e } from "foundry-pf2e";
 import { getPersistedData } from "../util/persistenceUtils";
 import { resolvePreselectedSkills } from "../util/preselectedSkillsUtil";
 import { computeSkillProgression, getMaxProficiencyAtLevel } from "../util/skillCalculationUtils";
@@ -69,7 +70,7 @@ class SkillBoostManager {
         delete levelBoosts.selected[skill];
     }
 
-    initialize(actor: ActorPF2e): void {
+    initialize(actor: CharacterPF2e): void {
         const persistedSkills = getPersistedData(actor);
         const preselectedSkills = resolvePreselectedSkills(actor);
         const skillProgression = computeSkillProgression(actor);
@@ -78,6 +79,7 @@ class SkillBoostManager {
             const levelBoosts = skillProgression.get(level) || { available: 0, additional: 0, selected: {} };
             levelBoosts.additional = skill.additional;
             levelBoosts.selected = skill.selected;
+            levelBoosts.available += skill.available;
             skillProgression.set(level, levelBoosts);
         });
 
