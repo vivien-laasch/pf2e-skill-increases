@@ -11,12 +11,12 @@ const manager = computed(() => store.manager);
 <template>
     <div class="bottom-bar">
         <form class="submit">
-            <button @click="onSubmit">{{ localize("PF2E.Actor.Character.AttributeBuilder.Complete") }}</button>
+            <button type="submit" @click="onSubmit">{{ localize("PF2E.Actor.Character.AttributeBuilder.Complete") }}</button>
         </form>
         <div class="skill-counts">
             <div class="count">{{ localize(`${MODULE_ID}.available`) + `: ${manager.getAvailableSkillBoosts()}` }}</div>
             <div class="count">{{ localize(`${MODULE_ID}.additional`) + `: ${manager.getAdditionalSkillBoosts()}` }}</div>
-            <button class="reset" @click="manager.resetSelection()"><i class="fa-solid fa-rotate-right"></i></button>
+            <button class="reset" @click="manager.resetSelection()" :title="localize(`${MODULE_ID}.reset`)"><i class="fa-solid fa-rotate-right"></i></button>
         </div>
     </div>
 </template>

@@ -102,13 +102,12 @@ button:disabled {
     
 .skill-manager[data-theme] {
 
-    button.proficient:disabled {
-        opacity: 100%;
-        background-color: color-mix(in srgb, var(--accent-color-dark), transparent 50%);
+    button:hover:not(:disabled) {
+        background-color: var(--color-primary-2);
     }
 
     button.proficient {
-        background-color: var(--accent-color);
+        background-color: var(--color-primary-2);
     }
 }
 </style>

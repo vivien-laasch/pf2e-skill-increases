@@ -18,7 +18,7 @@ import Skills from "./components/Skills.vue";
 }
 
 .application.skill-manager .window-content {
-padding-bottom: 0;
+  padding-bottom: 0;
 }
 
 .application.skill-manager .grid {
@@ -34,11 +34,11 @@ padding-bottom: 0;
   grid-template-rows: 90% 50px
 }
 
+.application.skill-manager button:disabled {
+    opacity: 40%;
+}
+
 .application.skill-manager[data-theme] {
   --background: var(--app-background);
-
-  button:disabled {
-    opacity: 30%;
-  }
 }
 </style>

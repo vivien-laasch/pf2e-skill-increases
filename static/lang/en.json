@@ -7,6 +7,7 @@
         "proficiencyDecreaseNotAllowed": "This skill was selected on a previous level and cannot be decreased.",
         "levelTooLow": "Your level is too low for the selected proficiency rank.",
         "available": "Available",
-        "additional": "Additional"
+        "additional": "Additional",
+        "reset": "Reset Skill Selection"
     }
 }
