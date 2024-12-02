@@ -16,7 +16,7 @@
         "baseUrl": ".",
         "rootDir": ".",
         "outDir": "dist",
-        "types": ["@league-of-foundry-developers/foundry-vtt-types"],
+        "types": ["foundry-pf2e", "@types/jquery"],
         "allowJs": true
     },
     "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]

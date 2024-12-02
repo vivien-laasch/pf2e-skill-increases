@@ -1,26 +1,29 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import Proficiency from "./Proficiency.vue";
+import { CharacterPF2e, CharacterSkill } from "foundry-pf2e";
 import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
 import { computeAttributeProgression } from "../../module/util/attributeCalculationUtils";
+import Proficiency from "./Proficiency.vue";
 
 const store = useSkillManagerStore();
-const availableSkills = computed(() => store.getActor.skills);
+const availableSkills = Object.values(store.getActor.skills).filter((skill) => !skill.lore);
 const proficiencyPerRank = [0, 2, 4, 6, 8];
+const manager = store.manager;
 
-function getTotalBonus(skill: SkillPF2e): number {
+function getTotalBonus(skill: CharacterSkill<CharacterPF2e>): number {
     return getProficiencyBonus(skill) + getAttributeBonus(skill);
 }
 
-function getProficiencyBonus(skill: SkillPF2e): number {
-    const proficiency = proficiencyPerRank[store.getProficiencyAtSelectedLevel(skill.slug)] ?? 0;
-    return proficiency !== 0 ? proficiency + store.selectedLevel : 0;
+function getProficiencyBonus(skill: CharacterSkill<CharacterPF2e>): number {
+    const proficiency = proficiencyPerRank[manager.getRankAtSelectedLevel(skill.slug)] ?? 0;
+    return proficiency !== 0 ? proficiency + manager.selectedLevel : 0;
 }
 
-function getAttributeBonus(skill: SkillPF2e): number {
-    const progression = computeAttributeProgression(store.getActor, skill.attribute, store.selectedLevel);
+function getAttributeBonus(skill: CharacterSkill<CharacterPF2e>): number {
+    if (!skill.attribute) {
+        return 0;
+    }
+    const progression = computeAttributeProgression(store.getActor, skill.attribute, manager.selectedLevel);
     const lastLevelKey = Array.from(progression.keys()).pop() ?? 1;
-
     return progression.get(lastLevelKey) || 0;
 }
 
@@ -42,7 +45,6 @@ function formatBonus(bonus: number): string {
   gap: 0.5rem;
   display: flex;
   flex-direction: column;
-  flex: 1;
   overflow-y: auto;
   padding-right: 0.75rem;
 }

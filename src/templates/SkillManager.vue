@@ -5,11 +5,11 @@ import Skills from "./components/Skills.vue";
 </script>
 <template>
     <div class="root">
-        <div class="skill-manager">
+        <div class="grid">
             <Levels></Levels>
             <Skills></Skills>
         </div>
-        <BottomBar></BottomBar>
+        <BottomBar class="grid"></BottomBar>
     </div>
 </template>
 <style lang="css">
@@ -18,12 +18,13 @@ import Skills from "./components/Skills.vue";
 }
 
 .application.skill-manager .window-content {
-padding-bottom: 0;
+  padding-bottom: 0;
 }
 
-.application.skill-manager .skill-manager {
-  display: flex;
-  gap: 1rem;
+.application.skill-manager .grid {
+  display: inline-grid;
+  grid-template-columns: 25% 75%;
+  grid-gap: 0.5rem;
 }
 
 .application.skill-manager .root {
@@ -31,5 +32,13 @@ padding-bottom: 0;
   width: 100%;
   display: grid;
   grid-template-rows: 90% 50px
+}
+
+.application.skill-manager button:disabled {
+    opacity: 40%;
+}
+
+.application.skill-manager[data-theme] {
+  --background: var(--app-background);
 }
 </style>

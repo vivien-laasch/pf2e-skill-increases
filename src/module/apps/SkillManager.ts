@@ -1,7 +1,9 @@
+import { CharacterPF2e } from "foundry-pf2e";
 import { createPinia, disposePinia, Pinia, setActivePinia } from "pinia";
 import App from "../../templates/SkillManager.vue";
 import { MODULE_ID } from "../constants";
 import { VueApplicationMixin } from "../fvtt-vue/VueApplicationMixin.mjs";
+import { SkillBoostManager } from "../model/SkillBoostManager";
 import { useSkillManagerStore } from "../stores/SkillManagerStore";
 import { persistData } from "../util/persistenceUtils";
 import { getLevel } from "../util/skillCalculationUtils";
@@ -10,7 +12,7 @@ const { ApplicationV2 } = foundry.applications.api;
 export class SkillManager extends VueApplicationMixin(ApplicationV2) {
     pinia: Pinia;
 
-    constructor(actor: ActorPF2e) {
+    constructor(actor: CharacterPF2e) {
         // @ts-expect-error - valid override
         super({
             uniqueId: actor.id,
@@ -25,9 +27,6 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
         {
             id: "skill-manager-{id}",
             uniqueId: "",
-            window: {
-                resizable: true,
-            },
             position: {
                 width: 660,
                 height: 620,
@@ -41,18 +40,18 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
         app: {
             app: App,
             forms: {
-                "form": {
+                form: {
                     closeOnSubmit: true,
                     handler() {
-                        const store = useSkillManagerStore();
-                        persistData(store.getActor, store.selectedSkills, store.preselectedSKills);
+                        const store: ReturnType<typeof useSkillManagerStore> = useSkillManagerStore();
+                        persistData(store.getActor, store.manager.skillBoosts);
                     },
                 },
             },
         },
     };
 
-    override async close(options?: Application.CloseOptions): Promise<void> {
+    override async close(options?: unknown): Promise<void> {
         disposePinia(this.pinia);
         return await super.close(options);
     }
@@ -64,13 +63,16 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
         return renderOptions;
     }
 
-    initializeStore(actor: ActorPF2e) {
+    initializeStore(actor: CharacterPF2e) {
         setActivePinia(this.pinia);
         const store = useSkillManagerStore();
+        const skillManager = new SkillBoostManager();
+
+        skillManager.initialize(actor);
+        skillManager.selectedLevel = skillManager.skillBoosts.has(getLevel(actor)) ? getLevel(actor) : 1;
+
         store.actor = actor;
-        store.selectedLevel = getLevel(actor);
-        store.loadPersistedSkills();
-        store.loadPreselectedSkills();
+        store.manager = skillManager;
     }
 }
 
