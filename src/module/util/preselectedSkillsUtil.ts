@@ -1,6 +1,6 @@
-import { MODULE_ID, SPECIAL_PRINCESS_FEATS } from "../constants";
+import { AutoChangeEntry, CharacterPF2e, FeatPF2e } from "foundry-pf2e";
+import { MODULE_ID, SPECIAL_PRINCESS_FEATURES } from "../constants";
 import { SkillBoost, SkillBoosts } from "../model/SkillBoostManager";
-import { CharacterPF2e, FeatPF2e, ItemFlagsPF2e } from "foundry-pf2e";
 
 export function resolvePreselectedSkills(actor: CharacterPF2e): SkillBoosts {
     const selectedSkills = new Map();
@@ -14,7 +14,7 @@ export function resolvePreselectedSkills(actor: CharacterPF2e): SkillBoosts {
     return selectedSkills;
 }
 
-function resolveFlagTarget(target: string, actor: CharacterPF2e): string {
+function resolveChangeTarget(target: string, change: AutoChangeEntry, actor: CharacterPF2e): string {
     const match = target.match(/{item\|flags\.(.+?)}/);
     if (!match) {
         return target;
@@ -23,21 +23,22 @@ function resolveFlagTarget(target: string, actor: CharacterPF2e): string {
     const flagSegments = match[1].split(".");
 
     for (const item of actor.items) {
-        let currentValue = item.flags;
-        for (const segment of flagSegments) {
-            if (!currentValue) {
-                break;
+        if (item.name === change.source) {
+            let currentValue: unknown = item.flags;
+
+            for (const segment of flagSegments) {
+                if (!currentValue || typeof currentValue !== "object") {
+                    currentValue = null;
+                    break;
+                }
+                currentValue = (currentValue as Record<string, unknown>)[segment];
             }
 
-            if (currentValue && typeof currentValue === "object") {
-                currentValue = currentValue[segment] as ItemFlagsPF2e;
+            if (typeof currentValue === "string") {
+                return target.replace(match[0], currentValue);
             }
-        }
-        if (typeof currentValue === "string") {
-            return target.replace(match[0], currentValue);
         }
     }
-
     return target;
 }
 
@@ -49,15 +50,22 @@ function addAutoChanges(actor: CharacterPF2e, selectedSkills: SkillBoosts): void
     }
 
     for (const [target, changes] of Object.entries(autoChanges)) {
-        const resolved = resolveFlagTarget(target, actor);
-        if (!resolved.startsWith("system.skills.") || !changes) {
+        if (!changes) {
             continue;
         }
-        const skill = resolved.split(".")[2];
-        changes.forEach((change) => {
-            //todo check this, i seriously don't care about non number values
-            updateSkillSelection(selectedSkills, skill, change.value as number, change.level as number);
-        });
+
+        for (const change of changes) {
+            const resolved = resolveChangeTarget(target, change, actor);
+
+            if (!resolved || !change) {
+                continue;
+            }
+            if (resolved.startsWith("system.skills.")) {
+                const skill = resolved.split(".")[2];
+                const level = change.level ?? 1;
+                updateSkillSelection(selectedSkills, skill, change.value as number, level);
+            }
+        }
     }
 }
 
@@ -131,17 +139,13 @@ function addDeitySkills(actor: CharacterPF2e, selectedSkills: SkillBoosts) {
 
 function addSpecialPrincessFeats(actor: CharacterPF2e, selectedSkills: SkillBoosts) {
     actor.items.forEach((item) => {
-        if (item.type !== "feat") {
-            return;
-        }
-
-        const featData = SPECIAL_PRINCESS_FEATS.find((feat) => feat.slug === item.system.slug);
+        const featData = SPECIAL_PRINCESS_FEATURES.find((feat) => feat.slug === item.system.slug);
 
         if (!featData) {
             return;
         }
 
-        const featLevel = (item as unknown as FeatPF2e).system.level.taken || 0;
+        const featLevel = (item as unknown as FeatPF2e).system?.level?.taken || 0;
 
         const levelsToUpdate = featLevel !== 0 ? [featLevel] : featData.levels || [];
 

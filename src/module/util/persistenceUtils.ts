@@ -4,10 +4,12 @@ import { SkillBoost, SkillBoosts } from "../model/SkillBoostManager";
 
 export async function persistData(actor: CharacterPF2e, skillBoosts: SkillBoosts): Promise<void> {
     const serializedSkills = Object.fromEntries(
-        [...skillBoosts].map(([level, boosts]) => {
-            const selected = Object.fromEntries(Object.entries(boosts.selected).filter(([, boost]) => !boost.locked));
-            return [level, { selected }];
-        }),
+        [...skillBoosts]
+            .filter(([level]) => level <= actor.level)
+            .map(([level, boosts]) => {
+                const selected = Object.fromEntries(Object.entries(boosts.selected).filter(([, boost]) => !boost.locked));
+                return [level, { selected }];
+            }),
     );
     await actor.unsetFlag(MODULE_ID, "selectedSkills");
     actor.setFlag(MODULE_ID, "selectedSkills", serializedSkills);
@@ -25,17 +27,18 @@ async function applyBonuses(actor: CharacterPF2e, skillBoosts: SkillBoosts): Pro
     const updates: Record<string, number> = {};
 
     for (const skill of Object.values(actor.skills)) {
-        const rank = upgradeProficiency(skill, skillBoosts);
-        updates[`system.skills.${skill.slug}.rank`] = rank;
+        const maxRank = upgradeProficiency(skill, skillBoosts, actor);
+        updates[`system.skills.${skill.slug}.rank`] = maxRank;
     }
 
     await actor.update(updates);
 }
 
-function upgradeProficiency(skill: CharacterSkill<CharacterPF2e>, skillBoosts: SkillBoosts): number {
+function upgradeProficiency(skill: CharacterSkill<CharacterPF2e>, skillBoosts: SkillBoosts, actor: CharacterPF2e): number {
     let maxRank = 0;
 
-    for (const [, boosts] of skillBoosts) {
+    for (const [level, boosts] of skillBoosts) {
+        if (level > actor.level) continue;
         if (boosts.selected[skill.slug]) {
             maxRank = Math.max(maxRank, boosts.selected[skill.slug].rank);
         }
