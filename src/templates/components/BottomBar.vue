@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import { inject } from "vue";
 import { MODULE_ID } from "../../module/constants";
-import { computed, inject } from "vue";
 import { localize } from "../../module/fvtt-vue/VueHelpers.mjs";
 import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
 
 const submit = inject("onSubmit") as (payload: Event) => void;
 const store = useSkillManagerStore();
-const manager = computed(() => store.manager);
+const skillBoosts = store.skillBoosts;
 </script>
 <template>
     <div class="bottom-bar">
@@ -14,9 +14,9 @@ const manager = computed(() => store.manager);
             <button class="submit" type="submit" @click="submit">{{ localize("PF2E.Actor.Character.AttributeBuilder.Complete") }}</button>
         </form>
         <div class="skill-counts container">
-            <div class="count">{{ localize(`${MODULE_ID}.available`) + `: ${manager.getAvailableSkillBoosts()}` }}</div>
-            <div class="count">{{ localize(`${MODULE_ID}.additional`) + `: ${manager.getAdditionalSkillBoosts()}` }}</div>
-            <button class="reset" @click="manager.resetSelection()" :title="localize(`${MODULE_ID}.reset`)"><i class="fa-solid fa-rotate-right"></i></button>
+            <div class="count">{{ localize(`${MODULE_ID}.available`) + `: ${skillBoosts.getAvailable(store.selectedLevel)}` }}</div>
+            <div class="count">{{ localize(`${MODULE_ID}.additional`) + `: ${skillBoosts.getAdditional(store.selectedLevel)}` }}</div>
+            <button class="reset" @click="skillBoosts.resetSelection()" :title="localize(`${MODULE_ID}.reset`)"><i class="fa-solid fa-rotate-right"></i></button>
         </div>
     </div>
 </template>

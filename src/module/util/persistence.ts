@@ -1,6 +1,6 @@
 import { CharacterPF2e, CharacterSkill } from "foundry-pf2e";
 import { MODULE_ID } from "../constants";
-import { SkillBoost, SkillBoosts } from "../model/SkillBoostManager";
+import { Level, SkillBoost, SkillBoosts } from "../model/SkillBoosts";
 
 export async function persistData(actor: CharacterPF2e, skillBoosts: SkillBoosts): Promise<void> {
     const serializedSkills = Object.fromEntries(
@@ -16,14 +16,14 @@ export async function persistData(actor: CharacterPF2e, skillBoosts: SkillBoosts
     applyBonuses(actor, skillBoosts);
 }
 
-export function getPersistedData(actor: CharacterPF2e): SkillBoosts {
+export function getPersistedData(actor: CharacterPF2e): Map<number, Level> {
     const serializedSkills = actor.getFlag(MODULE_ID, "selectedSkills") as Record<string, { selected: Record<string, SkillBoost> }>;
     if (!serializedSkills) return new Map();
 
-    return new Map(Object.entries(serializedSkills).map(([level, { selected }]) => [parseInt(level), { available: 0, additional: 0, selected }]));
+    return new Map(Object.entries(serializedSkills).map(([level, { selected }]) => [parseInt(level), new Level({selected: selected})]));
 }
 
-async function applyBonuses(actor: CharacterPF2e, skillBoosts: SkillBoosts): Promise<void> {
+async function applyBonuses(actor: CharacterPF2e, skillBoosts: Map<number, Level>): Promise<void> {
     const updates: Record<string, number> = {};
 
     for (const skill of Object.values(actor.skills)) {
@@ -34,7 +34,7 @@ async function applyBonuses(actor: CharacterPF2e, skillBoosts: SkillBoosts): Pro
     await actor.update(updates);
 }
 
-function upgradeProficiency(skill: CharacterSkill<CharacterPF2e>, skillBoosts: SkillBoosts, actor: CharacterPF2e): number {
+function upgradeProficiency(skill: CharacterSkill<CharacterPF2e>, skillBoosts: Map<number, Level>, actor: CharacterPF2e): number {
     let maxRank = 0;
 
     for (const [level, boosts] of skillBoosts) {

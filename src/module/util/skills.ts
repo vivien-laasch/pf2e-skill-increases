@@ -1,6 +1,6 @@
 import { CharacterPF2e } from "foundry-pf2e";
-import { SkillBoosts } from "../model/SkillBoostManager";
-import { computeAttributeProgression } from "./attributeCalculationUtils";
+import { Level } from "../model/SkillBoosts";
+import { computeAttributeProgression } from "./attributes";
 
 function getClassSkillBoosts(actor: CharacterPF2e): number {
     const classItem = actor.class;
@@ -12,7 +12,7 @@ function getClassSkillBoosts(actor: CharacterPF2e): number {
     return classItem.system.trainedSkills.additional;
 }
 
-export function computeSkillProgression(actor: CharacterPF2e): SkillBoosts {
+export function computeSkillProgression(actor: CharacterPF2e): Map<number, Level> {
     const classItem = actor.class;
     const boosts = new Map();
 
@@ -20,23 +20,21 @@ export function computeSkillProgression(actor: CharacterPF2e): SkillBoosts {
         return boosts;
     }
     const baseLevels = classItem.system.skillIncreaseLevels.value;
-    const intProgression = computeAttributeProgression(actor, "int", getLevel(actor));
+    const intProgression = computeAttributeProgression(actor, "int", actor.level);
     const boostLevels = Array.from(new Set([...baseLevels, ...intProgression.keys()])).sort((a, b) => a - b);
 
     boostLevels.forEach((level) => {
-        boosts.set(level, {
-            available: baseLevels.includes(level) ? 1 : 0,
-            additional: intProgression.has(level) ? 1 : 0,
-            selected: {},
-        });
+        boosts.set(
+            level,
+            new Level({
+                available: baseLevels.includes(level) ? 1 : 0,
+                additional: intProgression.has(level) ? 1 : 0,
+            }),
+        );
     });
 
-    boosts.set(1, { available: (intProgression.get(1) || 0) + getClassSkillBoosts(actor), additional: 0, selected: {} });
+    boosts.set(1, new Level({ available: (intProgression.get(1) || 0) + getClassSkillBoosts(actor) }));
     return boosts;
-}
-
-export function getLevel(actor: CharacterPF2e): number {
-    return actor.system.details.level.value;
 }
 
 export function getMaxProficiencyAtLevel(level: number): number {

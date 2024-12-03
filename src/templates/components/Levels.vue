@@ -3,9 +3,8 @@ import { localize } from "../../module/fvtt-vue/VueHelpers.mjs";
 import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
 
 const store = useSkillManagerStore();
-const levels = store.manager.getLevels();
+const levels = store.skillBoosts.getLevels();
 const actorLevel = store.getActor.level;
-const manager = store.manager;
 </script>
 <template>
     <div class="accordion">
@@ -15,10 +14,10 @@ const manager = store.manager;
             class="level"
             :class="{
                 disabled: level > actorLevel!,
-                selected: level === manager.selectedLevel,
+                selected: level === store.selectedLevel,
             }"
             :disabled="level > actorLevel!"
-            @click="manager.selectedLevel = level"
+            @click="store.selectedLevel = level"
         >
             {{ `${localize("PF2E.LevelLabel")}  ${level}` }}
         </button>
