@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
-import { getMaxProficiencyAtLevel } from "../../module/util/skillCalculationUtils";
+import { getMaxProficiencyAtLevel } from "../../module/util/skills";
 
 import { MODULE_ID } from "../../module/constants";
 import { localize } from "../../module/fvtt-vue/VueHelpers.mjs";
@@ -11,23 +11,23 @@ const props = defineProps({
 });
 
 const store = useSkillManagerStore();
-const manager = store.manager;
+const skillBoosts = store.skillBoosts;
 
 const ranks = [1, 2, 3, 4].map((rank) => localize(`PF2E.ProficiencyLevel${rank}`).charAt(0));
-const proficiencyRank = computed(() => manager.getRankAtSelectedLevel(props.skill));
-const isLocked = computed(() => manager.isSkillLocked(props.skill));
-const maxProficiency = computed(() => getMaxProficiencyAtLevel(manager.selectedLevel));
+const proficiencyRank = computed(() => skillBoosts.getRankAtLevel(props.skill, store.selectedLevel));
+const isLocked = computed(() => skillBoosts.isSkillLocked(props.skill, store.selectedLevel));
+const maxProficiency = computed(() => getMaxProficiencyAtLevel(store.selectedLevel));
 
 function toggleProficiency(index: number) {
     if (index < proficiencyRank.value) {
-        manager.removeRank(props.skill);
+        skillBoosts.removeRank(props.skill, store.selectedLevel);
     } else {
-        manager.addRank(props.skill);
+        skillBoosts.addRank(props.skill, store.selectedLevel);
     }
 }
 
 function getMessage(index: number): string {
-    if (!manager.isDisabled(props.skill, index + 1)) {
+    if (!isDisabled(index)) {
         return "";
     }
     if (isLocked.value) {
@@ -36,17 +36,17 @@ function getMessage(index: number): string {
     if (index >= maxProficiency.value) {
         return localize(`${MODULE_ID}.levelTooLow`);
     }
-    if (manager.getTotalSkillBoostsAtLevel() == 0) {
+    if (skillBoosts.getTotalSkillBoostsAtLevel(store.selectedLevel) == 0) {
         return localize(`${MODULE_ID}.skillsMaxIncreasesReached`);
     }
-    if (manager.getRankAtLevel(props.skill, manager.selectedLevel - 1) == index + 1) {
+    if (skillBoosts.getRankAtLevel(props.skill, store.selectedLevel - 1) == index + 1) {
         return localize(`${MODULE_ID}.proficiencyDecreaseNotAllowed`);
     }
     return "";
 }
 
 function isDisabled(index: number): boolean {
-    return manager.isDisabled(props.skill, index + 1);
+    return skillBoosts.isDisabled(props.skill, index + 1, store.selectedLevel);
 }
 </script>
 <template>
@@ -99,7 +99,6 @@ button:disabled {
   border-color: color-mix(in srgb, var(--color-light-5), transparent 70%);
 }
 
-    
 .skill-manager[data-theme] {
 
     button:hover:not(:disabled) {

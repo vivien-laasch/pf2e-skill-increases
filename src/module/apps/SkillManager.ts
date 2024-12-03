@@ -3,10 +3,9 @@ import { createPinia, disposePinia, Pinia, setActivePinia } from "pinia";
 import App from "../../templates/SkillManager.vue";
 import { MODULE_ID } from "../constants";
 import { VueApplicationMixin } from "../fvtt-vue/VueApplicationMixin.mjs";
-import { SkillBoostManager } from "../model/SkillBoostManager";
+import { SkillBoosts } from "../model/SkillBoosts";
 import { useSkillManagerStore } from "../stores/SkillManagerStore";
-import { persistData } from "../util/persistenceUtils";
-import { getLevel } from "../util/skillCalculationUtils";
+import { persistData } from "../util/persistence";
 
 const { ApplicationV2 } = foundry.applications.api;
 export class SkillManager extends VueApplicationMixin(ApplicationV2) {
@@ -43,8 +42,8 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
                 form: {
                     closeOnSubmit: true,
                     handler() {
-                        const store: ReturnType<typeof useSkillManagerStore> = useSkillManagerStore();
-                        persistData(store.getActor, store.manager.skillBoosts);
+                        const store = useSkillManagerStore();
+                        persistData(store.getActor, store.getSkillBoosts);
                     },
                 },
             },
@@ -63,16 +62,14 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
         return renderOptions;
     }
 
-    initializeStore(actor: CharacterPF2e) {
+    initializeStore(actor: CharacterPF2e): void {
         setActivePinia(this.pinia);
         const store = useSkillManagerStore();
-        const skillManager = new SkillBoostManager();
-
-        skillManager.initialize(actor);
-        skillManager.selectedLevel = skillManager.skillBoosts.has(getLevel(actor)) ? getLevel(actor) : 1;
+        const skillboosts = new SkillBoosts(actor);
 
         store.actor = actor;
-        store.manager = skillManager;
+        store.selectedLevel = skillboosts.has(actor.level) ? actor.level : 1;
+        store.skillBoosts = skillboosts;
     }
 }
 

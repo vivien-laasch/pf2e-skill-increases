@@ -14,3 +14,5 @@ export const SPECIAL_PRINCESS_FEATURES = [
     { slug: "rogue-dedication", amount: 1, type: "additional" },
     { slug: "stylish-tricks", amount: 1, type: "available", levels: [3, 7, 15] },
 ];
+
+export const DIVINE_CLASSES = ["cleric", "champion"];

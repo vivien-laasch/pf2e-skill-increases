@@ -1,28 +1,28 @@
 <script setup lang="ts">
 import { CharacterPF2e, CharacterSkill } from "foundry-pf2e";
 import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
-import { computeAttributeProgression } from "../../module/util/attributeCalculationUtils";
+import { computeAttributeProgression } from "../../module/util/attributes";
 import Proficiency from "./Proficiency.vue";
 
 const store = useSkillManagerStore();
 const availableSkills = Object.values(store.getActor.skills).filter((skill) => !skill.lore);
 const proficiencyPerRank = [0, 2, 4, 6, 8];
-const manager = store.manager;
+const skillBoosts = store.skillBoosts;
 
 function getTotalBonus(skill: CharacterSkill<CharacterPF2e>): number {
     return getProficiencyBonus(skill) + getAttributeBonus(skill);
 }
 
 function getProficiencyBonus(skill: CharacterSkill<CharacterPF2e>): number {
-    const proficiency = proficiencyPerRank[manager.getRankAtSelectedLevel(skill.slug)] ?? 0;
-    return proficiency !== 0 ? proficiency + manager.selectedLevel : 0;
+    const proficiency = proficiencyPerRank[skillBoosts.getRankAtLevel(skill.slug, store.selectedLevel)] ?? 0;
+    return proficiency !== 0 ? proficiency + store.selectedLevel : 0;
 }
 
 function getAttributeBonus(skill: CharacterSkill<CharacterPF2e>): number {
     if (!skill.attribute) {
         return 0;
     }
-    const progression = computeAttributeProgression(store.getActor, skill.attribute, manager.selectedLevel);
+    const progression = computeAttributeProgression(store.getActor, skill.attribute, store.selectedLevel);
     const lastLevelKey = Array.from(progression.keys()).pop() ?? 1;
     return progression.get(lastLevelKey) || 0;
 }

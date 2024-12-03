@@ -1,8 +1,8 @@
 import { AutoChangeEntry, CharacterPF2e, FeatPF2e } from "foundry-pf2e";
 import { MODULE_ID, SPECIAL_PRINCESS_FEATURES } from "../constants";
-import { SkillBoost, SkillBoosts } from "../model/SkillBoostManager";
+import { Level } from "../model/SkillBoosts";
 
-export function resolvePreselectedSkills(actor: CharacterPF2e): SkillBoosts {
+export function resolvePreselectedSkills(actor: CharacterPF2e): Map<number, Level> {
     const selectedSkills = new Map();
 
     addBackgroundSkills(actor, selectedSkills);
@@ -42,7 +42,7 @@ function resolveChangeTarget(target: string, change: AutoChangeEntry, actor: Cha
     return target;
 }
 
-function addAutoChanges(actor: CharacterPF2e, selectedSkills: SkillBoosts): void {
+function addAutoChanges(actor: CharacterPF2e, selectedSkills: Map<number, Level>): void {
     const autoChanges = actor.system.autoChanges;
 
     if (!autoChanges) {
@@ -69,7 +69,7 @@ function addAutoChanges(actor: CharacterPF2e, selectedSkills: SkillBoosts): void
     }
 }
 
-function updateSkillSelection(selectedSkills: SkillBoosts, skill: string, rank: number, level: number): void {
+function updateSkillSelection(selectedSkills: Map<number, Level>, skill: string, rank: number, level: number): void {
     let alreadySelected = false;
 
     for (const [lvl, entry] of selectedSkills) {
@@ -79,7 +79,7 @@ function updateSkillSelection(selectedSkills: SkillBoosts, skill: string, rank: 
         }
     }
 
-    const existingEntry = selectedSkills.get(level) || { available: 0, additional: 0, selected: {} as Record<string, SkillBoost> };
+    const existingEntry = selectedSkills.get(level) || new Level();
 
     if (alreadySelected) {
         existingEntry.additional++;
@@ -90,7 +90,7 @@ function updateSkillSelection(selectedSkills: SkillBoosts, skill: string, rank: 
     selectedSkills.set(level, existingEntry);
 }
 
-function addClassSkills(actor: CharacterPF2e, selectedSkills: SkillBoosts) {
+function addClassSkills(actor: CharacterPF2e, selectedSkills: Map<number, Level>) {
     const classItem = actor.class;
 
     if (!classItem) {
@@ -102,7 +102,7 @@ function addClassSkills(actor: CharacterPF2e, selectedSkills: SkillBoosts) {
     });
 }
 
-function addBackgroundSkills(actor: CharacterPF2e, selectedSkills: SkillBoosts) {
+function addBackgroundSkills(actor: CharacterPF2e, selectedSkills: Map<number, Level>) {
     const background = actor.background;
 
     if (!background) {
@@ -114,11 +114,11 @@ function addBackgroundSkills(actor: CharacterPF2e, selectedSkills: SkillBoosts) 
     });
 }
 
-function addDeitySkills(actor: CharacterPF2e, selectedSkills: SkillBoosts) {
-    const classesWithDeitySkills = game.settings?.get(MODULE_ID, "classesWithDeitySkills") as string[];
+function addDeitySkills(actor: CharacterPF2e, selectedSkills: Map<number, Level>) {
+    const divineClasses = game.settings?.get(MODULE_ID, "divineClasses") as string[];
     const slug = actor.class?.system.slug;
 
-    if (!slug || !classesWithDeitySkills?.includes(slug)) {
+    if (!slug || !divineClasses?.includes(slug)) {
         return;
     }
 
@@ -129,7 +129,7 @@ function addDeitySkills(actor: CharacterPF2e, selectedSkills: SkillBoosts) {
     }
 
     if (skill.length > 1) {
-        const levelOneSkills = selectedSkills.get(1) || { available: 0, additional: 0, selected: {} };
+        const levelOneSkills = selectedSkills.get(1) || new Level();
         levelOneSkills.additional++;
         selectedSkills.set(1, levelOneSkills);
     } else if (skill.length === 1) {
@@ -137,7 +137,7 @@ function addDeitySkills(actor: CharacterPF2e, selectedSkills: SkillBoosts) {
     }
 }
 
-function addSpecialPrincessFeats(actor: CharacterPF2e, selectedSkills: SkillBoosts) {
+function addSpecialPrincessFeats(actor: CharacterPF2e, selectedSkills: Map<number, Level>) {
     actor.items.forEach((item) => {
         const featData = SPECIAL_PRINCESS_FEATURES.find((feat) => feat.slug === item.system.slug);
 
@@ -150,7 +150,7 @@ function addSpecialPrincessFeats(actor: CharacterPF2e, selectedSkills: SkillBoos
         const levelsToUpdate = featLevel !== 0 ? [featLevel] : featData.levels || [];
 
         levelsToUpdate.forEach((level) => {
-            const selected = selectedSkills.get(level) || { available: 0, additional: 0, selected: {} };
+            const selected = selectedSkills.get(level) || new Level();
 
             if (featData.type === "available") {
                 selected.available += featData.amount;
