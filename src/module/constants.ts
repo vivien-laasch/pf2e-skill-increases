@@ -8,4 +8,9 @@ const ModuleData = {
 
 export default foundry.utils.mergeObject(ModuleData);
 
-export const SPECIAL_PRINCESS_FEATS = [{ slug: "rogue-dedication", amount: 1 }];
+export const SPECIAL_PRINCESS_FEATURES = [
+    { slug: "animist", amount: 1, type: "available", levels: [1] },
+    { slug: "fighter", amount: 1, type: "available", levels: [1] },
+    { slug: "rogue-dedication", amount: 1, type: "additional" },
+    { slug: "stylish-tricks", amount: 1, type: "available", levels: [3, 7, 15] },
+];

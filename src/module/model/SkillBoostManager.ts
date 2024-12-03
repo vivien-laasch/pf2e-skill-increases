@@ -1,3 +1,4 @@
+import { CharacterPF2e } from "foundry-pf2e";
 import { getPersistedData } from "../util/persistenceUtils";
 import { resolvePreselectedSkills } from "../util/preselectedSkillsUtil";
 import { computeSkillProgression, getMaxProficiencyAtLevel } from "../util/skillCalculationUtils";
@@ -57,8 +58,6 @@ class SkillBoostManager {
             levelBoosts.selected[skill] = { rank, locked: false };
         }
 
-        this.updateAdditionalSkills(skill);
-
         this.skillBoosts.set(this.selectedLevel, levelBoosts);
     }
 
@@ -69,7 +68,7 @@ class SkillBoostManager {
         delete levelBoosts.selected[skill];
     }
 
-    initialize(actor: ActorPF2e): void {
+    initialize(actor: CharacterPF2e): void {
         const persistedSkills = getPersistedData(actor);
         const preselectedSkills = resolvePreselectedSkills(actor);
         const skillProgression = computeSkillProgression(actor);
@@ -78,6 +77,7 @@ class SkillBoostManager {
             const levelBoosts = skillProgression.get(level) || { available: 0, additional: 0, selected: {} };
             levelBoosts.additional = skill.additional;
             levelBoosts.selected = skill.selected;
+            levelBoosts.available += skill.available;
             skillProgression.set(level, levelBoosts);
         });
 
@@ -87,7 +87,6 @@ class SkillBoostManager {
                 if (!levelBoosts.selected[skill]) {
                     levelBoosts.selected[skill] = boost;
                 }
-                this.updateAdditionalSkills(skill);
             }
             skillProgression.set(level, levelBoosts);
         });
@@ -162,10 +161,6 @@ class SkillBoostManager {
             this.getSkillBoostsAtSelectedLevel().additional -
                 Object.values(this.getSkillBoostsAtSelectedLevel().selected).filter((skill) => !skill.locked && skill.additional).length,
         );
-    }
-
-    updateAdditionalSkills(skill: string): void {
-        //todo if a trained skill is later auto trained, grant additional skill on that level instead, remove if vice versa
     }
 }
 

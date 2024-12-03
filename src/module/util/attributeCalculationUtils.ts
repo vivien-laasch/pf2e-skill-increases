@@ -11,6 +11,10 @@ function hasAncestryBoosts(actor: CharacterPF2e, attribute: AttributeString): bo
         return false;
     }
 
+    if (ancestry.system.alternateAncestryBoosts) {
+        return Object.values(ancestry.system.alternateAncestryBoosts).includes(attribute);
+    }
+
     return Object.values(ancestry.system.boosts).some((boost) => boost.selected === attribute);
 }
 
