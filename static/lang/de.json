@@ -1,0 +1,13 @@
+{
+    "pf2e-skill-increases": {
+        "title": "Fertigkeiten Manager",
+        "open": "Fertigkeiten Manager öffnen",
+        "proficiencyPreselected": "Diese Fertigkeit ist durch ein Talent oder eine Klasseneigenschaft vorgewählt.",
+        "skillsMaxIncreasesReached": "Du hast die maximale Anzahl von Fertigkeitssteigerungen für diese Stufe erreicht.",
+        "proficiencyDecreaseNotAllowed": "Diese Fertigkeit wurde auf einer früheren Stufe ausgewählt und kann nicht verringert werden.",
+        "levelTooLow": "Deine Stufe ist zu niedrig für den gewählten Rang.",
+        "available": "Verfügbar",
+        "additional": "Zusätzlich",
+        "reset": "Fähigkeitsauswahl zurücksetzen"
+    }
+}

@@ -19,10 +19,15 @@
             "lang": "en",
             "name": "English",
             "path": "lang/en.json"
+        },
+        {
+            "lang": "de",
+            "name": "Deutsch",
+            "path": "lang/de.json"
         }
     ],
     "url": "https://github.com/vivien-laasch/pf2e-skill-increases",
-    "download": "https://github.com/vivien-laasch/pf2e-skill-increases/releases/download/v0.0.3/module.zip",
+    "download": "https://github.com/vivien-laasch/pf2e-skill-increases/releases/download/v0.0.4/module.zip",
     "manifest": "https://github.com/vivien-laasch/pf2e-skill-increases/releases/latest/download/module.json",
-    "version": "0.0.3"
+    "version": "0.0.4"
 }
