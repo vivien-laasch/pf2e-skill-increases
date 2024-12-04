@@ -42,4 +42,9 @@ import Skills from "./components/Skills.vue";
 .application.skill-manager[data-theme] {
   --background: var(--app-background);
 }
+
+#open-skill-manager {
+  font: 500 var(--font-size-13) var(--serif);
+  margin-bottom: 0.5rem;
+}
 </style>

@@ -9,9 +9,12 @@ Hooks.once("init", () => {
 });
 
 Hooks.on("render" + CHARACTER_SHEET, (app: ActorSheet<CharacterPF2e>, html: JQuery) => {
-    console.log(`${MODULE_ID} | Attempting to inject Skill Manager button`);
+    console.log(`${MODULE_ID} | Injecting Skill Manager button`);
 
-    const openManager = `<button id="open-skill-manager" type="button" class="blue" style="margin-bottom: 0.5rem;">${game.i18n?.localize("pf2e-skill-increases.open")}</button>`;
+    const openManager = `<button id="open-skill-manager" type="button" class="blue">
+    <i class="fa-regular fa-list-ul" style="margin-right: 0.25rem;"></i>
+    ${game.i18n?.localize("pf2e-skill-increases.open")}
+    </button>`;
 
     const id = app.object._id;
     if (!id) return;
@@ -20,8 +23,6 @@ Hooks.on("render" + CHARACTER_SHEET, (app: ActorSheet<CharacterPF2e>, html: JQue
     html.find("#open-skill-manager").on("click", () => {
         openSkillManager(id);
     });
-
-    console.log(`${MODULE_ID} | Skill Manager button injected`);
 });
 
 async function openSkillManager(actorId: string) {
