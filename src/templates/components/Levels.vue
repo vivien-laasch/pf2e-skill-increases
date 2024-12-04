@@ -15,7 +15,8 @@ const actorLevel = store.getActor.level;
             type="button"
             :class="{
                 disabled: level > actorLevel!,
-                active: level === store.selectedLevel,
+                selected: level === store.selectedLevel,
+                available: store.skillBoosts.getTotal(level) > 0 && level <= actorLevel!,
             }"
             :disabled="level > actorLevel!"
             @click="store.selectedLevel = level"
@@ -36,5 +37,13 @@ const actorLevel = store.getActor.level;
 .level {
   padding: 0.25rem 1.5rem;
   width: auto;
+}
+
+.selected {
+  background: var(--button-hover-background-color);
+}
+
+.available {
+  --box-shadow: 0 0 2px 2px #ffb351;
 }
 </style>

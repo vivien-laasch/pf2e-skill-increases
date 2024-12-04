@@ -95,12 +95,6 @@ class SkillBoosts extends Map<number, Level> {
         return this.getLevel(level).selected[skill]?.locked || false;
     }
 
-    getTotalSkillBoostsAtLevel(level: number): number {
-        const levelBoosts = this.getLevel(level);
-        const selectedSkillsNotLocked = Object.values(levelBoosts.selected).filter((skill) => !skill.locked);
-        return Math.max(levelBoosts.available + levelBoosts.additional - selectedSkillsNotLocked.length, 0);
-    }
-
     isDisabled(skill: string, rank: number, level: number): boolean {
         if (rank > getMaxProficiencyAtLevel(level)) {
             return true;
@@ -128,6 +122,12 @@ class SkillBoosts extends Map<number, Level> {
             return false;
         }
         return true;
+    }
+
+    getTotal(level: number): number {
+        const levelBoosts = this.getLevel(level);
+        const selected = Object.values(levelBoosts.selected).filter((skill) => !skill.locked);
+        return Math.max(levelBoosts.available + levelBoosts.additional - selected.length, 0);
     }
 
     getAvailable(level: number): number {

@@ -36,7 +36,7 @@ function getMessage(index: number): string {
     if (index >= maxProficiency.value) {
         return localize(`${MODULE_ID}.levelTooLow`);
     }
-    if (skillBoosts.getTotalSkillBoostsAtLevel(store.selectedLevel) == 0) {
+    if (skillBoosts.getTotal(store.selectedLevel) == 0) {
         return localize(`${MODULE_ID}.skillsMaxIncreasesReached`);
     }
     if (skillBoosts.getRankAtLevel(props.skill, store.selectedLevel - 1) == index + 1) {
