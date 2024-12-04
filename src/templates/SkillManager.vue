@@ -18,24 +18,25 @@ import Skills from "./components/Skills.vue";
 }
 
 .application.skill-manager .window-content {
-  padding-bottom: 0;
+  padding: 0;
+  backdrop-filter: blur(5px);
 }
 
 .application.skill-manager .grid {
   display: inline-grid;
   grid-template-columns: 25% 75%;
-  grid-gap: 0.5rem;
+  padding: 0.5rem;
 }
 
 .application.skill-manager .root {
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-rows: 90% 50px
+  grid-template-rows: 90% 10%;
 }
 
 .application.skill-manager button:disabled {
-    opacity: 40%;
+  opacity: 25%;
 }
 
 .application.skill-manager[data-theme] {

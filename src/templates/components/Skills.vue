@@ -46,7 +46,7 @@ function formatBonus(bonus: number): string {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  padding-right: 0.75rem;
+  padding: 0.25rem;
 }
 
 .skill {

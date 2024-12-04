@@ -21,21 +21,25 @@ const skillBoosts = store.skillBoosts;
     </div>
 </template>
 <style scoped lang="css">
+
+.bottom-bar {
+    border-top: 1px solid var(--color-border);
+}
+
 .container {
     display: flex;
     height: 100%;
     align-items: center;
-    padding: 0.25rem;
 }
 
 .skill-counts {
     justify-content: space-between;
-    padding-right: 1rem;
+    padding: 0 0.5rem;
 }
 
 .submit {
-    width: 100%;
     padding: 0.25rem 1.5rem;
+    margin: 0 0.25rem;
 }
 
 .reset {

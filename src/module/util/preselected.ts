@@ -1,4 +1,4 @@
-import { AutoChangeEntry, CharacterPF2e, FeatPF2e } from "foundry-pf2e";
+import { AutoChangeEntry, CharacterPF2e, FeatPF2e, ItemFlagsPF2e } from "foundry-pf2e";
 import { MODULE_ID, SPECIAL_PRINCESS_FEATURES } from "../constants";
 import { Level } from "../model/SkillBoosts";
 
@@ -22,23 +22,25 @@ function resolveChangeTarget(target: string, change: AutoChangeEntry, actor: Cha
 
     const flagSegments = match[1].split(".");
 
-    for (const item of actor.items) {
-        if (item.name === change.source) {
-            let currentValue: unknown = item.flags;
+    const source = actor.items.find((item) => item.name === change.source);
 
-            for (const segment of flagSegments) {
-                if (!currentValue || typeof currentValue !== "object") {
-                    currentValue = null;
-                    break;
-                }
-                currentValue = (currentValue as Record<string, unknown>)[segment];
-            }
-
-            if (typeof currentValue === "string") {
-                return target.replace(match[0], currentValue);
-            }
-        }
+    if (!source) {
+        return target;
     }
+
+    let currentValue: ItemFlagsPF2e | null = source.flags;
+    for (const segment of flagSegments) {
+        if (!currentValue || typeof currentValue !== "object") {
+            currentValue = null;
+            break;
+        }
+        currentValue = currentValue[segment] as ItemFlagsPF2e;
+    }
+
+    if (typeof currentValue === "string") {
+        return target.replace(match[0], currentValue);
+    }
+
     return target;
 }
 
@@ -116,9 +118,9 @@ function addBackgroundSkills(actor: CharacterPF2e, selectedSkills: Map<number, L
 
 function addDeitySkills(actor: CharacterPF2e, selectedSkills: Map<number, Level>) {
     const divineClasses = game.settings?.get(MODULE_ID, "divineClasses") as string[];
-    const slug = actor.class?.system.slug;
+    const divine = actor.items.filter((item) => item.system.slug !== null && divineClasses.includes(item.system.slug)).length > 0;
 
-    if (!slug || !divineClasses?.includes(slug)) {
+    if (!divine) {
         return;
     }
 

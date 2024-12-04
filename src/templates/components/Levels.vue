@@ -12,9 +12,10 @@ const actorLevel = store.getActor.level;
             v-for="level of levels"
             :key="level"
             class="level"
+            type="button"
             :class="{
                 disabled: level > actorLevel!,
-                selected: level === store.selectedLevel,
+                active: level === store.selectedLevel,
             }"
             :disabled="level > actorLevel!"
             @click="store.selectedLevel = level"
@@ -35,9 +36,5 @@ const actorLevel = store.getActor.level;
 .level {
   padding: 0.25rem 1.5rem;
   width: auto;
-}
-
-.selected {
-  background-color: var(--button-hover-background-color);
 }
 </style>

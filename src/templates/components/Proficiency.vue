@@ -88,7 +88,7 @@ button {
 }
 
 button.proficient:disabled {
-  background-color: color-mix(in srgb, var(--button-hover-background-color), transparent 50%);
+  background-color: var(--button-hover-background-color);
 }
 
 button.proficient {
@@ -102,11 +102,11 @@ button:disabled {
 .skill-manager[data-theme] {
 
     button:hover:not(:disabled) {
-        background-color: var(--color-primary-2);
+        background-color: var(--accent-color);
     }
 
     button.proficient {
-        background-color: var(--color-primary-2);
+        background-color: var(--accent-color);
     }
 }
 </style>
