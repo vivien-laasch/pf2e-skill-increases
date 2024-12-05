@@ -20,7 +20,7 @@ export function getPersistedData(actor: CharacterPF2e): Map<number, Level> {
     const serializedSkills = actor.getFlag(MODULE_ID, "selectedSkills") as Record<string, { selected: Record<string, SkillBoost> }>;
     if (!serializedSkills) return new Map();
 
-    return new Map(Object.entries(serializedSkills).map(([level, { selected }]) => [parseInt(level), new Level({selected: selected})]));
+    return new Map(Object.entries(serializedSkills).map(([level, { selected }]) => [parseInt(level), new Level({ selected: selected })]));
 }
 
 async function applyBonuses(actor: CharacterPF2e, skillBoosts: Map<number, Level>): Promise<void> {

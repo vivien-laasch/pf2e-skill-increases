@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import { localize } from "../../module/fvtt-vue/VueHelpers.mjs";
 import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
 
 const store = useSkillManagerStore();
-const levels = store.skillBoosts.getLevels();
+const levels = computed(() => store.skillBoosts.getLevels());
 const actorLevel = store.getActor.level;
 </script>
 <template>

@@ -9,33 +9,38 @@ interface SkillBoost {
     additional?: boolean;
 }
 
-class SkillBoosts  {
-    skillBoosts: Map<number, Level>
+class SkillBoosts {
+    skillBoosts: Map<number, Level>;
 
     constructor(actor: CharacterPF2e) {
         const persistedSkills = getPersistedData(actor);
         const preselectedSkills = resolvePreselectedSkills(actor);
         const skillProgression = computeSkillProgression(actor);
 
-        preselectedSkills.forEach((skill, level) => {
-            const levelBoosts = skillProgression.get(level) || new Level();
-            levelBoosts.additional = skill.additional;
-            levelBoosts.selected = skill.selected;
-            levelBoosts.available += skill.available;
-            skillProgression.set(level, levelBoosts);
-        });
+        this.skillBoosts = new Map();
 
-        persistedSkills.forEach((boosts, level) => {
-            const levelBoosts = skillProgression.get(level) || new Level();
-            for (const [skill, boost] of Object.entries(boosts.selected)) {
-                if (!levelBoosts.selected[skill]) {
-                    levelBoosts.selected[skill] = boost;
-                }
+        const levels = Array.from(new Set([...preselectedSkills.keys(), ...skillProgression.keys()])).sort((a: number, b: number) => a - b);
+
+        levels.forEach((level) => {
+            const levelBoosts = new Level();
+
+            const persisted = persistedSkills.get(level) || new Level();
+            levelBoosts.selected = persisted.selected;
+
+            const preselected = preselectedSkills.get(level) || new Level();
+            for (const [skill, boost] of Object.entries(preselected.selected)) {
+                levelBoosts.selected[skill] = boost;
+                levelBoosts.available += preselected.available;
+                levelBoosts.additional += preselected.additional;
+                this.handleInitialSkillCollision(skill, levelBoosts, level);
             }
-            skillProgression.set(level, levelBoosts);
-        });
 
-        this.skillBoosts = skillProgression;
+            const progression = skillProgression.get(level) || new Level();
+            levelBoosts.available += progression.available;
+            levelBoosts.additional += progression.additional;
+
+            this.skillBoosts.set(level, levelBoosts);
+        });
     }
 
     getLevel(level: number): Level {
@@ -68,12 +73,14 @@ class SkillBoosts  {
         }
 
         this.skillBoosts.set(level, levelBoosts);
+        this.handleSkillCollision(skill, levelBoosts, level);
     }
 
     removeRank(skill: string, level: number): void {
         const levelBoosts = this.getLevel(level);
         if (!levelBoosts || !levelBoosts.selected[skill]) return;
 
+        this.handleSkillCollision(skill, levelBoosts, level, true);
         delete levelBoosts.selected[skill];
     }
 
@@ -138,6 +145,41 @@ class SkillBoosts  {
     isIllegal(level: number): boolean {
         const levelBoosts = this.getLevel(level);
         return levelBoosts.getSkillBoosts().filter((skill) => !skill.locked).length > levelBoosts.available + levelBoosts.additional;
+    }
+
+    private handleInitialSkillCollision(skill: string, levelBoosts: Level, level: number): void {
+        for (const [prevLevel, prevBoosts] of this.skillBoosts) {
+            if (prevLevel < level && prevBoosts.selected[skill] && prevBoosts.selected[skill].rank === levelBoosts.selected[skill].rank) {
+                levelBoosts.additional += 1;
+                break;
+            }
+        }
+    }
+
+    private handleSkillCollision(skill: string, currentLevelBoosts: Level, currentLevel: number, subtract?: boolean): void {
+        for (const [level, boosts] of this.skillBoosts) {
+            const skillBoost = boosts.selected[skill];
+            if (skillBoost && level > currentLevel && skillBoost.rank === currentLevelBoosts.selected[skill].rank && skillBoost.locked) {
+                if (subtract) {
+                    boosts.additional = Math.max(0, boosts.additional - 1);
+                    if (boosts.additional === 0) {
+                        this.clearAdditional(boosts);
+                    }
+                } else {
+                    boosts.additional += 1;
+                }
+                this.skillBoosts.set(level, boosts);
+                break;
+            }
+        }
+    }
+
+    private clearAdditional(level: Level): void {
+        for (const [skill, boost] of Object.entries(level.selected)) {
+            if (boost.additional) {
+                delete level.selected[skill];
+            }
+        }
     }
 }
 

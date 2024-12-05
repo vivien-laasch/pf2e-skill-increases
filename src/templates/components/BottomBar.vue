@@ -16,12 +16,13 @@ const skillBoosts = store.skillBoosts;
         <div class="skill-counts container">
             <div class="count">{{ localize(`${MODULE_ID}.available`) + `: ${skillBoosts.getAvailable(store.selectedLevel)}` }}</div>
             <div class="count">{{ localize(`${MODULE_ID}.additional`) + `: ${skillBoosts.getAdditional(store.selectedLevel)}` }}</div>
-            <button class="reset" @click="skillBoosts.resetSelection()" :title="localize(`${MODULE_ID}.reset`)"><i class="fa-solid fa-rotate-right"></i></button>
+            <button class="reset" @click="skillBoosts.resetSelection()" :title="localize(`${MODULE_ID}.reset`)">
+                <i class="fa-solid fa-rotate-right"></i>
+            </button>
         </div>
     </div>
 </template>
 <style scoped lang="css">
-
 .bottom-bar {
     border-top: 1px solid var(--color-border);
 }
