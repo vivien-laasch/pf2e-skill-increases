@@ -1,6 +1,6 @@
+import { CharacterPF2e } from "foundry-pf2e";
 import { defineStore } from "pinia";
 import { SkillBoosts } from "../model/SkillBoosts";
-import { CharacterPF2e } from "foundry-pf2e";
 
 export const useSkillManagerStore = defineStore("skill-manager", {
     state: () => {
@@ -8,6 +8,7 @@ export const useSkillManagerStore = defineStore("skill-manager", {
             actor: {} as unknown,
             selectedLevel: 1,
             skillBoosts: {} as SkillBoosts,
+            untrainedImprovLevel: 0,
         };
     },
     getters: {

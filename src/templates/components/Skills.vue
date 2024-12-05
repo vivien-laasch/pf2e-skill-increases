@@ -2,20 +2,32 @@
 import { CharacterPF2e, CharacterSkill } from "foundry-pf2e";
 import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
 import { computeAttributeProgression } from "../../module/util/attributes";
+import { getUntrainedImprovBonus } from "../../module/util/skills";
 import Proficiency from "./Proficiency.vue";
+import { computed } from "vue";
 
 const store = useSkillManagerStore();
 const availableSkills = Object.values(store.getActor.skills).filter((skill) => !skill.lore);
 const proficiencyPerRank = [0, 2, 4, 6, 8];
-const skillBoosts = store.skillBoosts;
+const untrainedImprovisation = computed(() => store.untrainedImprovLevel > 0 && store.untrainedImprovLevel <= store.selectedLevel);
 
 function getTotal(skill: CharacterSkill<CharacterPF2e>): number {
     return getProficiencyBonus(skill) + getAttributeBonus(skill);
 }
 
 function getProficiencyBonus(skill: CharacterSkill<CharacterPF2e>): number {
-    const proficiency = proficiencyPerRank[skillBoosts.getRankAtLevel(skill.slug, store.selectedLevel)] ?? 0;
-    return proficiency !== 0 ? proficiency + store.selectedLevel : 0;
+    const rank = store.skillBoosts.getRankAtLevel(skill.slug, store.selectedLevel);
+    const proficiency = proficiencyPerRank[rank] ?? 0;
+
+    if (proficiency !== 0) {
+        return proficiency + store.selectedLevel;
+    }
+
+    if (untrainedImprovisation.value) {
+        return getUntrainedImprovBonus(store.selectedLevel);
+    }
+
+    return 0;
 }
 
 function getAttributeBonus(skill: CharacterSkill<CharacterPF2e>): number {

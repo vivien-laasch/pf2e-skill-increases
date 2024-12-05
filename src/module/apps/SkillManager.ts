@@ -6,6 +6,7 @@ import { VueApplicationMixin } from "../fvtt-vue/VueApplicationMixin.mjs";
 import { SkillBoosts } from "../model/SkillBoosts";
 import { useSkillManagerStore } from "../stores/SkillManagerStore";
 import { persistData } from "../util/persistence";
+import { getUntrainedImprovLevel } from "../util/skills";
 
 const { ApplicationV2 } = foundry.applications.api;
 export class SkillManager extends VueApplicationMixin(ApplicationV2) {
@@ -70,6 +71,7 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
         store.actor = actor;
         store.selectedLevel = skillboosts.skillBoosts.has(actor.level) ? actor.level : 1;
         store.skillBoosts = skillboosts;
+        store.untrainedImprovLevel = getUntrainedImprovLevel(actor);
     }
 }
 

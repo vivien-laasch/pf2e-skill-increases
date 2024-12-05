@@ -1,4 +1,4 @@
-import { CharacterPF2e } from "foundry-pf2e";
+import { CharacterPF2e, FeatPF2e } from "foundry-pf2e";
 import { Level } from "../model/SkillBoosts";
 import { computeAttributeProgression } from "./attributes";
 
@@ -47,4 +47,18 @@ export function getMaxProficiencyAtLevel(level: number): number {
     } else {
         return 4;
     }
+}
+
+export function getUntrainedImprovLevel(actor: CharacterPF2e): number {
+    return (actor.items.find((item) => item.slug === "untrained-improvisation") as unknown as FeatPF2e).system?.level?.taken || 0;
+}
+
+export function getUntrainedImprovBonus(level: number): number {
+    if (level < 5) {
+        return level - 2;
+    }
+    if (level < 7) {
+        return level - 1;
+    }
+    return level;
 }
