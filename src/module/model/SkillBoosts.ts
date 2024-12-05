@@ -9,9 +9,10 @@ interface SkillBoost {
     additional?: boolean;
 }
 
-class SkillBoosts extends Map<number, Level> {
+class SkillBoosts  {
+    skillBoosts: Map<number, Level>
+
     constructor(actor: CharacterPF2e) {
-        super();
         const persistedSkills = getPersistedData(actor);
         const preselectedSkills = resolvePreselectedSkills(actor);
         const skillProgression = computeSkillProgression(actor);
@@ -34,22 +35,18 @@ class SkillBoosts extends Map<number, Level> {
             skillProgression.set(level, levelBoosts);
         });
 
-        [...skillProgression.entries()]
-            .sort((a, b) => a[0] - b[0])
-            .forEach(([level, boosts]) => {
-                this.set(level, boosts);
-            });
+        this.skillBoosts = skillProgression;
     }
 
     getLevel(level: number): Level {
-        const test = this.get(level) || new Level();
+        const test = this.skillBoosts.get(level) || new Level();
         return test;
     }
 
     getRankAtLevel(skill: string, level: number): number {
         let proficiencyRank = 0;
 
-        for (const [skillBoostLevel, levelBoosts] of this) {
+        for (const [skillBoostLevel, levelBoosts] of this.skillBoosts) {
             if (skillBoostLevel <= level && levelBoosts.selected[skill]) {
                 proficiencyRank = Math.max(proficiencyRank, levelBoosts.selected[skill].rank);
             }
@@ -70,7 +67,7 @@ class SkillBoosts extends Map<number, Level> {
             levelBoosts.selected[skill] = { rank, locked: false };
         }
 
-        this.set(level, levelBoosts);
+        this.skillBoosts.set(level, levelBoosts);
     }
 
     removeRank(skill: string, level: number): void {
@@ -81,14 +78,14 @@ class SkillBoosts extends Map<number, Level> {
     }
 
     resetSelection(): void {
-        this.forEach((levelBoosts) => {
+        this.skillBoosts.forEach((levelBoosts) => {
             const unlockedSkills = Object.keys(levelBoosts.selected).filter((skill) => !levelBoosts.selected[skill].locked);
             unlockedSkills.forEach((skill) => delete levelBoosts.selected[skill]);
         });
     }
 
     getLevels(): number[] {
-        return [...this.entries()].filter(([, boosts]) => boosts.available > 0 || boosts.additional > 0).map(([level]) => level);
+        return [...this.skillBoosts.entries()].filter(([, boosts]) => boosts.available > 0 || boosts.additional > 0).map(([level]) => level);
     }
 
     isSkillLocked(skill: string, level: number): boolean {

@@ -43,7 +43,7 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
                     closeOnSubmit: true,
                     handler() {
                         const store = useSkillManagerStore();
-                        persistData(store.getActor, store.getSkillBoosts);
+                        persistData(store.getActor, store.getSkillBoosts.skillBoosts);
                     },
                 },
             },
@@ -68,7 +68,7 @@ export class SkillManager extends VueApplicationMixin(ApplicationV2) {
         const skillboosts = new SkillBoosts(actor);
 
         store.actor = actor;
-        store.selectedLevel = skillboosts.has(actor.level) ? actor.level : 1;
+        store.selectedLevel = skillboosts.skillBoosts.has(actor.level) ? actor.level : 1;
         store.skillBoosts = skillboosts;
     }
 }

@@ -1,8 +1,8 @@
 import { CharacterPF2e, CharacterSkill } from "foundry-pf2e";
 import { MODULE_ID } from "../constants";
-import { Level, SkillBoost, SkillBoosts } from "../model/SkillBoosts";
+import { Level, SkillBoost } from "../model/SkillBoosts";
 
-export async function persistData(actor: CharacterPF2e, skillBoosts: SkillBoosts): Promise<void> {
+export async function persistData(actor: CharacterPF2e, skillBoosts: Map<number, Level>): Promise<void> {
     const serializedSkills = Object.fromEntries(
         [...skillBoosts]
             .filter(([level]) => level <= actor.level)
