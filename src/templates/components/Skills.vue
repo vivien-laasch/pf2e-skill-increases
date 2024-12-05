@@ -9,7 +9,7 @@ const availableSkills = Object.values(store.getActor.skills).filter((skill) => !
 const proficiencyPerRank = [0, 2, 4, 6, 8];
 const skillBoosts = store.skillBoosts;
 
-function getTotalBonus(skill: CharacterSkill<CharacterPF2e>): number {
+function getTotal(skill: CharacterSkill<CharacterPF2e>): number {
     return getProficiencyBonus(skill) + getAttributeBonus(skill);
 }
 
@@ -34,7 +34,7 @@ function formatBonus(bonus: number): string {
 <template>
     <div class="skill-list">
         <div v-for="skill in availableSkills" :key="skill.slug" class="skill">
-            <div class="skill-bonus">{{ formatBonus(getTotalBonus(skill)) }}</div>
+            <div class="skill-bonus">{{ formatBonus(getTotal(skill)) }}</div>
             <div class="skill-name">{{ skill.label }}</div>
             <Proficiency :skill="skill.slug"></Proficiency>
         </div>

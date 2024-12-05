@@ -134,6 +134,11 @@ class SkillBoosts  {
     getAdditional(level: number): number {
         return this.getLevel(level).getAdditional();
     }
+
+    isIllegal(level: number): boolean {
+        const levelBoosts = this.getLevel(level);
+        return levelBoosts.getSkillBoosts().filter((skill) => !skill.locked).length > levelBoosts.available + levelBoosts.additional;
+    }
 }
 
 class Level {

@@ -17,6 +17,7 @@ const actorLevel = store.getActor.level;
                 disabled: level > actorLevel!,
                 selected: level === store.selectedLevel,
                 available: store.skillBoosts.getTotal(level) > 0 && level <= actorLevel!,
+                illegal: store.skillBoosts.isIllegal(level),
             }"
             :disabled="level > actorLevel!"
             @click="store.selectedLevel = level"
@@ -45,5 +46,9 @@ const actorLevel = store.getActor.level;
 
 .available {
   --box-shadow: 0 0 2px 2px #ffb351;
+}
+
+.illegal {
+  --box-shadow: 0 0 2px 2px #df2100;
 }
 </style>
