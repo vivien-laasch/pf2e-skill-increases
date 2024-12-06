@@ -2,10 +2,24 @@
 import { computed } from "vue";
 import { localize } from "../../module/fvtt-vue/VueHelpers.mjs";
 import { useSkillManagerStore } from "../../module/stores/SkillManagerStore";
+import { MODULE_ID } from "../../module/constants";
 
 const store = useSkillManagerStore();
 const levels = computed(() => store.skillBoosts.getLevels());
 const actorLevel = store.getActor.level;
+
+function getTooltip(level: number): string {
+    if (store.skillBoosts.isIllegal(level)) {
+        return localize(`${MODULE_ID}.illegalLevel`);
+    } else if (available(level)) {
+        return localize(`${MODULE_ID}.availableLevel`);
+    }
+    return "";
+}
+
+function available(level: number) {
+    return store.skillBoosts.getTotal(level) > 0 && level <= actorLevel;
+}
 </script>
 <template>
     <div class="accordion">
@@ -17,9 +31,10 @@ const actorLevel = store.getActor.level;
             :class="{
                 disabled: level > actorLevel!,
                 selected: level === store.selectedLevel,
-                available: store.skillBoosts.getTotal(level) > 0 && level <= actorLevel!,
+                available: available(level),
                 illegal: store.skillBoosts.isIllegal(level),
             }"
+            :data-tooltip="getTooltip(level)"
             :disabled="level > actorLevel!"
             @click="store.selectedLevel = level"
         >

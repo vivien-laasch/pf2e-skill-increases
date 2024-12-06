@@ -8,6 +8,8 @@
         "levelTooLow": "Your level is too low for the selected proficiency rank.",
         "available": "Available",
         "additional": "Additional",
-        "reset": "Reset Skill Selection"
+        "reset": "Reset Skill Selection",
+        "illegalLevel": "There are more selected skill increases than allowed.",
+        "availableLevel": "There are skill increases available."
     }
 }

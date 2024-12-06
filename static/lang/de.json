@@ -8,6 +8,8 @@
         "levelTooLow": "Deine Stufe ist zu niedrig für den gewählten Rang.",
         "available": "Verfügbar",
         "additional": "Zusätzlich",
-        "reset": "Fähigkeitsauswahl zurücksetzen"
+        "reset": "Auswahl zurücksetzen",
+        "illegalLevel": "Es wurden mehr Fertigkeitssteigerungen ausgewählt als erlaubt.",
+        "availableLevel": "Es sind Fertigkeitssteigerungen für diese Stufe verfügbar."
     }
 }
