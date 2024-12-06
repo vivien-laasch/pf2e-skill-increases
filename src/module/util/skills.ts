@@ -50,7 +50,7 @@ export function getMaxProficiencyAtLevel(level: number): number {
 }
 
 export function getUntrainedImprovLevel(actor: CharacterPF2e): number {
-    return (actor.items.find((item) => item.slug === "untrained-improvisation") as unknown as FeatPF2e).system?.level?.taken || 0;
+    return (actor.items.find((item) => item.slug === "untrained-improvisation") as unknown as FeatPF2e)?.system?.level?.taken || 0;
 }
 
 export function getUntrainedImprovBonus(level: number): number {
