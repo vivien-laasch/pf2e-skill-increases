@@ -7,7 +7,9 @@
         "proficiencyDecreaseNotAllowed": "Diese Fertigkeit wurde auf einer früheren Stufe ausgewählt und kann nicht verringert werden.",
         "levelTooLow": "Deine Stufe ist zu niedrig für den gewählten Rang.",
         "available": "Verfügbar",
+        "availableTooltip": "Fertigkeitssteigerungen, die auf bestimmten Stufen erhalten werden. Sie können verwendet werden, um Fertigkeiten zu verbessern oder eine neue Fertigkeit auf den Grad „Geübt“ zu erhöhen.",
         "additional": "Zusätzlich",
+        "additionalTooltip": "Zusätzliche Fertigkeitssteigerungen durch Klassenmerkmale oder Talente, beschränkt auf die Verbesserung von Fertigkeiten auf auf den Grad „Geübt“.",
         "reset": "Auswahl zurücksetzen",
         "illegalLevel": "Es wurden mehr Fertigkeitssteigerungen ausgewählt als erlaubt.",
         "availableLevel": "Es sind Fertigkeitssteigerungen für diese Stufe verfügbar."

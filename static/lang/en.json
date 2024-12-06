@@ -7,7 +7,9 @@
         "proficiencyDecreaseNotAllowed": "This skill was selected on a previous level and cannot be decreased.",
         "levelTooLow": "Your level is too low for the selected proficiency rank.",
         "available": "Available",
+        "availableTooltip": "Skill increases you gain naturally at certain levels. Use these to improve your proficiency in a skill or become trained in a new one.",
         "additional": "Additional",
+        "additionalTooltip": "Extra skill increases granted by class features or feats, limited to improving skills to Trained proficiency.",
         "reset": "Reset Skill Selection",
         "illegalLevel": "There are more selected skill increases than allowed.",
         "availableLevel": "There are skill increases available."
