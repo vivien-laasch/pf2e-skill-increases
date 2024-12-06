@@ -17,30 +17,26 @@ class SkillBoosts {
         const preselectedSkills = resolvePreselectedSkills(actor);
         const skillProgression = computeSkillProgression(actor);
 
-        this.skillBoosts = new Map();
-
-        const levels = Array.from(new Set([...preselectedSkills.keys(), ...skillProgression.keys()])).sort((a: number, b: number) => a - b);
+        const levels = Array.from(new Set([...preselectedSkills.keys(), ...skillProgression.keys()]));
 
         levels.forEach((level) => {
-            const levelBoosts = new Level();
+            const levelBoosts = skillProgression.get(level) || new Level();
 
-            const persisted = persistedSkills.get(level) || new Level();
-            levelBoosts.selected = persisted.selected;
+            const persistedBoosts = persistedSkills.get(level) || new Level();
+            Object.assign(levelBoosts.selected, persistedBoosts.selected);
 
-            const preselected = preselectedSkills.get(level) || new Level();
-            levelBoosts.available += preselected.available;
-            levelBoosts.additional += preselected.additional;
-            for (const [skill, boost] of Object.entries(preselected.selected)) {
+            const preselectedBoosts = preselectedSkills.get(level) || new Level();
+            levelBoosts.available += preselectedBoosts.available;
+            levelBoosts.additional += preselectedBoosts.additional;
+            for (const [skill, boost] of Object.entries(preselectedBoosts.selected)) {
                 levelBoosts.selected[skill] = boost;
-                this.handleInitialSkillCollision(skill, levelBoosts, level);
+                handleInitialSkillCollision(skillProgression, skill, levelBoosts, level);
             }
 
-            const progression = skillProgression.get(level) || new Level();
-            levelBoosts.available += progression.available;
-            levelBoosts.additional += progression.additional;
-
-            this.skillBoosts.set(level, levelBoosts);
+            skillProgression.set(level, levelBoosts);
         });
+
+        this.skillBoosts = new Map([...skillProgression.entries()].sort((a, b) => a[0] - b[0]));
     }
 
     getLevel(level: number): Level {
@@ -147,15 +143,6 @@ class SkillBoosts {
         return levelBoosts.getSkillBoosts().filter((skill) => !skill.locked).length > levelBoosts.available + levelBoosts.additional;
     }
 
-    private handleInitialSkillCollision(skill: string, levelBoosts: Level, level: number): void {
-        for (const [prevLevel, prevBoosts] of this.skillBoosts) {
-            if (prevLevel < level && prevBoosts.selected[skill] && prevBoosts.selected[skill].rank === levelBoosts.selected[skill].rank) {
-                levelBoosts.additional += 1;
-                break;
-            }
-        }
-    }
-
     private handleSkillCollision(skill: string, currentLevelBoosts: Level, currentLevel: number, subtract?: boolean): void {
         for (const [level, boosts] of this.skillBoosts) {
             const skillBoost = boosts.selected[skill];
@@ -208,3 +195,12 @@ class Level {
 }
 
 export { SkillBoost, SkillBoosts, Level };
+
+function handleInitialSkillCollision(skillBoosts: Map<number, Level>, skill: string, levelBoosts: Level, level: number): void {
+    for (const [prevLevel, prevBoosts] of skillBoosts) {
+        if (prevLevel < level && prevBoosts.selected[skill] && prevBoosts.selected[skill].rank === levelBoosts.selected[skill].rank) {
+            levelBoosts.additional += 1;
+            break;
+        }
+    }
+}
