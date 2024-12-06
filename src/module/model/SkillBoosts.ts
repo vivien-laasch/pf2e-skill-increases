@@ -28,10 +28,10 @@ class SkillBoosts {
             levelBoosts.selected = persisted.selected;
 
             const preselected = preselectedSkills.get(level) || new Level();
+            levelBoosts.available += preselected.available;
+            levelBoosts.additional += preselected.additional;
             for (const [skill, boost] of Object.entries(preselected.selected)) {
                 levelBoosts.selected[skill] = boost;
-                levelBoosts.available += preselected.available;
-                levelBoosts.additional += preselected.additional;
                 this.handleInitialSkillCollision(skill, levelBoosts, level);
             }
 
