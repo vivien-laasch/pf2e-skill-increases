@@ -117,10 +117,10 @@ function addBackgroundSkills(actor: CharacterPF2e, selectedSkills: Map<number, L
 }
 
 function addDeitySkills(actor: CharacterPF2e, selectedSkills: Map<number, Level>) {
-    const divineClasses = game.settings?.get(MODULE_ID, "divineClasses") as string[];
-    const divine = actor.items.filter((item) => item.system.slug !== null && divineClasses.includes(item.system.slug)).length > 0;
+    const divineClassesAndFeats = game.settings?.get(MODULE_ID, "divineClassesAndFeats") as string[];
+    const items = actor.items.filter((item) => item.system.slug !== null && divineClassesAndFeats.includes(item.system.slug));
 
-    if (!divine) {
+    if (items.length === 0) {
         return;
     }
 
@@ -130,13 +130,16 @@ function addDeitySkills(actor: CharacterPF2e, selectedSkills: Map<number, Level>
         return;
     }
 
-    if (skill.length > 1) {
-        const levelOneSkills = selectedSkills.get(1) || new Level();
-        levelOneSkills.additional++;
-        selectedSkills.set(1, levelOneSkills);
-    } else if (skill.length === 1) {
-        updateSkillSelection(selectedSkills, skill[0], 1, 1);
-    }
+    items.forEach((item) => {
+        const itemLevel = item.system.level?.value || 1
+        if (skill.length > 1) {
+            const skills = selectedSkills.get(itemLevel) || new Level();
+            skills.additional++;
+            selectedSkills.set(itemLevel, skills);
+        } else if (skill.length === 1) {
+            updateSkillSelection(selectedSkills, skill[0], 1, itemLevel);
+        }
+    })
 }
 
 function addSpecialPrincessFeats(actor: CharacterPF2e, selectedSkills: Map<number, Level>) {

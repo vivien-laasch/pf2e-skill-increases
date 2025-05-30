@@ -1,12 +1,12 @@
-import { DIVINE_CLASSES, MODULE_ID } from "./constants";
+import { DIVINE_CLASSES_AND_FEATS, MODULE_ID } from "./constants";
 
 export function registerSettings() {
-    game.settings?.register(MODULE_ID, "divineClasses", {
+    game.settings?.register(MODULE_ID, "divineClassesAndFeats", {
         scope: "world",
         config: false,
-        name: "Classes with Deity Skills",
-        hint: "List of classes that have deity skills",
+        name: "Classes and feats that grant Deity Skills",
+        hint: "This setting allows you to specify which classes and feats should grant Deity Skills. The default is Cleric, Champion, Avenger, Champion Dedication, and Cleric Dedication.",
         type: Array,
-        default: DIVINE_CLASSES,
+        default: DIVINE_CLASSES_AND_FEATS,
     });
 }
