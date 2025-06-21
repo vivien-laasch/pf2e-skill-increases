@@ -43,7 +43,8 @@ const skillBoosts = store.skillBoosts;
 }
 
 .submit {
-    padding: 0.25rem 1.5rem;
+    line-height: 0;
+    padding: 1rem 1.5rem;
     margin: 0 0.25rem;
 }
 

@@ -83,12 +83,13 @@ function isDisabled(index: number): boolean {
 }
 
 button {
-  width: 12px;
-  aspect-ratio: 1;
+    padding: 0;
+    height: 16px;
+    aspect-ratio: 1;
 }
 
 button.proficient:disabled {
-  background-color: var(--button-hover-background-color);
+    background-color: var(--button-focus-outline-color);
 }
 
 button.proficient {
