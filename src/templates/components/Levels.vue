@@ -52,7 +52,8 @@ function available(level: number) {
 }
 
 .level {
-  padding: 0.25rem 1.5rem;
+  line-height: 0;
+  padding: 1rem 1.5rem;
   width: auto;
 }
 
