@@ -86,6 +86,7 @@ button {
     padding: 0;
     height: 16px;
     aspect-ratio: 1;
+    min-height: 16px;
 }
 
 button.proficient:disabled {
