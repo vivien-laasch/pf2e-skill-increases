@@ -2,6 +2,7 @@ import ModuleData from "./module.json" with { type: "json" };
 import { defineConfig, TerserOptions } from "vite";
 import vue from "@vitejs/plugin-vue";
 import * as path from "path";
+import { copyStaticFiles, prepareRelease } from "./build/build.ts";
 
 const s_SOURCEMAPS = true;
 const s_COMPRESS = false;
@@ -63,5 +64,17 @@ export default defineConfig({
             target: "es2022",
         },
     },
-    plugins: [vue()],
+    plugins: [
+        vue(),
+        {
+            name: "copy-static-files",
+            buildEnd() {
+                const isReleaseBuild = process.env.RELEASE_BUILD === "true";
+                if (isReleaseBuild) {
+                    prepareRelease();
+                }
+                copyStaticFiles();
+            },
+        },
+    ],
 });

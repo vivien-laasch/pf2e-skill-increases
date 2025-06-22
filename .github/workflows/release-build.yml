@@ -1,0 +1,57 @@
+name: Release Build
+
+on:
+    push:
+        tags:
+            - "v*"
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                  submodules: recursive
+                  fetch-depth: 0
+
+            - name: Build
+              env:
+                  RELEASE_BUILD: true
+                  GITHUB_REPOSITORY: ${{ github.repository }}
+                  GITHUB_REF_NAME: ${{ github.ref_name }}
+              run: |
+                  npm install
+                  npm run build
+
+            - name: Create Release
+              id: create_release
+              uses: actions/create-release@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  tag_name: ${{ github.ref }}
+                  release_name: Release ${{ github.ref }}
+                  draft: false
+                  prerelease: false
+
+            - name: Upload module.zip
+              uses: actions/upload-release-asset@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  upload_url: ${{ steps.create_release.outputs.upload_url }}
+                  asset_path: ./dist/module.zip
+                  asset_name: module.zip
+                  asset_content_type: application/zip
+
+            - name: Upload module.json
+              uses: actions/upload-release-asset@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  upload_url: ${{ steps.create_release.outputs.upload_url }}
+                  asset_path: ./dist/module.json
+                  asset_name: module.json
+                  asset_content_type: application/json
