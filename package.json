@@ -11,6 +11,7 @@
     "license": "MIT",
     "private": true,
     "dependencies": {
+        "archiver": "^7.0.1",
         "foundry-pf2e": "github:7H3LaughingMan/foundry-pf2e",
         "pinia": "^2.2.6",
         "vue": "^3.5.12"

@@ -1,33 +1,37 @@
 {
-    "title": "PF2e Skill Increases",
-    "description": "We have Pathbuilder at home!",
-    "id": "pf2e-skill-increases",
-    "authors": [
-        {
-            "name": "Vi"
-        }
-    ],
-    "compatibility": {
-        "minimum": "12",
-        "verified": "13.345",
-        "maximum": "13"
+  "title": "PF2e Skill Increases",
+  "description": "We have Pathbuilder at home!",
+  "id": "pf2e-skill-increases",
+  "authors": [
+    {
+      "name": "Vi"
+    }
+  ],
+  "compatibility": {
+    "minimum": "12",
+    "verified": "13.345",
+    "maximum": "13"
+  },
+  "esmodules": [
+    "main.js"
+  ],
+  "styles": [
+    "style.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
     },
-    "esmodules": ["main.js"],
-    "styles": ["style.css"],
-    "languages": [
-        {
-            "lang": "en",
-            "name": "English",
-            "path": "lang/en.json"
-        },
-        {
-            "lang": "de",
-            "name": "Deutsch",
-            "path": "lang/de.json"
-        }
-    ],
-    "url": "https://github.com/vivien-laasch/pf2e-skill-increases",
-    "download": "https://github.com/vivien-laasch/pf2e-skill-increases/releases/download/v0.0.7/module.zip",
-    "manifest": "https://github.com/vivien-laasch/pf2e-skill-increases/releases/latest/download/module.json",
-    "version": "0.0.7"
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "lang/de.json"
+    }
+  ],
+  "url": "https://github.com/vivien-laasch/pf2e-skill-increases",
+  "download": "https://github.com/vivien-laasch/pf2e-skill-increases/releases/download/v0.0.0/module.zip",
+  "manifest": "https://github.com/vivien-laasch/pf2e-skill-increases/releases/latest/download/module.json",
+  "version": "0.0.0"
 }
