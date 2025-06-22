@@ -36,7 +36,7 @@ import Skills from "./components/Skills.vue";
 }
 
 .application.skill-manager button:disabled {
-  opacity: 25%;
+  opacity: 50%;
 }
 
 .application.skill-manager[data-theme] {

@@ -3,6 +3,8 @@
 .vs/
 .vscode
 icons/\!dox/
+.DS_Store
+package-lock.json
 
 coverage
 dist/

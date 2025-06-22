@@ -55,6 +55,7 @@ function available(level: number) {
   line-height: 0;
   padding: 1rem 1.5rem;
   width: auto;
+  box-shadow: var(--box-shadow);
 }
 
 .selected {
