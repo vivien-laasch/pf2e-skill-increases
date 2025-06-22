@@ -44,13 +44,16 @@ const skillBoosts = store.skillBoosts;
 
 .submit {
     line-height: 0;
-    padding: 1rem 1.5rem;
+    padding: 1.25rem 1.5rem;
     margin: 0 0.25rem;
+    width: 100%;
 }
 
 .reset {
     padding: 0.5rem;
     width: fit-content;
+    height: 80%;
+    aspect-ratio: 1;
 }
 
 .reset i {

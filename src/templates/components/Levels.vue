@@ -53,7 +53,7 @@ function available(level: number) {
 
 .level {
   line-height: 0;
-  padding: 1rem 1.5rem;
+  padding: 1.25em 1.5rem;
   width: auto;
   box-shadow: var(--box-shadow);
 }
