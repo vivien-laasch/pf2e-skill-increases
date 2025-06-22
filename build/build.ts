@@ -55,7 +55,7 @@ function prepareModuleJson() {
 
 function createModuleZip() {
     const dest = path.resolve(__dirname, "../dist");
-    const zipPath = path.join(dest, "module.zip");
+    const zipPath = path.join(__dirname +  "/.." , "module.zip");
     const output = fs.createWriteStream(zipPath);
     const archive = archiver("zip", { zlib: { level: 9 } });
 
