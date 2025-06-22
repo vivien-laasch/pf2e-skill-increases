@@ -70,10 +70,10 @@ export default defineConfig({
             name: "copy-static-files",
             buildEnd() {
                 const isReleaseBuild = process.env.RELEASE_BUILD === "true";
+                copyStaticFiles();
                 if (isReleaseBuild) {
                     prepareRelease();
                 }
-                copyStaticFiles();
             },
         },
     ],
