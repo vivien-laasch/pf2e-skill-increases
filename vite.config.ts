@@ -68,7 +68,7 @@ export default defineConfig({
         vue(),
         {
             name: "copy-static-files",
-            buildEnd() {
+            writeBundle() {
                 const isReleaseBuild = process.env.RELEASE_BUILD === "true";
                 copyStaticFiles();
                 if (isReleaseBuild) {
